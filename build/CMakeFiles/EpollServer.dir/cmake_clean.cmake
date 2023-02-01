@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/EpollServer.dir/RingBuffer.cpp.o"
+  "CMakeFiles/EpollServer.dir/RingBuffer.cpp.o.d"
   "CMakeFiles/EpollServer.dir/main.cpp.o"
   "CMakeFiles/EpollServer.dir/main.cpp.o.d"
   "CMakeFiles/EpollServer.dir/spepoll.c.o"

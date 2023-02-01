@@ -523,6 +523,30 @@ EpollServer/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/build
 .PHONY : EpollServer/fast
 
+RingBuffer.o: RingBuffer.cpp.o
+.PHONY : RingBuffer.o
+
+# target to build an object file
+RingBuffer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/RingBuffer.cpp.o
+.PHONY : RingBuffer.cpp.o
+
+RingBuffer.i: RingBuffer.cpp.i
+.PHONY : RingBuffer.i
+
+# target to preprocess a source file
+RingBuffer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/RingBuffer.cpp.i
+.PHONY : RingBuffer.cpp.i
+
+RingBuffer.s: RingBuffer.cpp.s
+.PHONY : RingBuffer.s
+
+# target to generate assembly for a file
+RingBuffer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/RingBuffer.cpp.s
+.PHONY : RingBuffer.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -635,6 +659,9 @@ help:
 	@echo "... NightlyTest"
 	@echo "... NightlyUpdate"
 	@echo "... EpollServer"
+	@echo "... RingBuffer.o"
+	@echo "... RingBuffer.i"
+	@echo "... RingBuffer.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

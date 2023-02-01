@@ -31,6 +31,7 @@ int main(void)
     epfd = InitEpoll(ep_events, EPOLL_SIZE);
     SetETServSock(epfd, serv_sock);
 
+    //나중에 멀티스레딩도적용해보기
     do
     {
         event_cnt = epoll_wait(epfd, ep_events, EPOLL_SIZE, -1);
