@@ -5,7 +5,7 @@
 
 #include "spsocket.h"
 
-int SetServSock(uint32_t s_addr, uint16_t s_port, int listen_queue)
+int SetTCPServSock(uint32_t s_addr, uint16_t s_port, int listen_queue)
 {
     int serv_sock;
     struct sockaddr_in serv_adr;

@@ -23,7 +23,7 @@ int main(void)
 
     struct epoll_event* ep_events;
     
-    serv_sock = SetServSock(SERV_ADDR, SERV_PORT, SOMAXCONN);
+    serv_sock = SetTCPServSock(SERV_ADDR, SERV_PORT, SOMAXCONN);
     if(serv_sock == -1){
         exit(1);
     }
