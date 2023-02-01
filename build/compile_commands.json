@@ -1,0 +1,17 @@
+[
+{
+  "directory": "/home/kikuke/DV/GameServer1/build",
+  "command": "/usr/bin/g++   -g -o CMakeFiles/EpollServer.dir/main.cpp.o -c /home/kikuke/DV/GameServer1/main.cpp",
+  "file": "/home/kikuke/DV/GameServer1/main.cpp"
+},
+{
+  "directory": "/home/kikuke/DV/GameServer1/build",
+  "command": "/usr/bin/gcc   -g -o CMakeFiles/EpollServer.dir/spepoll.c.o -c /home/kikuke/DV/GameServer1/spepoll.c",
+  "file": "/home/kikuke/DV/GameServer1/spepoll.c"
+},
+{
+  "directory": "/home/kikuke/DV/GameServer1/build",
+  "command": "/usr/bin/gcc   -g -o CMakeFiles/EpollServer.dir/spsocket.c.o -c /home/kikuke/DV/GameServer1/spsocket.c",
+  "file": "/home/kikuke/DV/GameServer1/spsocket.c"
+}
+]

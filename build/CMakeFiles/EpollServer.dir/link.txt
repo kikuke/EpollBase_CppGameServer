@@ -1,0 +1,1 @@
+/usr/bin/g++ -g -rdynamic CMakeFiles/EpollServer.dir/main.cpp.o CMakeFiles/EpollServer.dir/spepoll.c.o CMakeFiles/EpollServer.dir/spsocket.c.o -o EpollServer 
