@@ -5,7 +5,15 @@
 
 #include "spsocket.h"
 
-int SetTCPServSock(uint32_t s_addr, uint16_t s_port, int listen_queue)
+void SetSockaddr_In(struct sockaddr_in* addr_in, in_addr_t s_addr, in_port_t sin_port)
+{
+    memset(addr_in, 0, sizeof(*addr_in));
+    (*addr_in).sin_family=AF_INET;
+    (*addr_in).sin_addr.s_addr=htonl(s_addr);
+    (*addr_in).sin_port=htons(sin_port);
+}
+
+int SetTCPServSock(in_addr_t s_addr, in_port_t sin_port, int listen_queue)
 {
     int serv_sock;
     struct sockaddr_in serv_adr;
@@ -15,10 +23,7 @@ int SetTCPServSock(uint32_t s_addr, uint16_t s_port, int listen_queue)
         return -1;
     }
 
-    memset(&serv_adr, 0, sizeof(serv_adr));
-    serv_adr.sin_family=AF_INET;
-    serv_adr.sin_addr.s_addr=htonl(s_addr);
-    serv_adr.sin_port=htons(s_port);
+    SetSockaddr_In(&serv_adr, s_addr, sin_port);
 
     if(bind(serv_sock, (struct sockaddr*)&serv_adr, sizeof(serv_adr)) == -1){
         return -1;
