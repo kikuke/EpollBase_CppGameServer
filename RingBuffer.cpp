@@ -72,7 +72,7 @@ size_t RingBuffer::dequeue(void* dest_buf, size_t size)
     if(size > read_sz)
         front = size - read_sz;
 
-    return read_sz;
+    return size;
 }
 
 void RingBuffer::flush()
@@ -119,14 +119,17 @@ void RingBuffer::InitBufPointer()
 
 size_t RingBuffer::DoubleBuffer(size_t need_sz)
 {
-    buf_sz  *= (need_sz/buf_sz + 2);
-    unsigned char* newBuf = new unsigned char[buf_sz];
+    unsigned char* newBuf;
+    size_t use_sz = getUseSize();
 
-    peek(newBuf, getUseSize());
+    buf_sz  *= (need_sz/buf_sz + 2);
+    newBuf = new unsigned char[buf_sz];
+
+    peek(newBuf, use_sz);
     delete[] buffer;
     buffer = newBuf;
     front = 0;
-    rear = getUseSize();
+    rear = use_sz;
 
     return buf_sz;
 }
