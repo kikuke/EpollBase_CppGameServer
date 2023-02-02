@@ -50,11 +50,11 @@ size_t RingBuffer::enqueue(void* src_buf, size_t size)
     write_sz = size < write_sz ? size : write_sz;
 
     memcpy(buffer + rear, src_buf, write_sz);
-    rear += write_sz;
     if(size > write_sz){
         memcpy(buffer, (unsigned char*)src_buf + write_sz, size - write_sz);
-        rear = size - write_sz;
     }
+
+    rear = getNextPointerMove(rear, size);
 
     return size;
 }
@@ -68,9 +68,7 @@ size_t RingBuffer::dequeue(void* dest_buf, size_t size)
         size = getUseSize();
     peek(dest_buf, size);
 
-    front += read_sz;
-    if(size > read_sz)
-        front = size - read_sz;
+    front = getNextPointerMove(front, size);
 
     return size;
 }
@@ -115,6 +113,11 @@ void RingBuffer::InitBufPointer()
 {
     front = 0;
     rear = 0;
+}
+
+size_t RingBuffer::getNextPointerMove(size_t idx, size_t size)
+{
+    return (idx + size) % buf_sz;
 }
 
 size_t RingBuffer::DoubleBuffer(size_t need_sz)

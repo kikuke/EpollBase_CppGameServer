@@ -17,6 +17,7 @@ private:
     size_t rear;
 
     void InitBufPointer();
+    size_t getNextPointerMove(size_t idx, size_t size);
     size_t DoubleBuffer(size_t need_sz);
 
     size_t getBufferSize();
