@@ -61,8 +61,6 @@ size_t RingBuffer::enqueue(void* src_buf, size_t size)
 
 size_t RingBuffer::dequeue(void* dest_buf, size_t size)
 {
-    size_t read_sz = getNotBrokenGetSize();
-
     if(size == 0) return 0;
     if(size > getUseSize())
         size = getUseSize();
@@ -122,15 +120,16 @@ size_t RingBuffer::getNextPointerMove(size_t idx, size_t size)
 
 size_t RingBuffer::DoubleBuffer(size_t need_sz)
 {
-    unsigned char* newBuf;
     size_t use_sz = getUseSize();
+    size_t newBuf_sz = buf_sz * (need_sz/buf_sz + 2);
+    unsigned char* newBuf;
 
-    buf_sz  *= (need_sz/buf_sz + 2);
-    newBuf = new unsigned char[buf_sz];
-
+    newBuf = new unsigned char[newBuf_sz];
     peek(newBuf, use_sz);
+
     delete[] buffer;
     buffer = newBuf;
+    buf_sz = newBuf_sz;
     front = 0;
     rear = use_sz;
 
