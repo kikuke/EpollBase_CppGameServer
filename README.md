@@ -1,10 +1,10 @@
 # Cpp Game Server 개발 현황
 
-## spsocket.h
- - 소켓 설정 간편화
+## spsocket.h - 미완
+ - 소켓 설정 간편화 (추가중)
  
-## spepoll.h
- - epoll 설정 간편화
+## spepoll.h - 미완
+ - epoll 설정 간편화 (추가중)
  - nonblocking EdgeTrigger epoll 모듈화
    - ReadET의 etReadFunc로 while문 안에서 read() 처리마다 동작하는 메서드를 설정 가능
    
