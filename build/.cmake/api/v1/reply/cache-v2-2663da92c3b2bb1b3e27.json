@@ -83,7 +83,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/kikuke/DV/GameServer1/build"
+			"value" : "/home/kikuke/DV/EpollBase_CppGameServer/build"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -623,7 +623,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/kikuke/DV/GameServer1"
+			"value" : "/home/kikuke/DV/EpollBase_CppGameServer"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1587,7 +1587,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/kikuke/DV/GameServer1/build"
+			"value" : "/home/kikuke/DV/EpollBase_CppGameServer/build"
 		},
 		{
 			"name" : "EpollServer_IS_TOP_LEVEL",
@@ -1611,7 +1611,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/kikuke/DV/GameServer1"
+			"value" : "/home/kikuke/DV/EpollBase_CppGameServer"
 		},
 		{
 			"name" : "GITCOMMAND",

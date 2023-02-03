@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/kikuke/DV/GameServer1
+CMAKE_SOURCE_DIR = /home/kikuke/DV/EpollBase_CppGameServer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/kikuke/DV/GameServer1/build
+CMAKE_BINARY_DIR = /home/kikuke/DV/EpollBase_CppGameServer/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -78,7 +78,7 @@ package/fast: package
 # Special rule for the target package_source
 package_source:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool for source..."
-	/usr/bin/cpack --config ./CPackSourceConfig.cmake /home/kikuke/DV/GameServer1/build/CPackSourceConfig.cmake
+	/usr/bin/cpack --config ./CPackSourceConfig.cmake /home/kikuke/DV/EpollBase_CppGameServer/build/CPackSourceConfig.cmake
 .PHONY : package_source
 
 # Special rule for the target package_source
@@ -117,9 +117,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kikuke/DV/GameServer1/build/CMakeFiles /home/kikuke/DV/GameServer1/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kikuke/DV/EpollBase_CppGameServer/build/CMakeFiles /home/kikuke/DV/EpollBase_CppGameServer/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kikuke/DV/GameServer1/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kikuke/DV/EpollBase_CppGameServer/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -595,6 +595,30 @@ SocketManager.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/SocketManager.cpp.s
 .PHONY : SocketManager.cpp.s
 
+TcpService.o: TcpService.cpp.o
+.PHONY : TcpService.o
+
+# target to build an object file
+TcpService.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/TcpService.cpp.o
+.PHONY : TcpService.cpp.o
+
+TcpService.i: TcpService.cpp.i
+.PHONY : TcpService.i
+
+# target to preprocess a source file
+TcpService.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/TcpService.cpp.i
+.PHONY : TcpService.cpp.i
+
+TcpService.s: TcpService.cpp.s
+.PHONY : TcpService.s
+
+# target to generate assembly for a file
+TcpService.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/TcpService.cpp.s
+.PHONY : TcpService.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -716,6 +740,9 @@ help:
 	@echo "... SocketManager.o"
 	@echo "... SocketManager.i"
 	@echo "... SocketManager.s"
+	@echo "... TcpService.o"
+	@echo "... TcpService.i"
+	@echo "... TcpService.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

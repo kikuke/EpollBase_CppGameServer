@@ -4,8 +4,8 @@
 
 
 # Configuration directories and files
-SourceDirectory: /home/kikuke/DV/GameServer1
-BuildDirectory: /home/kikuke/DV/GameServer1/build
+SourceDirectory: /home/kikuke/DV/EpollBase_CppGameServer
+BuildDirectory: /home/kikuke/DV/EpollBase_CppGameServer/build
 
 # Where to place the cost data store
 CostDataFile: 
@@ -26,7 +26,7 @@ SubmitURL: http://
 NightlyStartTime: 00:00:00 EDT
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "/usr/bin/cmake" "/home/kikuke/DV/GameServer1"
+ConfigureCommand: "/usr/bin/cmake" "/home/kikuke/DV/EpollBase_CppGameServer"
 MakeCommand: /usr/bin/cmake --build . --config "${CTEST_CONFIGURATION_TYPE}" -- -i
 DefaultCTestConfigurationType: Release
 

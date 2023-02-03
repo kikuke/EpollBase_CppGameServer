@@ -1,6 +1,6 @@
 CMakeFiles/EpollServer.dir/spepoll.c.o: \
- /home/kikuke/DV/GameServer1/spepoll.c /usr/include/stdc-predef.h \
- /usr/include/stdlib.h \
+ /home/kikuke/DV/EpollBase_CppGameServer/spepoll.c \
+ /usr/include/stdc-predef.h /usr/include/stdlib.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
@@ -58,7 +58,7 @@ CMakeFiles/EpollServer.dir/spepoll.c.o: \
  /usr/include/x86_64-linux-gnu/bits/wchar.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
  /usr/include/x86_64-linux-gnu/bits/epoll.h \
- /home/kikuke/DV/GameServer1/spepoll.h /usr/include/stdio.h \
+ /home/kikuke/DV/EpollBase_CppGameServer/spepoll.h /usr/include/stdio.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h \
  /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \

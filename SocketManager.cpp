@@ -1,5 +1,7 @@
 #include "SocketManager.h"
 
+SocketManager SocketManager::m_Instance;
+
 bool SocketManager::addTcpSocketInfo(int socket)
 {
     std::pair<int, TCPSOCKETINFO*> inform = std::pair<int, TCPSOCKETINFO*>(socket, new TCPSOCKETINFO);

@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/kikuke/DV/GameServer1
+CMAKE_SOURCE_DIR = /home/kikuke/DV/EpollBase_CppGameServer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/kikuke/DV/GameServer1/build
+CMAKE_BINARY_DIR = /home/kikuke/DV/EpollBase_CppGameServer/build
 
 # Utility rule file for NightlyStart.
 
@@ -82,6 +82,6 @@ CMakeFiles/NightlyStart.dir/clean:
 .PHONY : CMakeFiles/NightlyStart.dir/clean
 
 CMakeFiles/NightlyStart.dir/depend:
-	cd /home/kikuke/DV/GameServer1/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/kikuke/DV/GameServer1 /home/kikuke/DV/GameServer1 /home/kikuke/DV/GameServer1/build /home/kikuke/DV/GameServer1/build /home/kikuke/DV/GameServer1/build/CMakeFiles/NightlyStart.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/kikuke/DV/EpollBase_CppGameServer/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/kikuke/DV/EpollBase_CppGameServer /home/kikuke/DV/EpollBase_CppGameServer /home/kikuke/DV/EpollBase_CppGameServer/build /home/kikuke/DV/EpollBase_CppGameServer/build /home/kikuke/DV/EpollBase_CppGameServer/build/CMakeFiles/NightlyStart.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/NightlyStart.dir/depend
 

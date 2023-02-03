@@ -1,32 +1,37 @@
 [
 {
-  "directory": "/home/kikuke/DV/GameServer1/build",
-  "command": "/usr/bin/g++   -g -o CMakeFiles/EpollServer.dir/main.cpp.o -c /home/kikuke/DV/GameServer1/main.cpp",
-  "file": "/home/kikuke/DV/GameServer1/main.cpp"
+  "directory": "/home/kikuke/DV/EpollBase_CppGameServer/build",
+  "command": "/usr/bin/g++   -g -o CMakeFiles/EpollServer.dir/main.cpp.o -c /home/kikuke/DV/EpollBase_CppGameServer/main.cpp",
+  "file": "/home/kikuke/DV/EpollBase_CppGameServer/main.cpp"
 },
 {
-  "directory": "/home/kikuke/DV/GameServer1/build",
-  "command": "/usr/bin/g++   -g -o CMakeFiles/EpollServer.dir/PacketCollector.cpp.o -c /home/kikuke/DV/GameServer1/PacketCollector.cpp",
-  "file": "/home/kikuke/DV/GameServer1/PacketCollector.cpp"
+  "directory": "/home/kikuke/DV/EpollBase_CppGameServer/build",
+  "command": "/usr/bin/g++   -g -o CMakeFiles/EpollServer.dir/PacketCollector.cpp.o -c /home/kikuke/DV/EpollBase_CppGameServer/PacketCollector.cpp",
+  "file": "/home/kikuke/DV/EpollBase_CppGameServer/PacketCollector.cpp"
 },
 {
-  "directory": "/home/kikuke/DV/GameServer1/build",
-  "command": "/usr/bin/g++   -g -o CMakeFiles/EpollServer.dir/RingBuffer.cpp.o -c /home/kikuke/DV/GameServer1/RingBuffer.cpp",
-  "file": "/home/kikuke/DV/GameServer1/RingBuffer.cpp"
+  "directory": "/home/kikuke/DV/EpollBase_CppGameServer/build",
+  "command": "/usr/bin/g++   -g -o CMakeFiles/EpollServer.dir/RingBuffer.cpp.o -c /home/kikuke/DV/EpollBase_CppGameServer/RingBuffer.cpp",
+  "file": "/home/kikuke/DV/EpollBase_CppGameServer/RingBuffer.cpp"
 },
 {
-  "directory": "/home/kikuke/DV/GameServer1/build",
-  "command": "/usr/bin/g++   -g -o CMakeFiles/EpollServer.dir/SocketManager.cpp.o -c /home/kikuke/DV/GameServer1/SocketManager.cpp",
-  "file": "/home/kikuke/DV/GameServer1/SocketManager.cpp"
+  "directory": "/home/kikuke/DV/EpollBase_CppGameServer/build",
+  "command": "/usr/bin/g++   -g -o CMakeFiles/EpollServer.dir/SocketManager.cpp.o -c /home/kikuke/DV/EpollBase_CppGameServer/SocketManager.cpp",
+  "file": "/home/kikuke/DV/EpollBase_CppGameServer/SocketManager.cpp"
 },
 {
-  "directory": "/home/kikuke/DV/GameServer1/build",
-  "command": "/usr/bin/gcc   -g -o CMakeFiles/EpollServer.dir/spepoll.c.o -c /home/kikuke/DV/GameServer1/spepoll.c",
-  "file": "/home/kikuke/DV/GameServer1/spepoll.c"
+  "directory": "/home/kikuke/DV/EpollBase_CppGameServer/build",
+  "command": "/usr/bin/g++   -g -o CMakeFiles/EpollServer.dir/TcpService.cpp.o -c /home/kikuke/DV/EpollBase_CppGameServer/TcpService.cpp",
+  "file": "/home/kikuke/DV/EpollBase_CppGameServer/TcpService.cpp"
 },
 {
-  "directory": "/home/kikuke/DV/GameServer1/build",
-  "command": "/usr/bin/gcc   -g -o CMakeFiles/EpollServer.dir/spsocket.c.o -c /home/kikuke/DV/GameServer1/spsocket.c",
-  "file": "/home/kikuke/DV/GameServer1/spsocket.c"
+  "directory": "/home/kikuke/DV/EpollBase_CppGameServer/build",
+  "command": "/usr/bin/gcc   -g -o CMakeFiles/EpollServer.dir/spepoll.c.o -c /home/kikuke/DV/EpollBase_CppGameServer/spepoll.c",
+  "file": "/home/kikuke/DV/EpollBase_CppGameServer/spepoll.c"
+},
+{
+  "directory": "/home/kikuke/DV/EpollBase_CppGameServer/build",
+  "command": "/usr/bin/gcc   -g -o CMakeFiles/EpollServer.dir/spsocket.c.o -c /home/kikuke/DV/EpollBase_CppGameServer/spsocket.c",
+  "file": "/home/kikuke/DV/EpollBase_CppGameServer/spsocket.c"
 }
 ]

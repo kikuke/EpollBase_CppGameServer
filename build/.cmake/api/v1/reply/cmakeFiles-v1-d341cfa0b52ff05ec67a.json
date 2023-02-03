@@ -163,8 +163,8 @@
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "/home/kikuke/DV/GameServer1/build",
-		"source" : "/home/kikuke/DV/GameServer1"
+		"build" : "/home/kikuke/DV/EpollBase_CppGameServer/build",
+		"source" : "/home/kikuke/DV/EpollBase_CppGameServer"
 	},
 	"version" : 
 	{

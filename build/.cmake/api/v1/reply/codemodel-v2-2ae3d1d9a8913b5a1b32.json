@@ -158,7 +158,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "EpollServer::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-EpollServer-Debug-6146f85b4dad013aa36a.json",
+					"jsonFile" : "target-EpollServer-Debug-e5785bc8256ea801341e.json",
 					"name" : "EpollServer",
 					"projectIndex" : 0
 				},
@@ -301,8 +301,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/home/kikuke/DV/GameServer1/build",
-		"source" : "/home/kikuke/DV/GameServer1"
+		"build" : "/home/kikuke/DV/EpollBase_CppGameServer/build",
+		"source" : "/home/kikuke/DV/EpollBase_CppGameServer"
 	},
 	"version" : 
 	{

@@ -1,5 +1,6 @@
 CMakeFiles/EpollServer.dir/spsocket.c.o: \
- /home/kikuke/DV/GameServer1/spsocket.c /usr/include/stdc-predef.h \
+ /home/kikuke/DV/EpollBase_CppGameServer/spsocket.c \
+ /usr/include/stdc-predef.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -57,4 +58,4 @@ CMakeFiles/EpollServer.dir/spsocket.c.o: \
  /usr/include/asm-generic/sockios.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_osockaddr.h \
  /usr/include/x86_64-linux-gnu/bits/in.h \
- /home/kikuke/DV/GameServer1/spsocket.h
+ /home/kikuke/DV/EpollBase_CppGameServer/spsocket.h
