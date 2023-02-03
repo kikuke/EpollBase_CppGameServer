@@ -4,6 +4,7 @@
 #include <stddef.h>
 
 #define RINGBUFFER_DEFAULT_SIZE 32768
+
 class RingBuffer
 {
 private:
@@ -30,7 +31,7 @@ private:
 public:
     RingBuffer();
     RingBuffer(int buf_sz);
-    ~RingBuffer();
+    virtual ~RingBuffer();
 
     size_t peek(void* dest_buf, size_t size);
     size_t enqueue(void* src_buf, size_t size);
@@ -38,6 +39,22 @@ public:
 
     //flush and reuse. no destroy.
     void flush();
+
+    template <typename T>
+    RingBuffer& operator <<(T const& data)
+    {
+        enqueue(&data, sizeof(data));
+
+        return *this;
+    }
+
+    template <typename T>
+    RingBuffer& operator >>(T & data)
+    {
+        dequeue(&data, sizeof(data));
+
+        return *this;
+    }
 };
 
 #endif
