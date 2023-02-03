@@ -2,6 +2,7 @@
 #define SOCKET_INFO
 
 #include "RingBuffer.h"
+
 struct TCPSOCKETINFO
 {
     int socket;

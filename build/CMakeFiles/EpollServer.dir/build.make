@@ -83,10 +83,24 @@ CMakeFiles/EpollServer.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EpollServer.dir/main.cpp.s"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kikuke/DV/GameServer1/main.cpp -o CMakeFiles/EpollServer.dir/main.cpp.s
 
+CMakeFiles/EpollServer.dir/PacketCollector.cpp.o: CMakeFiles/EpollServer.dir/flags.make
+CMakeFiles/EpollServer.dir/PacketCollector.cpp.o: ../PacketCollector.cpp
+CMakeFiles/EpollServer.dir/PacketCollector.cpp.o: CMakeFiles/EpollServer.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kikuke/DV/GameServer1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/EpollServer.dir/PacketCollector.cpp.o"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/EpollServer.dir/PacketCollector.cpp.o -MF CMakeFiles/EpollServer.dir/PacketCollector.cpp.o.d -o CMakeFiles/EpollServer.dir/PacketCollector.cpp.o -c /home/kikuke/DV/GameServer1/PacketCollector.cpp
+
+CMakeFiles/EpollServer.dir/PacketCollector.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EpollServer.dir/PacketCollector.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kikuke/DV/GameServer1/PacketCollector.cpp > CMakeFiles/EpollServer.dir/PacketCollector.cpp.i
+
+CMakeFiles/EpollServer.dir/PacketCollector.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EpollServer.dir/PacketCollector.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kikuke/DV/GameServer1/PacketCollector.cpp -o CMakeFiles/EpollServer.dir/PacketCollector.cpp.s
+
 CMakeFiles/EpollServer.dir/RingBuffer.cpp.o: CMakeFiles/EpollServer.dir/flags.make
 CMakeFiles/EpollServer.dir/RingBuffer.cpp.o: ../RingBuffer.cpp
 CMakeFiles/EpollServer.dir/RingBuffer.cpp.o: CMakeFiles/EpollServer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kikuke/DV/GameServer1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/EpollServer.dir/RingBuffer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kikuke/DV/GameServer1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/EpollServer.dir/RingBuffer.cpp.o"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/EpollServer.dir/RingBuffer.cpp.o -MF CMakeFiles/EpollServer.dir/RingBuffer.cpp.o.d -o CMakeFiles/EpollServer.dir/RingBuffer.cpp.o -c /home/kikuke/DV/GameServer1/RingBuffer.cpp
 
 CMakeFiles/EpollServer.dir/RingBuffer.cpp.i: cmake_force
@@ -97,10 +111,24 @@ CMakeFiles/EpollServer.dir/RingBuffer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EpollServer.dir/RingBuffer.cpp.s"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kikuke/DV/GameServer1/RingBuffer.cpp -o CMakeFiles/EpollServer.dir/RingBuffer.cpp.s
 
+CMakeFiles/EpollServer.dir/SocketManager.cpp.o: CMakeFiles/EpollServer.dir/flags.make
+CMakeFiles/EpollServer.dir/SocketManager.cpp.o: ../SocketManager.cpp
+CMakeFiles/EpollServer.dir/SocketManager.cpp.o: CMakeFiles/EpollServer.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kikuke/DV/GameServer1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/EpollServer.dir/SocketManager.cpp.o"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/EpollServer.dir/SocketManager.cpp.o -MF CMakeFiles/EpollServer.dir/SocketManager.cpp.o.d -o CMakeFiles/EpollServer.dir/SocketManager.cpp.o -c /home/kikuke/DV/GameServer1/SocketManager.cpp
+
+CMakeFiles/EpollServer.dir/SocketManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EpollServer.dir/SocketManager.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kikuke/DV/GameServer1/SocketManager.cpp > CMakeFiles/EpollServer.dir/SocketManager.cpp.i
+
+CMakeFiles/EpollServer.dir/SocketManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EpollServer.dir/SocketManager.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kikuke/DV/GameServer1/SocketManager.cpp -o CMakeFiles/EpollServer.dir/SocketManager.cpp.s
+
 CMakeFiles/EpollServer.dir/spepoll.c.o: CMakeFiles/EpollServer.dir/flags.make
 CMakeFiles/EpollServer.dir/spepoll.c.o: ../spepoll.c
 CMakeFiles/EpollServer.dir/spepoll.c.o: CMakeFiles/EpollServer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kikuke/DV/GameServer1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/EpollServer.dir/spepoll.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kikuke/DV/GameServer1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/EpollServer.dir/spepoll.c.o"
 	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/EpollServer.dir/spepoll.c.o -MF CMakeFiles/EpollServer.dir/spepoll.c.o.d -o CMakeFiles/EpollServer.dir/spepoll.c.o -c /home/kikuke/DV/GameServer1/spepoll.c
 
 CMakeFiles/EpollServer.dir/spepoll.c.i: cmake_force
@@ -114,7 +142,7 @@ CMakeFiles/EpollServer.dir/spepoll.c.s: cmake_force
 CMakeFiles/EpollServer.dir/spsocket.c.o: CMakeFiles/EpollServer.dir/flags.make
 CMakeFiles/EpollServer.dir/spsocket.c.o: ../spsocket.c
 CMakeFiles/EpollServer.dir/spsocket.c.o: CMakeFiles/EpollServer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kikuke/DV/GameServer1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/EpollServer.dir/spsocket.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kikuke/DV/GameServer1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/EpollServer.dir/spsocket.c.o"
 	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/EpollServer.dir/spsocket.c.o -MF CMakeFiles/EpollServer.dir/spsocket.c.o.d -o CMakeFiles/EpollServer.dir/spsocket.c.o -c /home/kikuke/DV/GameServer1/spsocket.c
 
 CMakeFiles/EpollServer.dir/spsocket.c.i: cmake_force
@@ -128,7 +156,9 @@ CMakeFiles/EpollServer.dir/spsocket.c.s: cmake_force
 # Object files for target EpollServer
 EpollServer_OBJECTS = \
 "CMakeFiles/EpollServer.dir/main.cpp.o" \
+"CMakeFiles/EpollServer.dir/PacketCollector.cpp.o" \
 "CMakeFiles/EpollServer.dir/RingBuffer.cpp.o" \
+"CMakeFiles/EpollServer.dir/SocketManager.cpp.o" \
 "CMakeFiles/EpollServer.dir/spepoll.c.o" \
 "CMakeFiles/EpollServer.dir/spsocket.c.o"
 
@@ -136,12 +166,14 @@ EpollServer_OBJECTS = \
 EpollServer_EXTERNAL_OBJECTS =
 
 EpollServer: CMakeFiles/EpollServer.dir/main.cpp.o
+EpollServer: CMakeFiles/EpollServer.dir/PacketCollector.cpp.o
 EpollServer: CMakeFiles/EpollServer.dir/RingBuffer.cpp.o
+EpollServer: CMakeFiles/EpollServer.dir/SocketManager.cpp.o
 EpollServer: CMakeFiles/EpollServer.dir/spepoll.c.o
 EpollServer: CMakeFiles/EpollServer.dir/spsocket.c.o
 EpollServer: CMakeFiles/EpollServer.dir/build.make
 EpollServer: CMakeFiles/EpollServer.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/kikuke/DV/GameServer1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable EpollServer"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/kikuke/DV/GameServer1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable EpollServer"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/EpollServer.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

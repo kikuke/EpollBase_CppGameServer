@@ -38,7 +38,7 @@ size_t RingBuffer::peek(void* dest_buf, size_t size)
     return size;
 }
 
-size_t RingBuffer::enqueue(void* src_buf, size_t size)
+size_t RingBuffer::enqueue(const void* src_buf, size_t size)
 {
     size_t write_sz;
 

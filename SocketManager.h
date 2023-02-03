@@ -18,8 +18,10 @@ public:
     {
         return m_Instance;
     }
+    
+    bool addTcpSocketInfo(int socket);
+    bool delTcpSocketInfo(int socket);
 
-    //소켓인포 생성/삭제 관련 함수 만들기
     TCPSOCKETINFO* getTcpSocketInfo(int socket);
 };
 

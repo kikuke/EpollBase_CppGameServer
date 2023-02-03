@@ -5,6 +5,8 @@
 
 #include "spsocket.h"
 #include "spepoll.h"
+#include "PacketCollector.h"
+#include "TcpService.h"
 
 int main(void)
 {
@@ -14,14 +16,13 @@ int main(void)
     constexpr int EPOLL_SIZE = 5000;
     constexpr int BUF_SIZE = 2048;
 
-    int serv_sock, clnt_sock;
-    struct sockaddr_in clnt_adr;
-    socklen_t adr_sz;
+    int serv_sock;
     int epfd, event_cnt;
-    int i;
     char buf[BUF_SIZE];
 
     struct epoll_event* ep_events;
+    
+    int i;
     
     serv_sock = SetTCPServSock(SERV_ADDR, SERV_PORT, SOMAXCONN);
     if(serv_sock == -1){
@@ -42,24 +43,16 @@ int main(void)
         for(i = 0; i < event_cnt; i++)
         {
             if(ep_events[i].data.fd == serv_sock){
-                adr_sz = sizeof(clnt_adr);
-                clnt_sock = accept(serv_sock, (struct sockaddr*)&clnt_adr, &adr_sz);
-                AddETClntSock(epfd, clnt_sock);
+                AcceptTcpSocket(ep_events[i].data.fd, epfd);
             }
             else {
-                if(ReadET(ep_events[i].data.fd, buf, BUF_SIZE, write) == 0)
+                if(ReadET(ep_events[i].data.fd, buf, BUF_SIZE, WriteRingBuffer) == 0)
                 {
-                    epoll_ctl(epfd, EPOLL_CTL_DEL, ep_events[i].data.fd, NULL);
-                    close(ep_events[i].data.fd);
-                }
-                else
-                {
-                    /*
-                    위에서는 write로 바로 처리하고있다. 스트림 형태이므로 나중에 메소드 바꿔서 TCP마다 메시지 시작과 끝 체크 후 처리 필요.
-                    전체 메시지 발송 등등
-                    */
+                    CloseTcpSocket(ep_events[i].data.fd, epfd);
                 }
             }
+
+            //해당 패킷의 완전 수신여부 체크해서 처리하기.
         }
     } while (true);
     

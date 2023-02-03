@@ -523,6 +523,30 @@ EpollServer/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/build
 .PHONY : EpollServer/fast
 
+PacketCollector.o: PacketCollector.cpp.o
+.PHONY : PacketCollector.o
+
+# target to build an object file
+PacketCollector.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/PacketCollector.cpp.o
+.PHONY : PacketCollector.cpp.o
+
+PacketCollector.i: PacketCollector.cpp.i
+.PHONY : PacketCollector.i
+
+# target to preprocess a source file
+PacketCollector.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/PacketCollector.cpp.i
+.PHONY : PacketCollector.cpp.i
+
+PacketCollector.s: PacketCollector.cpp.s
+.PHONY : PacketCollector.s
+
+# target to generate assembly for a file
+PacketCollector.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/PacketCollector.cpp.s
+.PHONY : PacketCollector.cpp.s
+
 RingBuffer.o: RingBuffer.cpp.o
 .PHONY : RingBuffer.o
 
@@ -546,6 +570,30 @@ RingBuffer.s: RingBuffer.cpp.s
 RingBuffer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/RingBuffer.cpp.s
 .PHONY : RingBuffer.cpp.s
+
+SocketManager.o: SocketManager.cpp.o
+.PHONY : SocketManager.o
+
+# target to build an object file
+SocketManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/SocketManager.cpp.o
+.PHONY : SocketManager.cpp.o
+
+SocketManager.i: SocketManager.cpp.i
+.PHONY : SocketManager.i
+
+# target to preprocess a source file
+SocketManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/SocketManager.cpp.i
+.PHONY : SocketManager.cpp.i
+
+SocketManager.s: SocketManager.cpp.s
+.PHONY : SocketManager.s
+
+# target to generate assembly for a file
+SocketManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/SocketManager.cpp.s
+.PHONY : SocketManager.cpp.s
 
 main.o: main.cpp.o
 .PHONY : main.o
@@ -659,9 +707,15 @@ help:
 	@echo "... NightlyTest"
 	@echo "... NightlyUpdate"
 	@echo "... EpollServer"
+	@echo "... PacketCollector.o"
+	@echo "... PacketCollector.i"
+	@echo "... PacketCollector.s"
 	@echo "... RingBuffer.o"
 	@echo "... RingBuffer.i"
 	@echo "... RingBuffer.s"
+	@echo "... SocketManager.o"
+	@echo "... SocketManager.i"
+	@echo "... SocketManager.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

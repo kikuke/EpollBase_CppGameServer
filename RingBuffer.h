@@ -34,7 +34,7 @@ public:
     virtual ~RingBuffer();
 
     size_t peek(void* dest_buf, size_t size);
-    size_t enqueue(void* src_buf, size_t size);
+    size_t enqueue(const void* src_buf, size_t size);
     size_t dequeue(void* dest_buf, size_t size);
 
     //flush and reuse. no destroy.
