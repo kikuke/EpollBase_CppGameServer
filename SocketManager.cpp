@@ -4,7 +4,12 @@ SocketManager SocketManager::m_Instance;
 
 bool SocketManager::addTcpSocketInfo(int socket)
 {
-    std::pair<int, TCPSOCKETINFO*> inform = std::pair<int, TCPSOCKETINFO*>(socket, new TCPSOCKETINFO);
+    //나중에 inform 세팅 관련 함수 만들기
+    TCPSOCKETINFO* info_ptr = new TCPSOCKETINFO;
+    info_ptr->socket = socket;
+    
+    std::pair<int, TCPSOCKETINFO*> inform = std::pair<int, TCPSOCKETINFO*>(socket, info_ptr);
+
     return tcpInfoMap.insert(inform).second;
 }
 
