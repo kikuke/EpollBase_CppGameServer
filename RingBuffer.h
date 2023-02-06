@@ -22,7 +22,6 @@ private:
     size_t DoubleBuffer(size_t need_sz);
 
     size_t getBufferSize();
-    size_t getUseSize();
     size_t getRemainSize();
 
     size_t getNotBrokenGetSize();
@@ -32,6 +31,8 @@ public:
     RingBuffer();
     RingBuffer(int buf_sz);
     virtual ~RingBuffer();
+
+    size_t getUseSize();
 
     size_t peek(void* dest_buf, size_t size);
     size_t enqueue(const void* src_buf, size_t size);

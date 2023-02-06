@@ -523,29 +523,53 @@ EpollServer/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/build
 .PHONY : EpollServer/fast
 
-PacketCollector.o: PacketCollector.cpp.o
-.PHONY : PacketCollector.o
+PacketHandler.o: PacketHandler.cpp.o
+.PHONY : PacketHandler.o
 
 # target to build an object file
-PacketCollector.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/PacketCollector.cpp.o
-.PHONY : PacketCollector.cpp.o
+PacketHandler.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/PacketHandler.cpp.o
+.PHONY : PacketHandler.cpp.o
 
-PacketCollector.i: PacketCollector.cpp.i
-.PHONY : PacketCollector.i
+PacketHandler.i: PacketHandler.cpp.i
+.PHONY : PacketHandler.i
 
 # target to preprocess a source file
-PacketCollector.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/PacketCollector.cpp.i
-.PHONY : PacketCollector.cpp.i
+PacketHandler.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/PacketHandler.cpp.i
+.PHONY : PacketHandler.cpp.i
 
-PacketCollector.s: PacketCollector.cpp.s
-.PHONY : PacketCollector.s
+PacketHandler.s: PacketHandler.cpp.s
+.PHONY : PacketHandler.s
 
 # target to generate assembly for a file
-PacketCollector.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/PacketCollector.cpp.s
-.PHONY : PacketCollector.cpp.s
+PacketHandler.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/PacketHandler.cpp.s
+.PHONY : PacketHandler.cpp.s
+
+PacketIO.o: PacketIO.cpp.o
+.PHONY : PacketIO.o
+
+# target to build an object file
+PacketIO.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/PacketIO.cpp.o
+.PHONY : PacketIO.cpp.o
+
+PacketIO.i: PacketIO.cpp.i
+.PHONY : PacketIO.i
+
+# target to preprocess a source file
+PacketIO.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/PacketIO.cpp.i
+.PHONY : PacketIO.cpp.i
+
+PacketIO.s: PacketIO.cpp.s
+.PHONY : PacketIO.s
+
+# target to generate assembly for a file
+PacketIO.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/PacketIO.cpp.s
+.PHONY : PacketIO.cpp.s
 
 RingBuffer.o: RingBuffer.cpp.o
 .PHONY : RingBuffer.o
@@ -643,6 +667,30 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+spbitop.o: spbitop.c.o
+.PHONY : spbitop.o
+
+# target to build an object file
+spbitop.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/spbitop.c.o
+.PHONY : spbitop.c.o
+
+spbitop.i: spbitop.c.i
+.PHONY : spbitop.i
+
+# target to preprocess a source file
+spbitop.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/spbitop.c.i
+.PHONY : spbitop.c.i
+
+spbitop.s: spbitop.c.s
+.PHONY : spbitop.s
+
+# target to generate assembly for a file
+spbitop.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/spbitop.c.s
+.PHONY : spbitop.c.s
+
 spepoll.o: spepoll.c.o
 .PHONY : spepoll.o
 
@@ -731,9 +779,12 @@ help:
 	@echo "... NightlyTest"
 	@echo "... NightlyUpdate"
 	@echo "... EpollServer"
-	@echo "... PacketCollector.o"
-	@echo "... PacketCollector.i"
-	@echo "... PacketCollector.s"
+	@echo "... PacketHandler.o"
+	@echo "... PacketHandler.i"
+	@echo "... PacketHandler.s"
+	@echo "... PacketIO.o"
+	@echo "... PacketIO.i"
+	@echo "... PacketIO.s"
 	@echo "... RingBuffer.o"
 	@echo "... RingBuffer.i"
 	@echo "... RingBuffer.s"
@@ -746,6 +797,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... spbitop.o"
+	@echo "... spbitop.i"
+	@echo "... spbitop.s"
 	@echo "... spepoll.o"
 	@echo "... spepoll.i"
 	@echo "... spepoll.s"

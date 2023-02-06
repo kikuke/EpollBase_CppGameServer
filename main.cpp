@@ -5,7 +5,7 @@
 
 #include "spsocket.h"
 #include "spepoll.h"
-#include "PacketCollector.h"
+#include "PacketIO.h"
 #include "TcpService.h"
 
 int main(void)
@@ -32,7 +32,7 @@ int main(void)
     epfd = InitEpoll(ep_events, EPOLL_SIZE);
     SetETServSock(epfd, serv_sock);
 
-    //나중에 멀티스레딩도적용해보기
+    //나중에 멀티스레딩도적용해보기 아직은 tcp 요청만 처리하지만 나중에 udp등의 요청을 처리하거나 다른 스레드나 프로세스로 연결해주기
     do
     {
         event_cnt = epoll_wait(epfd, ep_events, EPOLL_SIZE, -1);
@@ -52,7 +52,7 @@ int main(void)
                 }
             }
 
-            //해당 패킷의 완전 수신여부 체크해서 처리하기.
+            //해당 패킷의 수신여부 체크해서 처리하기.
         }
     } while (true);
     
