@@ -1,5 +1,5 @@
-#ifndef SPBIT_OP
-#define SPBIT_OP
+#ifndef SPBIT_IO
+#define SPBIT_IO
 
 #ifdef __cplusplus
 extern "C" {
@@ -18,10 +18,15 @@ size_t GetBitLen(size_t sBitIdx, size_t eBitIdx);
 //use it uInt or flagData.
 unsigned int BitsToUInt(size_t sBitIdx, size_t eBitIdx, const void* buf, size_t bufUseSize);
 
+//return set bits
+//copy bitMask to sBitIdx ~ eBitIdx in Buf
+size_t SetBitsByMask(unsigned int bitMask, size_t sBitIdx, size_t eBitIdx, const void* buf, size_t bufSize);
+
+//0 is false. other is true
+int CheckBitMask(unsigned int bitMask, size_t sBitIdx, size_t eBitIdx, const void* buf, size_t bufUseSize);
+
 //return convert num. convert bits to Bools. Available maximum convert is sizeof(unsigned int) * 4
 size_t BitsToBools(size_t sBitIdx, int* bool, size_t boolSize, const void* srcbuf, size_t srcBufUseSize);
-
-//역변환 함수들도 만들기
 
 #ifdef __cplusplus
 }

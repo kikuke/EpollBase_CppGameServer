@@ -153,19 +153,19 @@ CMakeFiles/EpollServer.dir/TcpService.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EpollServer.dir/TcpService.cpp.s"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kikuke/DV/EpollBase_CppGameServer/TcpService.cpp -o CMakeFiles/EpollServer.dir/TcpService.cpp.s
 
-CMakeFiles/EpollServer.dir/spbitop.c.o: CMakeFiles/EpollServer.dir/flags.make
-CMakeFiles/EpollServer.dir/spbitop.c.o: ../spbitop.c
-CMakeFiles/EpollServer.dir/spbitop.c.o: CMakeFiles/EpollServer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kikuke/DV/EpollBase_CppGameServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/EpollServer.dir/spbitop.c.o"
-	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/EpollServer.dir/spbitop.c.o -MF CMakeFiles/EpollServer.dir/spbitop.c.o.d -o CMakeFiles/EpollServer.dir/spbitop.c.o -c /home/kikuke/DV/EpollBase_CppGameServer/spbitop.c
+CMakeFiles/EpollServer.dir/spbitio.c.o: CMakeFiles/EpollServer.dir/flags.make
+CMakeFiles/EpollServer.dir/spbitio.c.o: ../spbitio.c
+CMakeFiles/EpollServer.dir/spbitio.c.o: CMakeFiles/EpollServer.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kikuke/DV/EpollBase_CppGameServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/EpollServer.dir/spbitio.c.o"
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/EpollServer.dir/spbitio.c.o -MF CMakeFiles/EpollServer.dir/spbitio.c.o.d -o CMakeFiles/EpollServer.dir/spbitio.c.o -c /home/kikuke/DV/EpollBase_CppGameServer/spbitio.c
 
-CMakeFiles/EpollServer.dir/spbitop.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/EpollServer.dir/spbitop.c.i"
-	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/kikuke/DV/EpollBase_CppGameServer/spbitop.c > CMakeFiles/EpollServer.dir/spbitop.c.i
+CMakeFiles/EpollServer.dir/spbitio.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/EpollServer.dir/spbitio.c.i"
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/kikuke/DV/EpollBase_CppGameServer/spbitio.c > CMakeFiles/EpollServer.dir/spbitio.c.i
 
-CMakeFiles/EpollServer.dir/spbitop.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/EpollServer.dir/spbitop.c.s"
-	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/kikuke/DV/EpollBase_CppGameServer/spbitop.c -o CMakeFiles/EpollServer.dir/spbitop.c.s
+CMakeFiles/EpollServer.dir/spbitio.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/EpollServer.dir/spbitio.c.s"
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/kikuke/DV/EpollBase_CppGameServer/spbitio.c -o CMakeFiles/EpollServer.dir/spbitio.c.s
 
 CMakeFiles/EpollServer.dir/spepoll.c.o: CMakeFiles/EpollServer.dir/flags.make
 CMakeFiles/EpollServer.dir/spepoll.c.o: ../spepoll.c
@@ -203,7 +203,7 @@ EpollServer_OBJECTS = \
 "CMakeFiles/EpollServer.dir/RingBuffer.cpp.o" \
 "CMakeFiles/EpollServer.dir/SocketManager.cpp.o" \
 "CMakeFiles/EpollServer.dir/TcpService.cpp.o" \
-"CMakeFiles/EpollServer.dir/spbitop.c.o" \
+"CMakeFiles/EpollServer.dir/spbitio.c.o" \
 "CMakeFiles/EpollServer.dir/spepoll.c.o" \
 "CMakeFiles/EpollServer.dir/spsocket.c.o"
 
@@ -216,7 +216,7 @@ EpollServer: CMakeFiles/EpollServer.dir/PacketIO.cpp.o
 EpollServer: CMakeFiles/EpollServer.dir/RingBuffer.cpp.o
 EpollServer: CMakeFiles/EpollServer.dir/SocketManager.cpp.o
 EpollServer: CMakeFiles/EpollServer.dir/TcpService.cpp.o
-EpollServer: CMakeFiles/EpollServer.dir/spbitop.c.o
+EpollServer: CMakeFiles/EpollServer.dir/spbitio.c.o
 EpollServer: CMakeFiles/EpollServer.dir/spepoll.c.o
 EpollServer: CMakeFiles/EpollServer.dir/spsocket.c.o
 EpollServer: CMakeFiles/EpollServer.dir/build.make

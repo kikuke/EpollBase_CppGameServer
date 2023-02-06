@@ -667,29 +667,29 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-spbitop.o: spbitop.c.o
-.PHONY : spbitop.o
+spbitio.o: spbitio.c.o
+.PHONY : spbitio.o
 
 # target to build an object file
-spbitop.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/spbitop.c.o
-.PHONY : spbitop.c.o
+spbitio.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/spbitio.c.o
+.PHONY : spbitio.c.o
 
-spbitop.i: spbitop.c.i
-.PHONY : spbitop.i
+spbitio.i: spbitio.c.i
+.PHONY : spbitio.i
 
 # target to preprocess a source file
-spbitop.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/spbitop.c.i
-.PHONY : spbitop.c.i
+spbitio.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/spbitio.c.i
+.PHONY : spbitio.c.i
 
-spbitop.s: spbitop.c.s
-.PHONY : spbitop.s
+spbitio.s: spbitio.c.s
+.PHONY : spbitio.s
 
 # target to generate assembly for a file
-spbitop.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/spbitop.c.s
-.PHONY : spbitop.c.s
+spbitio.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/spbitio.c.s
+.PHONY : spbitio.c.s
 
 spepoll.o: spepoll.c.o
 .PHONY : spepoll.o
@@ -797,9 +797,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... spbitop.o"
-	@echo "... spbitop.i"
-	@echo "... spbitop.s"
+	@echo "... spbitio.o"
+	@echo "... spbitio.i"
+	@echo "... spbitio.s"
 	@echo "... spepoll.o"
 	@echo "... spepoll.i"
 	@echo "... spepoll.s"

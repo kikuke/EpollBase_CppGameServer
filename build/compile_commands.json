@@ -31,8 +31,8 @@
 },
 {
   "directory": "/home/kikuke/DV/EpollBase_CppGameServer/build",
-  "command": "/usr/bin/gcc   -g -o CMakeFiles/EpollServer.dir/spbitop.c.o -c /home/kikuke/DV/EpollBase_CppGameServer/spbitop.c",
-  "file": "/home/kikuke/DV/EpollBase_CppGameServer/spbitop.c"
+  "command": "/usr/bin/gcc   -g -o CMakeFiles/EpollServer.dir/spbitio.c.o -c /home/kikuke/DV/EpollBase_CppGameServer/spbitio.c",
+  "file": "/home/kikuke/DV/EpollBase_CppGameServer/spbitio.c"
 },
 {
   "directory": "/home/kikuke/DV/EpollBase_CppGameServer/build",
