@@ -20,7 +20,7 @@ unsigned int BitsToUInt(size_t sBitIdx, size_t eBitIdx, const void* buf, size_t 
 
 //return set bits
 //copy bitMask to sBitIdx ~ eBitIdx in Buf
-size_t SetBitsByMask(unsigned int bitMask, size_t sBitIdx, size_t eBitIdx, const void* buf, size_t bufSize);
+size_t SetBitsByMask(unsigned int bitMask, size_t sBitIdx, size_t eBitIdx, void* buf, size_t bufSize);
 
 //0 is false. other is true
 int CheckBitMask(unsigned int bitMask, size_t sBitIdx, size_t eBitIdx, const void* buf, size_t bufUseSize);

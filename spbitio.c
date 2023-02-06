@@ -39,7 +39,7 @@ unsigned int BitsToUInt(size_t sBitIdx, size_t eBitIdx, const void* buf, size_t 
     return data;
 }
 
-size_t SetBitsByMask(unsigned int bitMask, size_t sBitIdx, size_t eBitIdx, const void* buf, size_t bufSize)
+size_t SetBitsByMask(unsigned int bitMask, size_t sBitIdx, size_t eBitIdx, void* buf, size_t bufSize)
 {
     unsigned char brokenData[5];
     unsigned int initMask;
