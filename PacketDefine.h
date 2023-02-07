@@ -11,7 +11,7 @@ struct TCPTestPacketHeader
 
     unsigned int subOp : 8;
     unsigned int flag : 12;
-    unsigned int : 12;//4Byte
+    unsigned int auth : 12;//4Byte
 };//8byte
 
 #endif

@@ -15,6 +15,8 @@ private:
 
     RingBuffer readBuf;
 
+    int TCPHeaderCheck(TCPSOCKETINFO* info);
+
 public:
     //PacketHandler(int startCode, int endCode, const int (*handler)(const void*, size_t));
     //virtual ~PacketHandler();
