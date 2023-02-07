@@ -1,6 +1,6 @@
 #include "sptype.h"
 #include "spbitio.h"
-#include "PacketParser.h"
+#include "sppacketparser.h"
 
 int CheckStartCode(unsigned int startCode, size_t sBitIdx, size_t eBitIdx, const void* buf, size_t bufUseSize)
 {

@@ -523,6 +523,30 @@ EpollServer/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/build
 .PHONY : EpollServer/fast
 
+PacketHandler.o: PacketHandler.cpp.o
+.PHONY : PacketHandler.o
+
+# target to build an object file
+PacketHandler.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/PacketHandler.cpp.o
+.PHONY : PacketHandler.cpp.o
+
+PacketHandler.i: PacketHandler.cpp.i
+.PHONY : PacketHandler.i
+
+# target to preprocess a source file
+PacketHandler.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/PacketHandler.cpp.i
+.PHONY : PacketHandler.cpp.i
+
+PacketHandler.s: PacketHandler.cpp.s
+.PHONY : PacketHandler.s
+
+# target to generate assembly for a file
+PacketHandler.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/PacketHandler.cpp.s
+.PHONY : PacketHandler.cpp.s
+
 PacketIO.o: PacketIO.cpp.o
 .PHONY : PacketIO.o
 
@@ -546,30 +570,6 @@ PacketIO.s: PacketIO.cpp.s
 PacketIO.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/PacketIO.cpp.s
 .PHONY : PacketIO.cpp.s
-
-PacketParser.o: PacketParser.cpp.o
-.PHONY : PacketParser.o
-
-# target to build an object file
-PacketParser.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/PacketParser.cpp.o
-.PHONY : PacketParser.cpp.o
-
-PacketParser.i: PacketParser.cpp.i
-.PHONY : PacketParser.i
-
-# target to preprocess a source file
-PacketParser.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/PacketParser.cpp.i
-.PHONY : PacketParser.cpp.i
-
-PacketParser.s: PacketParser.cpp.s
-.PHONY : PacketParser.s
-
-# target to generate assembly for a file
-PacketParser.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/PacketParser.cpp.s
-.PHONY : PacketParser.cpp.s
 
 RingBuffer.o: RingBuffer.cpp.o
 .PHONY : RingBuffer.o
@@ -715,6 +715,30 @@ spepoll.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/spepoll.c.s
 .PHONY : spepoll.c.s
 
+sppacketparser.o: sppacketparser.c.o
+.PHONY : sppacketparser.o
+
+# target to build an object file
+sppacketparser.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/sppacketparser.c.o
+.PHONY : sppacketparser.c.o
+
+sppacketparser.i: sppacketparser.c.i
+.PHONY : sppacketparser.i
+
+# target to preprocess a source file
+sppacketparser.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/sppacketparser.c.i
+.PHONY : sppacketparser.c.i
+
+sppacketparser.s: sppacketparser.c.s
+.PHONY : sppacketparser.s
+
+# target to generate assembly for a file
+sppacketparser.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/sppacketparser.c.s
+.PHONY : sppacketparser.c.s
+
 spsocket.o: spsocket.c.o
 .PHONY : spsocket.o
 
@@ -779,12 +803,12 @@ help:
 	@echo "... NightlyTest"
 	@echo "... NightlyUpdate"
 	@echo "... EpollServer"
+	@echo "... PacketHandler.o"
+	@echo "... PacketHandler.i"
+	@echo "... PacketHandler.s"
 	@echo "... PacketIO.o"
 	@echo "... PacketIO.i"
 	@echo "... PacketIO.s"
-	@echo "... PacketParser.o"
-	@echo "... PacketParser.i"
-	@echo "... PacketParser.s"
 	@echo "... RingBuffer.o"
 	@echo "... RingBuffer.i"
 	@echo "... RingBuffer.s"
@@ -803,6 +827,9 @@ help:
 	@echo "... spepoll.o"
 	@echo "... spepoll.i"
 	@echo "... spepoll.s"
+	@echo "... sppacketparser.o"
+	@echo "... sppacketparser.i"
+	@echo "... sppacketparser.s"
 	@echo "... spsocket.o"
 	@echo "... spsocket.i"
 	@echo "... spsocket.s"
