@@ -41,6 +41,10 @@ public:
     //flush and reuse. no destroy.
     void flush();
 
+    RingBuffer& operator <<(RingBuffer& data);
+
+    RingBuffer& operator >>(RingBuffer& data);
+
     template <typename T>
     RingBuffer& operator <<(T const& data)
     {
@@ -48,6 +52,7 @@ public:
 
         return *this;
     }
+
 
     template <typename T>
     RingBuffer& operator >>(T & data)

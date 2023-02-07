@@ -2,7 +2,7 @@
 #define PACKET_DEFINE
 
 //use BitField memcpy
-struct TestPacketHeader
+struct TCPTestPacketHeader
 {
     unsigned int startCode : 8;
     unsigned int packetLen : 16;

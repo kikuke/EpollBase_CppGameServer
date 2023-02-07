@@ -76,6 +76,26 @@ void RingBuffer::flush()
     InitBufPointer();
 }
 
+RingBuffer& RingBuffer::operator <<(RingBuffer& data)
+{
+    enqueue(data.buffer + data.front, data.getNotBrokenGetSize());
+    data.front = data.getNextPointerMove(data.front, data.getNotBrokenGetSize());
+    enqueue(data.buffer + data.front, data.getNotBrokenGetSize());
+    data.front = data.getNextPointerMove(data.front, data.getNotBrokenGetSize());
+
+    return *this;
+}
+
+RingBuffer& RingBuffer::operator >>(RingBuffer& data)
+{
+    data.enqueue(buffer + front, getNotBrokenGetSize());
+    front = getNextPointerMove(front, getNotBrokenGetSize());
+    data.enqueue(buffer + front, getNotBrokenGetSize());
+    front = getNextPointerMove(front, getNotBrokenGetSize());
+
+    return *this;
+}
+
 size_t RingBuffer::getNotBrokenGetSize()
 {
     if(rear >= front)

@@ -19,7 +19,7 @@ public:
     //PacketHandler(int startCode, int endCode, const int (*handler)(const void*, size_t));
     //virtual ~PacketHandler();
 
-    int execute(int sock);
+    int execute(int sock);//아예 추상 클래스로 만들어보이기?
 };
 
 #endif
