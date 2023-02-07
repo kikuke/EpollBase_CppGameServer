@@ -18,8 +18,11 @@ size_t GetBitLen(size_t sBitIdx, size_t eBitIdx);
 //use it uInt or flagData.
 unsigned int BitsToUInt(size_t sBitIdx, size_t eBitIdx, const void* buf, size_t bufUseSize);
 
+//Set One Bit
+size_t SetBit(size_t bitIdx,int bool, void* buf, size_t bufSize);
+
 //return set bits
-//copy bitMask to sBitIdx ~ eBitIdx in Buf
+//copy bitMask to sBitIdx ~ eBitIdx in Buf. If need set manyBit, more efficient than SetBit.
 size_t SetBitsByMask(unsigned int bitMask, size_t sBitIdx, size_t eBitIdx, void* buf, size_t bufSize);
 
 //0 is false. other is true

@@ -39,6 +39,22 @@ unsigned int BitsToUInt(size_t sBitIdx, size_t eBitIdx, const void* buf, size_t 
     return data;
 }
 
+size_t SetBit(size_t bitIdx,int bool, void* buf, size_t bufSize)
+{
+    unsigned char brokenData;
+    memcpy(brokenData, ((unsigned char*)buf)[BitToByteIdx(bitIdx)], 1);
+
+    if(bool){
+        brokenData &= (~(1 << 8 - (BitToByteIdxRem(bitIdx) + 1)));
+    } else {
+        brokenData |= (1 << 8 - (BitToByteIdxRem(bitIdx) + 1));
+    }
+
+    memcpy(&buf[BitToByteIdx(bitIdx)], brokenData, 1);
+
+    return 1;
+}
+
 size_t SetBitsByMask(unsigned int bitMask, size_t sBitIdx, size_t eBitIdx, void* buf, size_t bufSize)
 {
     unsigned char brokenData[5];
