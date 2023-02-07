@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/EpollServer.dir/PacketHandler.cpp.o"
-  "CMakeFiles/EpollServer.dir/PacketHandler.cpp.o.d"
   "CMakeFiles/EpollServer.dir/PacketIO.cpp.o"
   "CMakeFiles/EpollServer.dir/PacketIO.cpp.o.d"
+  "CMakeFiles/EpollServer.dir/PacketParser.cpp.o"
+  "CMakeFiles/EpollServer.dir/PacketParser.cpp.o.d"
   "CMakeFiles/EpollServer.dir/RingBuffer.cpp.o"
   "CMakeFiles/EpollServer.dir/RingBuffer.cpp.o.d"
   "CMakeFiles/EpollServer.dir/SocketManager.cpp.o"
