@@ -10,11 +10,23 @@ private:
     /* data */
 public:
     TcpMessagePacket():PacketHandler(MESSAGE) {}
-    ~TcpMessagePacket();
+    ~TcpMessagePacket() {}
 
     int execute(unsigned int subOp, RingBuffer& buffer) override
     {
+        switch (subOp)
+        {
+        case MESSAGE_ECHO:
+            /* code */
+            //에코 코드 넣어두기
+            break;
         
+        default:
+            //error
+            return 0;
+            break;
+        }
+        return 1;
     }
 };
 

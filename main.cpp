@@ -25,7 +25,8 @@ int main(void)
 
     struct epoll_event* ep_events;
 
-    TcpPacketHandler tcpPacketHandler(2, {new TcpMessagePacket(), new TcpMessagePacket()});
+    PacketHandler tcpHandles[] = {new TcpMessagePacket(), new TcpMessagePacket()};
+    TcpPacketHandler tcpPacketHandler(tcpHandles, sizeof(tcpHandles)/sizeof(*tcpHandles));
     
     int i;
     

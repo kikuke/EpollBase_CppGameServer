@@ -10,8 +10,8 @@
 class TcpPacketHandler
 {
 private:
-    size_t handler_size;
     PacketHandler* handlers;
+    size_t handler_size;
 
     RingBuffer readBuf;
 
@@ -19,7 +19,7 @@ private:
     void ExecuteOP(unsigned int mainOp, unsigned int subOp);
 
 public:
-    TcpPacketHandler(size_t handler_size, PacketHandler* handlers){
+    TcpPacketHandler(PacketHandler* handlers, size_t handler_size){
         this->handler_size = handler_size;
         this->handlers = handlers;
     }
