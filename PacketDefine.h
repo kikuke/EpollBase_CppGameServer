@@ -1,7 +1,15 @@
 #ifndef PACKET_DEFINE
 #define PACKET_DEFINE
 
-//use BitField memcpy
+//TCP CODE
+#define TCP_PACKET_START_CODE 0x77
+#define TCP_PACKET_END_CODE 0x33
+
+//TCP OP
+#define MESSAGE 3
+#define MESSAGE_ECHO 7
+
+//TCP HEADER
 struct TCPTestPacketHeader
 {
     unsigned int startCode : 8;

@@ -7,6 +7,9 @@
 #include "spepoll.h"
 #include "PacketIO.h"
 #include "TcpService.h"
+#include "PacketHandler.h"
+#include "TcpPacketHandler.h"
+#include "TcpMessagePacket.h"
 
 int main(void)
 {
@@ -21,6 +24,8 @@ int main(void)
     char buf[BUF_SIZE];
 
     struct epoll_event* ep_events;
+
+    TcpPacketHandler tcpPacketHandler(2, {new TcpMessagePacket(), new TcpMessagePacket()});
     
     int i;
     
@@ -52,7 +57,8 @@ int main(void)
                 }
             }
 
-            //해당 패킷의 수신여부 체크해서 처리하기.
+            while(tcpPacketHandler.execute(ep_events[i].data.fd))//메시지 처리함수. 빌때까지.
+            {}
         }
     } while (true);
     

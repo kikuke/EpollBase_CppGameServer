@@ -523,30 +523,6 @@ EpollServer/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/build
 .PHONY : EpollServer/fast
 
-PacketHandler.o: PacketHandler.cpp.o
-.PHONY : PacketHandler.o
-
-# target to build an object file
-PacketHandler.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/PacketHandler.cpp.o
-.PHONY : PacketHandler.cpp.o
-
-PacketHandler.i: PacketHandler.cpp.i
-.PHONY : PacketHandler.i
-
-# target to preprocess a source file
-PacketHandler.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/PacketHandler.cpp.i
-.PHONY : PacketHandler.cpp.i
-
-PacketHandler.s: PacketHandler.cpp.s
-.PHONY : PacketHandler.s
-
-# target to generate assembly for a file
-PacketHandler.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/PacketHandler.cpp.s
-.PHONY : PacketHandler.cpp.s
-
 PacketIO.o: PacketIO.cpp.o
 .PHONY : PacketIO.o
 
@@ -618,6 +594,30 @@ SocketManager.s: SocketManager.cpp.s
 SocketManager.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/SocketManager.cpp.s
 .PHONY : SocketManager.cpp.s
+
+TcpPacketHandler.o: TcpPacketHandler.cpp.o
+.PHONY : TcpPacketHandler.o
+
+# target to build an object file
+TcpPacketHandler.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/TcpPacketHandler.cpp.o
+.PHONY : TcpPacketHandler.cpp.o
+
+TcpPacketHandler.i: TcpPacketHandler.cpp.i
+.PHONY : TcpPacketHandler.i
+
+# target to preprocess a source file
+TcpPacketHandler.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/TcpPacketHandler.cpp.i
+.PHONY : TcpPacketHandler.cpp.i
+
+TcpPacketHandler.s: TcpPacketHandler.cpp.s
+.PHONY : TcpPacketHandler.s
+
+# target to generate assembly for a file
+TcpPacketHandler.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/TcpPacketHandler.cpp.s
+.PHONY : TcpPacketHandler.cpp.s
 
 TcpService.o: TcpService.cpp.o
 .PHONY : TcpService.o
@@ -803,9 +803,6 @@ help:
 	@echo "... NightlyTest"
 	@echo "... NightlyUpdate"
 	@echo "... EpollServer"
-	@echo "... PacketHandler.o"
-	@echo "... PacketHandler.i"
-	@echo "... PacketHandler.s"
 	@echo "... PacketIO.o"
 	@echo "... PacketIO.i"
 	@echo "... PacketIO.s"
@@ -815,6 +812,9 @@ help:
 	@echo "... SocketManager.o"
 	@echo "... SocketManager.i"
 	@echo "... SocketManager.s"
+	@echo "... TcpPacketHandler.o"
+	@echo "... TcpPacketHandler.i"
+	@echo "... TcpPacketHandler.s"
 	@echo "... TcpService.o"
 	@echo "... TcpService.i"
 	@echo "... TcpService.s"

@@ -6,11 +6,6 @@
 },
 {
   "directory": "/home/kikuke/DV/EpollBase_CppGameServer/build",
-  "command": "/usr/bin/g++   -g -o CMakeFiles/EpollServer.dir/PacketHandler.cpp.o -c /home/kikuke/DV/EpollBase_CppGameServer/PacketHandler.cpp",
-  "file": "/home/kikuke/DV/EpollBase_CppGameServer/PacketHandler.cpp"
-},
-{
-  "directory": "/home/kikuke/DV/EpollBase_CppGameServer/build",
   "command": "/usr/bin/g++   -g -o CMakeFiles/EpollServer.dir/PacketIO.cpp.o -c /home/kikuke/DV/EpollBase_CppGameServer/PacketIO.cpp",
   "file": "/home/kikuke/DV/EpollBase_CppGameServer/PacketIO.cpp"
 },
@@ -23,6 +18,11 @@
   "directory": "/home/kikuke/DV/EpollBase_CppGameServer/build",
   "command": "/usr/bin/g++   -g -o CMakeFiles/EpollServer.dir/SocketManager.cpp.o -c /home/kikuke/DV/EpollBase_CppGameServer/SocketManager.cpp",
   "file": "/home/kikuke/DV/EpollBase_CppGameServer/SocketManager.cpp"
+},
+{
+  "directory": "/home/kikuke/DV/EpollBase_CppGameServer/build",
+  "command": "/usr/bin/g++   -g -o CMakeFiles/EpollServer.dir/TcpPacketHandler.cpp.o -c /home/kikuke/DV/EpollBase_CppGameServer/TcpPacketHandler.cpp",
+  "file": "/home/kikuke/DV/EpollBase_CppGameServer/TcpPacketHandler.cpp"
 },
 {
   "directory": "/home/kikuke/DV/EpollBase_CppGameServer/build",
