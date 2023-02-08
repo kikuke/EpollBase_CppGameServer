@@ -7,20 +7,37 @@
 class TcpMessagePacket : public PacketHandler
 {
 private:
-    /* data */
+    int MessageEcho(MessageEchoData meData);
+
 public:
     TcpMessagePacket():PacketHandler(MESSAGE) {}
     ~TcpMessagePacket() {}
 
-    int execute(unsigned int subOp, RingBuffer& buffer) override
+    int execute(int sock, unsigned int subOp, RingBuffer& buffer) override
     {
         switch (subOp)
         {
         case MESSAGE_ECHO:
-            /* code */
-            //에코 코드 넣어두기
+            MessageEchoData meData;
+            if(DequeueData(meData, buffer) != TCP_PACKET_END_CODE){
+                return 0;//에러코드로 바꿔주기
+            }
+
+            return MessageEcho(meData);//에러나면 에러코드가 반환됨.
             break;
         
+        default:
+            //error
+            return 0;
+            break;
+        }
+        return 1;
+    }
+
+    int catchError(int sock, unsigned int errorCode) override
+    {
+        switch (errorCode)
+        {
         default:
             //error
             return 0;

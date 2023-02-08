@@ -59,7 +59,9 @@ int main(void)
             }
 
             while(tcpPacketHandler.execute(ep_events[i].data.fd))//메시지 처리함수. 빌때까지.
-            {}
+            {
+                //에러 2차 처리 위 함수에서 에러 처리하기에 어지간하면 할일 없음
+            }
         }
     } while (true);
 

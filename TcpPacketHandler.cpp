@@ -1,30 +1,31 @@
 #include "SocketManager.h"
 #include "TcpPacketHandler.h"
 
-void TcpPacketHandler::ExecuteOP(unsigned int mainOp, unsigned int subOp)
+int TcpPacketHandler::ExecuteOP(int sock, unsigned int mainOp, unsigned int subOp)
 {
     for(int i=0; i<handler_size; i++){
-        if((*(handlers[i])).getMainOp() == mainOp){
-            (*(handlers[i])).execute(subOp, readBuf);
-            return;
-        }
+        if((*(handlers[i])).getMainOp() == mainOp)
+            return (*(handlers[i])).execute(sock, subOp, readBuf);
     }
-    
-    //에러처리. 여기 밑으로는 에러임.
 
-    /*
-    각 응답 클래스의 run인자에는 RingBuffer를 이용해 빼내는 함수도 있음?
-    각 응답코드별 응답 구조체 또는 클래스를 만들어서 그대로 빼내기.
-    응답 클래스에는 응답 구조체도 들어있음 응답 구조체를 이용해 한번에 빼내기.
-    응답 구조체는 get()같은 상위 클래스의 메서드를 이용해 빼낼 수 있음.
-    상위 클래스에 run 같은 느낌으로 실행되는 것들도 만들기
-    */
+   return 0;
+}
+
+int TcpPacketHandler::CatchError(int sock, unsigned int mainOp, unsigned int errorCode)
+{
+    for(int i=0; i<handler_size; i++){
+        if((*(handlers[i])).getMainOp() == mainOp)
+            return (*(handlers[i])).catchError(sock, errorCode);
+    }
+
+    return 0;
 }
 
 int TcpPacketHandler::execute(int sock)
 {
     TCPSOCKETINFO* info = SocketManager::getInstance().getTcpSocketInfo(sock);
     TCPTestPacketHeader header;
+    int ret;
 
     int useSz = info->recvBuffer.getUseSize();
 
@@ -35,8 +36,9 @@ int TcpPacketHandler::execute(int sock)
     if(header.packetLen > useSz)
         return 0;
 
-    if(!TCPHeaderCheck(&header)){
-        //에러 처리 코드들.
+    ret = TCPHeaderCheck(&header);
+    if(ret != 1){
+        //헤더체크 에러 처리 코드들.
         return 0;
     }
     
@@ -44,7 +46,13 @@ int TcpPacketHandler::execute(int sock)
     readBuf.flush();
     readBuf << info->recvBuffer;
 
-    ExecuteOP(header.mainOp, header.subOp);
+    ret = ExecuteOP(sock, header.mainOp, header.subOp);
+    if(ret != 1){
+        //해당 소켓의 버퍼는 비게됨.
+        //해당 오류에 대한 해당 기능의 에러 처리
+        CatchError(sock, header.mainOp, ret);
+        return 0;
+    }
 
     readBuf >> info->recvBuffer;
 

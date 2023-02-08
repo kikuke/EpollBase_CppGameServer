@@ -16,7 +16,10 @@ private:
     RingBuffer readBuf;
 
     int TCPHeaderCheck(TCPTestPacketHeader* header);
-    void ExecuteOP(unsigned int mainOp, unsigned int subOp);
+    //call packetHandler's execute()
+    int ExecuteOP(int sock, unsigned int mainOp, unsigned int subOp);
+    //call packetHandler's catchError()
+    int CatchError(int sock, unsigned int mainOp, unsigned int errorCode);
 
 public:
     TcpPacketHandler(PacketHandler** handlers, size_t handler_size){
