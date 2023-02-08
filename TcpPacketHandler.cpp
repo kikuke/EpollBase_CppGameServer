@@ -4,8 +4,8 @@
 void TcpPacketHandler::ExecuteOP(unsigned int mainOp, unsigned int subOp)
 {
     for(int i=0; i<handler_size; i++){
-        if(handlers[i].getMainOp() == mainOp){
-            handlers[i].execute(subOp, readBuf);
+        if((*(handlers[i])).getMainOp() == mainOp){
+            (*(handlers[i])).execute(subOp, readBuf);
             return;
         }
     }

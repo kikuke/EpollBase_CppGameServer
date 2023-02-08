@@ -25,7 +25,7 @@ int main(void)
 
     struct epoll_event* ep_events;
 
-    PacketHandler tcpHandles[] = {new TcpMessagePacket(), new TcpMessagePacket()};
+    PacketHandler* tcpHandles[] = {new TcpMessagePacket(), new TcpMessagePacket()};
     TcpPacketHandler tcpPacketHandler(tcpHandles, sizeof(tcpHandles)/sizeof(*tcpHandles));
     
     int i;
@@ -62,7 +62,6 @@ int main(void)
             {}
         }
     } while (true);
-    
 
     close(serv_sock);
     close(epfd);

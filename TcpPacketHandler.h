@@ -10,7 +10,7 @@
 class TcpPacketHandler
 {
 private:
-    PacketHandler* handlers;
+    PacketHandler** handlers;
     size_t handler_size;
 
     RingBuffer readBuf;
@@ -19,11 +19,14 @@ private:
     void ExecuteOP(unsigned int mainOp, unsigned int subOp);
 
 public:
-    TcpPacketHandler(PacketHandler* handlers, size_t handler_size){
+    TcpPacketHandler(PacketHandler** handlers, size_t handler_size){
         this->handler_size = handler_size;
         this->handlers = handlers;
     }
     virtual ~TcpPacketHandler(){
+        for(int i=0; i<handler_size; i++){
+            delete handlers[i];
+        }
         delete[] handlers;
         handlers = nullptr;
     }
