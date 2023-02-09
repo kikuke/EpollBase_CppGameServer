@@ -51,6 +51,11 @@
 },
 {
   "directory": "/home/kikuke/DV/EpollBase_CppGameServer/build",
+  "command": "/usr/bin/gcc   -g -o CMakeFiles/EpollServer.dir/spfileio.c.o -c /home/kikuke/DV/EpollBase_CppGameServer/spfileio.c",
+  "file": "/home/kikuke/DV/EpollBase_CppGameServer/spfileio.c"
+},
+{
+  "directory": "/home/kikuke/DV/EpollBase_CppGameServer/build",
   "command": "/usr/bin/gcc   -g -o CMakeFiles/EpollServer.dir/sppacketparser.c.o -c /home/kikuke/DV/EpollBase_CppGameServer/sppacketparser.c",
   "file": "/home/kikuke/DV/EpollBase_CppGameServer/sppacketparser.c"
 },

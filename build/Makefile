@@ -763,6 +763,30 @@ spepoll.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/spepoll.c.s
 .PHONY : spepoll.c.s
 
+spfileio.o: spfileio.c.o
+.PHONY : spfileio.o
+
+# target to build an object file
+spfileio.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/spfileio.c.o
+.PHONY : spfileio.c.o
+
+spfileio.i: spfileio.c.i
+.PHONY : spfileio.i
+
+# target to preprocess a source file
+spfileio.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/spfileio.c.i
+.PHONY : spfileio.c.i
+
+spfileio.s: spfileio.c.s
+.PHONY : spfileio.s
+
+# target to generate assembly for a file
+spfileio.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/spfileio.c.s
+.PHONY : spfileio.c.s
+
 sppacketparser.o: sppacketparser.c.o
 .PHONY : sppacketparser.o
 
@@ -881,6 +905,9 @@ help:
 	@echo "... spepoll.o"
 	@echo "... spepoll.i"
 	@echo "... spepoll.s"
+	@echo "... spfileio.o"
+	@echo "... spfileio.i"
+	@echo "... spfileio.s"
 	@echo "... sppacketparser.o"
 	@echo "... sppacketparser.i"
 	@echo "... sppacketparser.s"

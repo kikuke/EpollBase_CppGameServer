@@ -19,6 +19,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/EpollServer.dir/spbitio.c.o.d"
   "CMakeFiles/EpollServer.dir/spepoll.c.o"
   "CMakeFiles/EpollServer.dir/spepoll.c.o.d"
+  "CMakeFiles/EpollServer.dir/spfileio.c.o"
+  "CMakeFiles/EpollServer.dir/spfileio.c.o.d"
   "CMakeFiles/EpollServer.dir/sppacketparser.c.o"
   "CMakeFiles/EpollServer.dir/sppacketparser.c.o.d"
   "CMakeFiles/EpollServer.dir/spsocket.c.o"

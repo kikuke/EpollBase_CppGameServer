@@ -10,6 +10,7 @@
 #include "PacketHandler.h"
 #include "TcpPacketHandler.h"
 #include "TcpMessagePacket.h"
+#include "Logger.h"
 
 int main(void)
 {
@@ -29,42 +30,55 @@ int main(void)
     TcpPacketHandler tcpPacketHandler(tcpHandles, sizeof(tcpHandles)/sizeof(*tcpHandles));
     
     int i;
+
+    Logger::LoggerSetting(LOGLEVEL::DEBUG, "./TestLog", DEFAULT_LOG_BUFFER_SIZE);
+    Logger log("MainLog");
     
+    log.Log(LOGLEVEL::INFO, "Start Server...");
+
     serv_sock = SetTCPServSock(SERV_ADDR, SERV_PORT, SOMAXCONN);
     if(serv_sock == -1){
+        log.Log(LOGLEVEL::ERROR, "SetTCPServSock()");
         exit(1);
     }
 
     epfd = InitEpoll(ep_events, EPOLL_SIZE);
+
+    log.Log(LOGLEVEL::DEBUG, "SetETServSock()");
     SetETServSock(epfd, serv_sock);
 
     //나중에 멀티스레딩도적용해보기 아직은 tcp 요청만 처리하지만 나중에 udp등의 요청을 처리하거나 다른 스레드나 프로세스로 연결해주기
     do
     {
+        log.Log(LOGLEVEL::DEBUG, "epoll_wait()");
         event_cnt = epoll_wait(epfd, ep_events, EPOLL_SIZE, -1);
         if(event_cnt == -1){
+            log.Log(LOGLEVEL::DEBUG, "event_cnt: -1");
             break;
         }
 
         for(i = 0; i < event_cnt; i++)
         {
             if(ep_events[i].data.fd == serv_sock){
+                log.Log(LOGLEVEL::DEBUG, "AcceptTcpSocket()");
                 AcceptTcpSocket(ep_events[i].data.fd, epfd);
             }
             else {
                 if(ReadET(ep_events[i].data.fd, buf, BUF_SIZE, WriteRingBuffer) == 0)
                 {
+                    log.Log(LOGLEVEL::DEBUG, "CloseTcpSocket()");
                     CloseTcpSocket(ep_events[i].data.fd, epfd);
                 }
             }
 
             while(tcpPacketHandler.execute(ep_events[i].data.fd))//메시지 처리함수. 빌때까지.
             {
-                //에러 2차 처리 위 함수에서 에러 처리하기에 어지간하면 할일 없음
+                log.Log(LOGLEVEL::DEBUG, "TcpPacketHandler.excute()");
             }
         }
     } while (true);
 
+    log.Log(LOGLEVEL::INFO, "Shutdown Server...");
     close(serv_sock);
     close(epfd);
     return 0;

@@ -43,6 +43,8 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "typeinfo": "cpp",
-        "types.h": "c"
+        "types.h": "c",
+        "string.h": "c",
+        "spfileio.h": "c"
     }
 }

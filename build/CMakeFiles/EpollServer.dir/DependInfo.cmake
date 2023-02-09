@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/kikuke/DV/EpollBase_CppGameServer/spbitio.c" "CMakeFiles/EpollServer.dir/spbitio.c.o" "gcc" "CMakeFiles/EpollServer.dir/spbitio.c.o.d"
   "/home/kikuke/DV/EpollBase_CppGameServer/spepoll.c" "CMakeFiles/EpollServer.dir/spepoll.c.o" "gcc" "CMakeFiles/EpollServer.dir/spepoll.c.o.d"
+  "/home/kikuke/DV/EpollBase_CppGameServer/spfileio.c" "CMakeFiles/EpollServer.dir/spfileio.c.o" "gcc" "CMakeFiles/EpollServer.dir/spfileio.c.o.d"
   "/home/kikuke/DV/EpollBase_CppGameServer/sppacketparser.c" "CMakeFiles/EpollServer.dir/sppacketparser.c.o" "gcc" "CMakeFiles/EpollServer.dir/sppacketparser.c.o.d"
   "/home/kikuke/DV/EpollBase_CppGameServer/spsocket.c" "CMakeFiles/EpollServer.dir/spsocket.c.o" "gcc" "CMakeFiles/EpollServer.dir/spsocket.c.o.d"
   "/home/kikuke/DV/EpollBase_CppGameServer/Logger.cpp" "CMakeFiles/EpollServer.dir/Logger.cpp.o" "gcc" "CMakeFiles/EpollServer.dir/Logger.cpp.o.d"

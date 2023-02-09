@@ -64,7 +64,8 @@
 				18,
 				20,
 				22,
-				24
+				24,
+				26
 			]
 		}
 	],
@@ -108,7 +109,8 @@
 				18,
 				20,
 				22,
-				24
+				24,
+				26
 			]
 		},
 		{
@@ -129,7 +131,8 @@
 				21,
 				23,
 				25,
-				26
+				27,
+				28
 			]
 		}
 	],
@@ -253,6 +256,17 @@
 		{
 			"backtrace" : 1,
 			"path" : "spepoll.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 1,
+			"path" : "spfileio.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "spfileio.h",
 			"sourceGroupIndex" : 1
 		},
 		{
