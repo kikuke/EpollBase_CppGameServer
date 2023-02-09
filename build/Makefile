@@ -523,6 +523,30 @@ EpollServer/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/build
 .PHONY : EpollServer/fast
 
+Logger.o: Logger.cpp.o
+.PHONY : Logger.o
+
+# target to build an object file
+Logger.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/Logger.cpp.o
+.PHONY : Logger.cpp.o
+
+Logger.i: Logger.cpp.i
+.PHONY : Logger.i
+
+# target to preprocess a source file
+Logger.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/Logger.cpp.i
+.PHONY : Logger.cpp.i
+
+Logger.s: Logger.cpp.s
+.PHONY : Logger.s
+
+# target to generate assembly for a file
+Logger.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/Logger.cpp.s
+.PHONY : Logger.cpp.s
+
 PacketIO.o: PacketIO.cpp.o
 .PHONY : PacketIO.o
 
@@ -594,6 +618,30 @@ SocketManager.s: SocketManager.cpp.s
 SocketManager.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/SocketManager.cpp.s
 .PHONY : SocketManager.cpp.s
+
+TcpMessagePacket.o: TcpMessagePacket.cpp.o
+.PHONY : TcpMessagePacket.o
+
+# target to build an object file
+TcpMessagePacket.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/TcpMessagePacket.cpp.o
+.PHONY : TcpMessagePacket.cpp.o
+
+TcpMessagePacket.i: TcpMessagePacket.cpp.i
+.PHONY : TcpMessagePacket.i
+
+# target to preprocess a source file
+TcpMessagePacket.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/TcpMessagePacket.cpp.i
+.PHONY : TcpMessagePacket.cpp.i
+
+TcpMessagePacket.s: TcpMessagePacket.cpp.s
+.PHONY : TcpMessagePacket.s
+
+# target to generate assembly for a file
+TcpMessagePacket.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/TcpMessagePacket.cpp.s
+.PHONY : TcpMessagePacket.cpp.s
 
 TcpPacketHandler.o: TcpPacketHandler.cpp.o
 .PHONY : TcpPacketHandler.o
@@ -803,6 +851,9 @@ help:
 	@echo "... NightlyTest"
 	@echo "... NightlyUpdate"
 	@echo "... EpollServer"
+	@echo "... Logger.o"
+	@echo "... Logger.i"
+	@echo "... Logger.s"
 	@echo "... PacketIO.o"
 	@echo "... PacketIO.i"
 	@echo "... PacketIO.s"
@@ -812,6 +863,9 @@ help:
 	@echo "... SocketManager.o"
 	@echo "... SocketManager.i"
 	@echo "... SocketManager.s"
+	@echo "... TcpMessagePacket.o"
+	@echo "... TcpMessagePacket.i"
+	@echo "... TcpMessagePacket.s"
 	@echo "... TcpPacketHandler.o"
 	@echo "... TcpPacketHandler.i"
 	@echo "... TcpPacketHandler.s"

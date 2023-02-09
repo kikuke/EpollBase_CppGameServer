@@ -83,10 +83,24 @@ CMakeFiles/EpollServer.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EpollServer.dir/main.cpp.s"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kikuke/DV/EpollBase_CppGameServer/main.cpp -o CMakeFiles/EpollServer.dir/main.cpp.s
 
+CMakeFiles/EpollServer.dir/Logger.cpp.o: CMakeFiles/EpollServer.dir/flags.make
+CMakeFiles/EpollServer.dir/Logger.cpp.o: ../Logger.cpp
+CMakeFiles/EpollServer.dir/Logger.cpp.o: CMakeFiles/EpollServer.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kikuke/DV/EpollBase_CppGameServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/EpollServer.dir/Logger.cpp.o"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/EpollServer.dir/Logger.cpp.o -MF CMakeFiles/EpollServer.dir/Logger.cpp.o.d -o CMakeFiles/EpollServer.dir/Logger.cpp.o -c /home/kikuke/DV/EpollBase_CppGameServer/Logger.cpp
+
+CMakeFiles/EpollServer.dir/Logger.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EpollServer.dir/Logger.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kikuke/DV/EpollBase_CppGameServer/Logger.cpp > CMakeFiles/EpollServer.dir/Logger.cpp.i
+
+CMakeFiles/EpollServer.dir/Logger.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EpollServer.dir/Logger.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kikuke/DV/EpollBase_CppGameServer/Logger.cpp -o CMakeFiles/EpollServer.dir/Logger.cpp.s
+
 CMakeFiles/EpollServer.dir/PacketIO.cpp.o: CMakeFiles/EpollServer.dir/flags.make
 CMakeFiles/EpollServer.dir/PacketIO.cpp.o: ../PacketIO.cpp
 CMakeFiles/EpollServer.dir/PacketIO.cpp.o: CMakeFiles/EpollServer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kikuke/DV/EpollBase_CppGameServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/EpollServer.dir/PacketIO.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kikuke/DV/EpollBase_CppGameServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/EpollServer.dir/PacketIO.cpp.o"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/EpollServer.dir/PacketIO.cpp.o -MF CMakeFiles/EpollServer.dir/PacketIO.cpp.o.d -o CMakeFiles/EpollServer.dir/PacketIO.cpp.o -c /home/kikuke/DV/EpollBase_CppGameServer/PacketIO.cpp
 
 CMakeFiles/EpollServer.dir/PacketIO.cpp.i: cmake_force
@@ -100,7 +114,7 @@ CMakeFiles/EpollServer.dir/PacketIO.cpp.s: cmake_force
 CMakeFiles/EpollServer.dir/RingBuffer.cpp.o: CMakeFiles/EpollServer.dir/flags.make
 CMakeFiles/EpollServer.dir/RingBuffer.cpp.o: ../RingBuffer.cpp
 CMakeFiles/EpollServer.dir/RingBuffer.cpp.o: CMakeFiles/EpollServer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kikuke/DV/EpollBase_CppGameServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/EpollServer.dir/RingBuffer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kikuke/DV/EpollBase_CppGameServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/EpollServer.dir/RingBuffer.cpp.o"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/EpollServer.dir/RingBuffer.cpp.o -MF CMakeFiles/EpollServer.dir/RingBuffer.cpp.o.d -o CMakeFiles/EpollServer.dir/RingBuffer.cpp.o -c /home/kikuke/DV/EpollBase_CppGameServer/RingBuffer.cpp
 
 CMakeFiles/EpollServer.dir/RingBuffer.cpp.i: cmake_force
@@ -114,7 +128,7 @@ CMakeFiles/EpollServer.dir/RingBuffer.cpp.s: cmake_force
 CMakeFiles/EpollServer.dir/SocketManager.cpp.o: CMakeFiles/EpollServer.dir/flags.make
 CMakeFiles/EpollServer.dir/SocketManager.cpp.o: ../SocketManager.cpp
 CMakeFiles/EpollServer.dir/SocketManager.cpp.o: CMakeFiles/EpollServer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kikuke/DV/EpollBase_CppGameServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/EpollServer.dir/SocketManager.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kikuke/DV/EpollBase_CppGameServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/EpollServer.dir/SocketManager.cpp.o"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/EpollServer.dir/SocketManager.cpp.o -MF CMakeFiles/EpollServer.dir/SocketManager.cpp.o.d -o CMakeFiles/EpollServer.dir/SocketManager.cpp.o -c /home/kikuke/DV/EpollBase_CppGameServer/SocketManager.cpp
 
 CMakeFiles/EpollServer.dir/SocketManager.cpp.i: cmake_force
@@ -125,10 +139,24 @@ CMakeFiles/EpollServer.dir/SocketManager.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EpollServer.dir/SocketManager.cpp.s"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kikuke/DV/EpollBase_CppGameServer/SocketManager.cpp -o CMakeFiles/EpollServer.dir/SocketManager.cpp.s
 
+CMakeFiles/EpollServer.dir/TcpMessagePacket.cpp.o: CMakeFiles/EpollServer.dir/flags.make
+CMakeFiles/EpollServer.dir/TcpMessagePacket.cpp.o: ../TcpMessagePacket.cpp
+CMakeFiles/EpollServer.dir/TcpMessagePacket.cpp.o: CMakeFiles/EpollServer.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kikuke/DV/EpollBase_CppGameServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/EpollServer.dir/TcpMessagePacket.cpp.o"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/EpollServer.dir/TcpMessagePacket.cpp.o -MF CMakeFiles/EpollServer.dir/TcpMessagePacket.cpp.o.d -o CMakeFiles/EpollServer.dir/TcpMessagePacket.cpp.o -c /home/kikuke/DV/EpollBase_CppGameServer/TcpMessagePacket.cpp
+
+CMakeFiles/EpollServer.dir/TcpMessagePacket.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EpollServer.dir/TcpMessagePacket.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kikuke/DV/EpollBase_CppGameServer/TcpMessagePacket.cpp > CMakeFiles/EpollServer.dir/TcpMessagePacket.cpp.i
+
+CMakeFiles/EpollServer.dir/TcpMessagePacket.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EpollServer.dir/TcpMessagePacket.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kikuke/DV/EpollBase_CppGameServer/TcpMessagePacket.cpp -o CMakeFiles/EpollServer.dir/TcpMessagePacket.cpp.s
+
 CMakeFiles/EpollServer.dir/TcpPacketHandler.cpp.o: CMakeFiles/EpollServer.dir/flags.make
 CMakeFiles/EpollServer.dir/TcpPacketHandler.cpp.o: ../TcpPacketHandler.cpp
 CMakeFiles/EpollServer.dir/TcpPacketHandler.cpp.o: CMakeFiles/EpollServer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kikuke/DV/EpollBase_CppGameServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/EpollServer.dir/TcpPacketHandler.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kikuke/DV/EpollBase_CppGameServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/EpollServer.dir/TcpPacketHandler.cpp.o"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/EpollServer.dir/TcpPacketHandler.cpp.o -MF CMakeFiles/EpollServer.dir/TcpPacketHandler.cpp.o.d -o CMakeFiles/EpollServer.dir/TcpPacketHandler.cpp.o -c /home/kikuke/DV/EpollBase_CppGameServer/TcpPacketHandler.cpp
 
 CMakeFiles/EpollServer.dir/TcpPacketHandler.cpp.i: cmake_force
@@ -142,7 +170,7 @@ CMakeFiles/EpollServer.dir/TcpPacketHandler.cpp.s: cmake_force
 CMakeFiles/EpollServer.dir/TcpService.cpp.o: CMakeFiles/EpollServer.dir/flags.make
 CMakeFiles/EpollServer.dir/TcpService.cpp.o: ../TcpService.cpp
 CMakeFiles/EpollServer.dir/TcpService.cpp.o: CMakeFiles/EpollServer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kikuke/DV/EpollBase_CppGameServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/EpollServer.dir/TcpService.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kikuke/DV/EpollBase_CppGameServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/EpollServer.dir/TcpService.cpp.o"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/EpollServer.dir/TcpService.cpp.o -MF CMakeFiles/EpollServer.dir/TcpService.cpp.o.d -o CMakeFiles/EpollServer.dir/TcpService.cpp.o -c /home/kikuke/DV/EpollBase_CppGameServer/TcpService.cpp
 
 CMakeFiles/EpollServer.dir/TcpService.cpp.i: cmake_force
@@ -156,7 +184,7 @@ CMakeFiles/EpollServer.dir/TcpService.cpp.s: cmake_force
 CMakeFiles/EpollServer.dir/spbitio.c.o: CMakeFiles/EpollServer.dir/flags.make
 CMakeFiles/EpollServer.dir/spbitio.c.o: ../spbitio.c
 CMakeFiles/EpollServer.dir/spbitio.c.o: CMakeFiles/EpollServer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kikuke/DV/EpollBase_CppGameServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/EpollServer.dir/spbitio.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kikuke/DV/EpollBase_CppGameServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/EpollServer.dir/spbitio.c.o"
 	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/EpollServer.dir/spbitio.c.o -MF CMakeFiles/EpollServer.dir/spbitio.c.o.d -o CMakeFiles/EpollServer.dir/spbitio.c.o -c /home/kikuke/DV/EpollBase_CppGameServer/spbitio.c
 
 CMakeFiles/EpollServer.dir/spbitio.c.i: cmake_force
@@ -170,7 +198,7 @@ CMakeFiles/EpollServer.dir/spbitio.c.s: cmake_force
 CMakeFiles/EpollServer.dir/spepoll.c.o: CMakeFiles/EpollServer.dir/flags.make
 CMakeFiles/EpollServer.dir/spepoll.c.o: ../spepoll.c
 CMakeFiles/EpollServer.dir/spepoll.c.o: CMakeFiles/EpollServer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kikuke/DV/EpollBase_CppGameServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/EpollServer.dir/spepoll.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kikuke/DV/EpollBase_CppGameServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/EpollServer.dir/spepoll.c.o"
 	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/EpollServer.dir/spepoll.c.o -MF CMakeFiles/EpollServer.dir/spepoll.c.o.d -o CMakeFiles/EpollServer.dir/spepoll.c.o -c /home/kikuke/DV/EpollBase_CppGameServer/spepoll.c
 
 CMakeFiles/EpollServer.dir/spepoll.c.i: cmake_force
@@ -184,7 +212,7 @@ CMakeFiles/EpollServer.dir/spepoll.c.s: cmake_force
 CMakeFiles/EpollServer.dir/sppacketparser.c.o: CMakeFiles/EpollServer.dir/flags.make
 CMakeFiles/EpollServer.dir/sppacketparser.c.o: ../sppacketparser.c
 CMakeFiles/EpollServer.dir/sppacketparser.c.o: CMakeFiles/EpollServer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kikuke/DV/EpollBase_CppGameServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/EpollServer.dir/sppacketparser.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kikuke/DV/EpollBase_CppGameServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object CMakeFiles/EpollServer.dir/sppacketparser.c.o"
 	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/EpollServer.dir/sppacketparser.c.o -MF CMakeFiles/EpollServer.dir/sppacketparser.c.o.d -o CMakeFiles/EpollServer.dir/sppacketparser.c.o -c /home/kikuke/DV/EpollBase_CppGameServer/sppacketparser.c
 
 CMakeFiles/EpollServer.dir/sppacketparser.c.i: cmake_force
@@ -198,7 +226,7 @@ CMakeFiles/EpollServer.dir/sppacketparser.c.s: cmake_force
 CMakeFiles/EpollServer.dir/spsocket.c.o: CMakeFiles/EpollServer.dir/flags.make
 CMakeFiles/EpollServer.dir/spsocket.c.o: ../spsocket.c
 CMakeFiles/EpollServer.dir/spsocket.c.o: CMakeFiles/EpollServer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kikuke/DV/EpollBase_CppGameServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/EpollServer.dir/spsocket.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kikuke/DV/EpollBase_CppGameServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object CMakeFiles/EpollServer.dir/spsocket.c.o"
 	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/EpollServer.dir/spsocket.c.o -MF CMakeFiles/EpollServer.dir/spsocket.c.o.d -o CMakeFiles/EpollServer.dir/spsocket.c.o -c /home/kikuke/DV/EpollBase_CppGameServer/spsocket.c
 
 CMakeFiles/EpollServer.dir/spsocket.c.i: cmake_force
@@ -212,9 +240,11 @@ CMakeFiles/EpollServer.dir/spsocket.c.s: cmake_force
 # Object files for target EpollServer
 EpollServer_OBJECTS = \
 "CMakeFiles/EpollServer.dir/main.cpp.o" \
+"CMakeFiles/EpollServer.dir/Logger.cpp.o" \
 "CMakeFiles/EpollServer.dir/PacketIO.cpp.o" \
 "CMakeFiles/EpollServer.dir/RingBuffer.cpp.o" \
 "CMakeFiles/EpollServer.dir/SocketManager.cpp.o" \
+"CMakeFiles/EpollServer.dir/TcpMessagePacket.cpp.o" \
 "CMakeFiles/EpollServer.dir/TcpPacketHandler.cpp.o" \
 "CMakeFiles/EpollServer.dir/TcpService.cpp.o" \
 "CMakeFiles/EpollServer.dir/spbitio.c.o" \
@@ -226,9 +256,11 @@ EpollServer_OBJECTS = \
 EpollServer_EXTERNAL_OBJECTS =
 
 EpollServer: CMakeFiles/EpollServer.dir/main.cpp.o
+EpollServer: CMakeFiles/EpollServer.dir/Logger.cpp.o
 EpollServer: CMakeFiles/EpollServer.dir/PacketIO.cpp.o
 EpollServer: CMakeFiles/EpollServer.dir/RingBuffer.cpp.o
 EpollServer: CMakeFiles/EpollServer.dir/SocketManager.cpp.o
+EpollServer: CMakeFiles/EpollServer.dir/TcpMessagePacket.cpp.o
 EpollServer: CMakeFiles/EpollServer.dir/TcpPacketHandler.cpp.o
 EpollServer: CMakeFiles/EpollServer.dir/TcpService.cpp.o
 EpollServer: CMakeFiles/EpollServer.dir/spbitio.c.o
@@ -237,7 +269,7 @@ EpollServer: CMakeFiles/EpollServer.dir/sppacketparser.c.o
 EpollServer: CMakeFiles/EpollServer.dir/spsocket.c.o
 EpollServer: CMakeFiles/EpollServer.dir/build.make
 EpollServer: CMakeFiles/EpollServer.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/kikuke/DV/EpollBase_CppGameServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable EpollServer"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/kikuke/DV/EpollBase_CppGameServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Linking CXX executable EpollServer"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/EpollServer.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

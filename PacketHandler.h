@@ -13,8 +13,8 @@ protected:
     template <typename T>
     unsigned char DequeueData(T& data, RingBuffer& buffer){
         unsigned char endCode;
-        data << buffer;
-        endCode << buffer;
+        buffer >> data;
+        buffer >> endCode;
 
         return endCode;
     }
