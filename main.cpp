@@ -79,11 +79,11 @@ int main(void)
                     tcpService.CloseTcpSocket(ep_events[i].data.fd, epfd);
                     log.Log(LOGLEVEL::DEBUG, "CloseTcpSocket()");
                 }
-            }
 
-            while (tcpPacketHandler.execute(ep_events[i].data.fd)) // 메시지 처리함수. 빌때까지.
-            {
-                log.Log(LOGLEVEL::DEBUG, "TcpPacketHandler.excute()");
+                while (tcpPacketHandler.execute(ep_events[i].data.fd)) // 메시지 처리함수. 빌때까지.
+                {
+                    log.Log(LOGLEVEL::DEBUG, "TcpPacketHandler.excute()");
+                }
             }
         }
     } while (true);
