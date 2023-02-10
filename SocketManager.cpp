@@ -34,8 +34,10 @@ bool SocketManager::addTcpSocketInfo(int socket)
 bool SocketManager::delTcpSocketInfo(int socket)
 {
     std::map<int, TCPSOCKETINFO*>::iterator iter = tcpInfoMap.find(socket);
-    if(iter == tcpInfoMap.end())
+    if(iter == tcpInfoMap.end()){
+        (*log).Log(LOGLEVEL::ERROR, "[%s] DeleteTcpInfo Failed - Socket: %d", inet_ntoa(iter->second->sockAddr.sin_addr), iter->second->socket);
         return false;
+    }
 
     (*log).Log(LOGLEVEL::INFO, "[%s] DeleteTcpInfo - Socket: %d", inet_ntoa(iter->second->sockAddr.sin_addr), iter->second->socket);
 

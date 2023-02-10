@@ -1,7 +1,6 @@
 #ifndef LOGGER
 #define LOGGER
 
-#include <stdio.h>
 #include <sys/types.h>
 
 #define DEFAULT_LOG_DIR_SIZE 256

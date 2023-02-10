@@ -37,8 +37,10 @@ bool TcpService::CloseTcpSocket(int clnt_sock, int epfd)
 {
     (*log).Log(LOGLEVEL::INFO, "[%s] Disconnecting Server!", inet_ntoa(SocketManager::getInstance().getTcpSocketInfo(clnt_sock)->sockAddr.sin_addr));
 
-    if(!SocketManager::getInstance().delTcpSocketInfo(clnt_sock))
+    if(!SocketManager::getInstance().delTcpSocketInfo(clnt_sock)){
+        perror("CloseTcpSocket delTcpSocketInfo Error");
         return false;
+    }
 
     epoll_ctl(epfd, EPOLL_CTL_DEL, clnt_sock, NULL);
     close(clnt_sock);

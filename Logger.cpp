@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <string.h>
 #include <stdarg.h>
 #include <sys/time.h>
@@ -74,7 +75,7 @@ int Logger::SaveLog()
     }
 
     if(logFile == NULL){
-        perror("SaveLog()");
+        perror("SaveLog() Error");
 
         return -1;
     }
@@ -89,8 +90,10 @@ int Logger::SetNowTime()
     struct timeval now;
     struct tm* tm_now;
 
-    if(gettimeofday(&now, NULL)!=0)
+    if(gettimeofday(&now, NULL)!=0){
+        perror("gettimeofday() Error");
         return 0;
+    }
     tm_now = localtime(&now.tv_sec);
 
     sprintf(saveFileName, "%02d-%02d-%02d_%01d.txt", tm_now->tm_year+1900, tm_now->tm_mon+1, tm_now->tm_mday, tm_now->tm_hour/6+1);
