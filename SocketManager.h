@@ -12,8 +12,9 @@ private:
     SocketManager();
     static SocketManager* m_Instance;
 
-    Logger* log;
     std::map<int, TCPSOCKETINFO*> tcpInfoMap;
+    
+    Logger* log;
 public:
     ~SocketManager();
     static SocketManager& getInstance()

@@ -38,7 +38,7 @@ int TcpPacketHandler::execute(int sock)
 
     ret = TCPHeaderCheck(&header);
     if(ret != 1){
-        //헤더체크 에러 처리 코드들.
+        (*log).Log(LOGLEVEL::ERROR, "TCPHeaderChcek()");
         return 0;
     }
     
@@ -48,6 +48,7 @@ int TcpPacketHandler::execute(int sock)
 
     ret = ExecuteOP(sock, header.mainOp, header.subOp);
     if(ret != 1){
+        (*log).Log(LOGLEVEL::ERROR, "ExecuteOP()");
         //해당 소켓의 버퍼는 비게됨.
         //해당 오류에 대한 해당 기능의 에러 처리
         CatchError(sock, header.mainOp, ret);

@@ -6,6 +6,7 @@
 #include "PacketDefine.h"
 #include "RingBuffer.h"
 #include "PacketHandler.h"
+#include "Logger.h"
 
 class TcpPacketHandler
 {
@@ -14,6 +15,8 @@ private:
     size_t handler_size;
 
     RingBuffer readBuf;
+
+    Logger* log;
 
     int TCPHeaderCheck(TCPTestPacketHeader* header);
     //call packetHandler's execute()
@@ -25,12 +28,16 @@ public:
     TcpPacketHandler(PacketHandler** handlers, size_t handler_size){
         this->handler_size = handler_size;
         this->handlers = handlers;
+        
+        log = new Logger("TcpPacketHandle");
     }
     virtual ~TcpPacketHandler(){
         for(int i=0; i<handler_size; i++){
             delete handlers[i];
         }
         handlers = nullptr;
+
+        delete log;
     }
 
     int execute(int sock);
