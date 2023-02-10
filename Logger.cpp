@@ -51,7 +51,7 @@ void Logger::Log(LOGLEVEL logLevel, const char* format, ...)
     strcpy(buffer + strlen(buffer), LogPrefix[logLevel]);
 
     va_start(args, format);
-    sprintf(buffer + strlen(buffer), format, args);
+    vsprintf(buffer + strlen(buffer), format, args);
     va_end(args);
 
     strcpy(buffer + strlen(buffer), "\n");
