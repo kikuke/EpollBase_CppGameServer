@@ -3,17 +3,19 @@
 
 #include <map>
 
+#include "Logger.h"
 #include "socketinfo.h"
 
 class SocketManager
 {
 private:
-    SocketManager(){}
+    SocketManager();
     static SocketManager m_Instance;
 
+    Logger* log;
     std::map<int, TCPSOCKETINFO*> tcpInfoMap;
 public:
-    ~SocketManager(){}
+    ~SocketManager();
     static SocketManager& getInstance()
     {
         return m_Instance;

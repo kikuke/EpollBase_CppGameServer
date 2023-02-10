@@ -7,7 +7,17 @@
 #include "SocketManager.h"
 #include "TcpService.h"
 
-bool AcceptTcpSocket(int serv_sock, int epfd)
+TcpService::TcpService()
+{
+    log = new Logger("TcpServce");
+}
+
+TcpService::~TcpService()
+{
+    delete log;
+}
+
+bool TcpService::AcceptTcpSocket(int serv_sock, int epfd)
 {
     int clnt_sock;
     struct sockaddr_in clnt_adr;
@@ -15,13 +25,18 @@ bool AcceptTcpSocket(int serv_sock, int epfd)
 
     adr_sz = sizeof(clnt_adr);
     clnt_sock = accept(serv_sock, (struct sockaddr*)&clnt_adr, &adr_sz);
+
+    (*log).Log(LOGLEVEL::INFO, "[%s] Connecting Server!", inet_ntoa(clnt_adr.sin_addr));
+
     AddETClntSock(epfd, clnt_sock);
 
     return SocketManager::getInstance().addTcpSocketInfo(clnt_sock);
 }
 
-bool CloseTcpSocket(int clnt_sock, int epfd)
+bool TcpService::CloseTcpSocket(int clnt_sock, int epfd)
 {
+    (*log).Log(LOGLEVEL::INFO, "[%s] Disconnecting Server!", inet_ntoa(SocketManager::getInstance().getTcpSocketInfo(clnt_sock)->sockAddr.sin_addr));
+
     if(!SocketManager::getInstance().delTcpSocketInfo(clnt_sock))
         return false;
 

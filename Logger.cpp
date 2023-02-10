@@ -67,8 +67,11 @@ int Logger::SaveLog()
     FILE* logFile;
 
     strcpy(savePath + savePathLen, saveFileName);
-    
-    logFile = fopen(savePath, "a+");
+    if(runLevel == LOGLEVEL::DEBUG) {
+        logFile = fopen(savePath, "a+");
+    } else {
+        logFile = fopen(savePath, "ab+");
+    }
     fprintf(logFile, "%s", buffer);
 
     fclose(logFile);
@@ -84,7 +87,7 @@ int Logger::SetNowTime()
         return 0;
     tm_now = localtime(&now.tv_sec);
 
-    sprintf(saveFileName, "%02d-%02d-%02d_%01d.txt", tm_now->tm_year+1900, tm_now->tm_mon+1, tm_now->tm_mday, tm_now->tm_hour/4+1);
+    sprintf(saveFileName, "%02d-%02d-%02d_%01d.txt", tm_now->tm_year+1900, tm_now->tm_mon+1, tm_now->tm_mday, tm_now->tm_hour/6+1);
     sprintf(buffer, "[%02d-%02d-%02d %02d:%02d:%02d:%03ld]",
     tm_now->tm_year+1900, tm_now->tm_mon+1, tm_now->tm_mday,
     tm_now->tm_hour, tm_now->tm_min, tm_now->tm_sec, now.tv_usec);
