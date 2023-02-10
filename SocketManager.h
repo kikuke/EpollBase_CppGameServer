@@ -10,7 +10,7 @@ class SocketManager
 {
 private:
     SocketManager();
-    static SocketManager m_Instance;
+    static SocketManager* m_Instance;
 
     Logger* log;
     std::map<int, TCPSOCKETINFO*> tcpInfoMap;
@@ -18,7 +18,11 @@ public:
     ~SocketManager();
     static SocketManager& getInstance()
     {
-        return m_Instance;
+        if(m_Instance == nullptr){
+            m_Instance = new SocketManager();
+        }
+
+        return *m_Instance;
     }
     
     bool addTcpSocketInfo(int socket);

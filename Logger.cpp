@@ -72,9 +72,11 @@ int Logger::SaveLog()
     } else {
         logFile = fopen(savePath, "ab+");
     }
-    
+
     if(logFile == NULL){
         perror("SaveLog()");
+
+        return -1;
     }
     fprintf(logFile, "%s", buffer);
 

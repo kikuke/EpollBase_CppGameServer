@@ -1,7 +1,9 @@
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
 #include <arpa/inet.h>
 #include <sys/epoll.h>
+#include <errno.h>
 
 #include "spsocket.h"
 #include "spepoll.h"
@@ -20,8 +22,8 @@ int main(void)
     constexpr int EPOLL_SIZE = 5000;
     constexpr int BUF_SIZE = 2048;
 
-    int serv_sock;
-    int epfd, event_cnt;
+    int serv_sock=-1;
+    int epfd=-1, event_cnt=0;
     char buf[BUF_SIZE];
 
     struct epoll_event *ep_events;
@@ -31,7 +33,7 @@ int main(void)
     PacketHandler *tcpHandles[] = {new TcpMessagePacket(), new TcpMessagePacket()};
     TcpPacketHandler tcpPacketHandler(tcpHandles, sizeof(tcpHandles) / sizeof(*tcpHandles));
 
-    int i;
+    int i=0;
 
     // 읽기 파일 만들어서 할당시키기 - 읽기수준, 저장 경로
     Logger::LoggerSetting(LOGLEVEL::DEBUG, "./TestLog", DEFAULT_LOG_BUFFER_SIZE);
@@ -42,11 +44,11 @@ int main(void)
     serv_sock = SetTCPServSock(SERV_ADDR, SERV_PORT, SOMAXCONN, true);
     if (serv_sock == -1)
     {
-        log.Log(LOGLEVEL::ERROR, "SetTCPServSock()");
+        log.Log(LOGLEVEL::ERROR, "SetTCPServSock() - %s", strerror(errno));
         exit(1);
     }
 
-    epfd = InitEpoll(ep_events, EPOLL_SIZE);
+    epfd = InitEpoll(&ep_events, EPOLL_SIZE);
 
     SetETServSock(epfd, serv_sock);
     log.Log(LOGLEVEL::DEBUG, "SetETServSock()");
@@ -59,7 +61,7 @@ int main(void)
         event_cnt = epoll_wait(epfd, ep_events, EPOLL_SIZE, -1);
         if (event_cnt == -1)
         {
-            log.Log(LOGLEVEL::ERROR, "epoll_wait()");
+            log.Log(LOGLEVEL::ERROR, "epoll_wait() - %s", strerror(errno));
             break;
         }
     

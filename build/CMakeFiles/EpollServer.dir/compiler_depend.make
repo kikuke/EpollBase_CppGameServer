@@ -661,6 +661,8 @@ CMakeFiles/EpollServer.dir/main.cpp.o: ../main.cpp \
   /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
   /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
   /usr/include/linux/close_range.h \
+  /usr/include/string.h \
+  /usr/include/strings.h \
   /usr/include/arpa/inet.h \
   /usr/include/netinet/in.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
@@ -687,6 +689,13 @@ CMakeFiles/EpollServer.dir/main.cpp.o: ../main.cpp \
   /usr/include/stdint.h \
   /usr/include/x86_64-linux-gnu/bits/wchar.h \
   /usr/include/x86_64-linux-gnu/bits/epoll.h \
+  /usr/include/errno.h \
+  /usr/include/x86_64-linux-gnu/bits/errno.h \
+  /usr/include/linux/errno.h \
+  /usr/include/x86_64-linux-gnu/asm/errno.h \
+  /usr/include/asm-generic/errno.h \
+  /usr/include/asm-generic/errno-base.h \
+  /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
   ../spsocket.h \
   ../spepoll.h \
   /usr/include/stdio.h \
@@ -977,10 +986,6 @@ CMakeFiles/EpollServer.dir/spsocket.c.o: ../spsocket.c \
 
 ../spfileio.c:
 
-/usr/include/linux/errno.h:
-
-/usr/include/x86_64-linux-gnu/bits/errno.h:
-
 /usr/include/x86_64-linux-gnu/bits/stat.h:
 
 /usr/include/fcntl.h:
@@ -988,6 +993,12 @@ CMakeFiles/EpollServer.dir/spsocket.c.o: ../spsocket.c \
 ../spbitio.h:
 
 ../spbitio.c:
+
+/usr/include/x86_64-linux-gnu/bits/types/error_t.h:
+
+/usr/include/linux/errno.h:
+
+/usr/include/x86_64-linux-gnu/bits/errno.h:
 
 /usr/include/c++/11/bits/std_abs.h:
 

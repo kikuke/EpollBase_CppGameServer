@@ -12,12 +12,12 @@ void SetNonblockingFd(int fd)
     fcntl(fd, F_SETFL, flag|O_NONBLOCK);
 }
 
-int InitEpoll(struct epoll_event* ep_events, size_t epoll_sz)
+int InitEpoll(struct epoll_event** ep_events, size_t epoll_sz)
 {
     int epfd;
 
     epfd = epoll_create(epoll_sz);
-    ep_events = (struct epoll_event*)malloc(sizeof(struct epoll_event) * epoll_sz);
+    *ep_events = (struct epoll_event*)malloc(sizeof(struct epoll_event) * epoll_sz);
 
     return epfd;
 }

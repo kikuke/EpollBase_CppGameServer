@@ -3,7 +3,7 @@
 
 #include "SocketManager.h"
 
-SocketManager SocketManager::m_Instance;
+SocketManager* SocketManager::m_Instance;
 
 SocketManager::SocketManager()
 {

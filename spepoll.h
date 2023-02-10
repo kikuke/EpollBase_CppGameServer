@@ -11,7 +11,7 @@ extern "C" {
 void SetNonblockingFd(int fd);
 
 //Make epoll_event to epoll_sz size and return epoll file discripter.
-int InitEpoll(struct epoll_event* ep_events, size_t epoll_sz);
+int InitEpoll(struct epoll_event** ep_events, size_t epoll_sz);
 
 //Insert serv_sock to epoll file discripter and mod nonblocking mode
 void SetETServSock(int epfd, int serv_sock);
