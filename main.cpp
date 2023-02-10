@@ -59,7 +59,7 @@ int main(void)
         event_cnt = epoll_wait(epfd, ep_events, EPOLL_SIZE, -1);
         if (event_cnt == -1)
         {
-            log.Log(LOGLEVEL::DEBUG, "event_cnt: -1");
+            log.Log(LOGLEVEL::ERROR, "epoll_wait()");
             break;
         }
     

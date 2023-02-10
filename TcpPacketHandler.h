@@ -30,7 +30,6 @@ public:
         for(int i=0; i<handler_size; i++){
             delete handlers[i];
         }
-        delete[] handlers;
         handlers = nullptr;
     }
 
