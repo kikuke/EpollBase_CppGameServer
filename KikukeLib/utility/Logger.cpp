@@ -76,6 +76,7 @@ int Logger::SaveLog()
 
     if(logFile == NULL){
         perror("SaveLog() Error");
+        puts(savePath);
 
         return -1;
     }
