@@ -22,8 +22,8 @@
 ### utility
  - Logger: 로그를 출력하고, 출력된 로그를 각 객체별로 초기화시 지정한 경로에 분산해 저장함.
  
-##Server
+## Server
  - Server_Define에 정의된 패킷에 따라 처리하는 Edgetrigger Epoll 기반 서버
 
-##Client
+## Client
  - Server_Define에 따라 패킷 통신하는 클라이언트
