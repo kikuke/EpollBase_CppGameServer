@@ -27,6 +27,10 @@ int main(void)
     char buf[BUF_SIZE];
 
     struct epoll_event *ep_events;
+    
+    // 읽기 파일 만들어서 할당시키기 - 읽기수준, 저장 경로
+    Logger::LoggerSetting(LOGLEVEL::DEBUG, "./TestLog", DEFAULT_LOG_BUFFER_SIZE);
+    Logger log("MainLog");
 
     TcpService tcpService;
 
@@ -34,10 +38,6 @@ int main(void)
     TcpPacketHandler tcpPacketHandler(tcpHandles, sizeof(tcpHandles) / sizeof(*tcpHandles));
 
     int i=0;
-
-    // 읽기 파일 만들어서 할당시키기 - 읽기수준, 저장 경로
-    Logger::LoggerSetting(LOGLEVEL::DEBUG, "./TestLog", DEFAULT_LOG_BUFFER_SIZE);
-    Logger log("MainLog");
 
     log.Log(LOGLEVEL::INFO, "Start Server...");
 
