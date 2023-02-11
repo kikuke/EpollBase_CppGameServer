@@ -1,0 +1,7 @@
+[2023-02-11 22:06:36:523793]INFO: [127.0.0.1] AddTcpInfo - Socket: 5
+[2023-02-11 22:35:29:808026]INFO: [127.0.0.1] AddTcpInfo - Socket: 5
+[2023-02-11 22:37:41:766637]INFO: [127.0.0.1] AddTcpInfo - Socket: 5
+[2023-02-11 22:38:53:872651]INFO: [127.0.0.1] AddTcpInfo - Socket: 5
+[2023-02-11 22:41:01:200089]INFO: [127.0.0.1] AddTcpInfo - Socket: 5
+[2023-02-11 22:47:50:110663]INFO: [127.0.0.1] AddTcpInfo - Socket: 5
+[2023-02-11 22:47:57:485166]INFO: [127.0.0.1] DeleteTcpInfo - Socket: 5

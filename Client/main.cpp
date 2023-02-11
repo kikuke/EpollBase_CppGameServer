@@ -34,14 +34,11 @@ int main(void)
 	serv_addr.sin_family=AF_INET;
 	serv_addr.sin_addr.s_addr=inet_addr("127.0.0.1");
 	serv_addr.sin_port=htons(SERV_PORT);
-	  
+	
 	if(connect(sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr))==-1)
 		error_handling("connect() error");
 
     printf("Server Connected...\n");
-    printf("Write your name: ");
-    scanf("%s", tempName);
-	sprintf(name, "[%s]", tempName);
 	
 	pthread_create(&snd_thread, NULL, send_msg, (void*)&sock);
 	pthread_create(&rcv_thread, NULL, recv_msg, (void*)&sock);
@@ -92,8 +89,8 @@ void * send_msg(void * arg)   // send thread main
 		sprintf((char *)msgData->msg,"%s %s", name, msg);
         memcpy(name_msgBuf, header, sizeof(TCPTestPacketHeader));
         memcpy(name_msgBuf + sizeof(TCPTestPacketHeader), msgData, sizeof(MessageEchoData));
-        strcpy(name_msgBuf + sizeof(TCPTestPacketHeader) + sizeof(TCPTestPacketHeader), end);
-		write(sock, name_msgBuf, strlen(name_msgBuf));
+        strcpy(name_msgBuf + sizeof(TCPTestPacketHeader) + sizeof(MessageEchoData), end);
+		write(sock, name_msgBuf, sizeof(TCPTestPacketHeader) + sizeof(MessageEchoData) + sizeof(unsigned char));
 	}
 	return NULL;
 }

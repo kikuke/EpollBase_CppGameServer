@@ -1,3 +1,0 @@
-[2023-02-11 14:17:42:704]INFO: Start Server...
-[2023-02-11 14:17:42:830]DEBUG: SetETServSock()
-[2023-02-11 14:17:42:859]DEBUG: epoll_wait()
