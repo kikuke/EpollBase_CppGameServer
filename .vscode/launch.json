@@ -5,7 +5,7 @@
             "name": "(gdb) 시작",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/EpollServer",
+            "program": "${workspaceFolder}/build/Server/EpollServer",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",

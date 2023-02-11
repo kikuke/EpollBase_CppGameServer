@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/kikuke/DV/EpollBase_CppGameServer
+CMAKE_SOURCE_DIR = /home/kikuke/DV/GameServer_Cp
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/kikuke/DV/EpollBase_CppGameServer/build
+CMAKE_BINARY_DIR = /home/kikuke/DV/GameServer_Cp/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -78,7 +78,7 @@ package/fast: package
 # Special rule for the target package_source
 package_source:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool for source..."
-	/usr/bin/cpack --config ./CPackSourceConfig.cmake /home/kikuke/DV/EpollBase_CppGameServer/build/CPackSourceConfig.cmake
+	/usr/bin/cpack --config ./CPackSourceConfig.cmake /home/kikuke/DV/GameServer_Cp/build/CPackSourceConfig.cmake
 .PHONY : package_source
 
 # Special rule for the target package_source
@@ -117,9 +117,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kikuke/DV/EpollBase_CppGameServer/build/CMakeFiles /home/kikuke/DV/EpollBase_CppGameServer/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kikuke/DV/GameServer_Cp/build/CMakeFiles /home/kikuke/DV/GameServer_Cp/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kikuke/DV/EpollBase_CppGameServer/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kikuke/DV/GameServer_Cp/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -511,6 +511,19 @@ ContinuousSubmit/fast:
 .PHONY : ContinuousSubmit/fast
 
 #=============================================================================
+# Target rules for targets named KikukeLib
+
+# Build rule for target.
+KikukeLib: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 KikukeLib
+.PHONY : KikukeLib
+
+# fast build rule for target.
+KikukeLib/fast:
+	$(MAKE) $(MAKESILENT) -f KikukeLib/CMakeFiles/KikukeLib.dir/build.make KikukeLib/CMakeFiles/KikukeLib.dir/build
+.PHONY : KikukeLib/fast
+
+#=============================================================================
 # Target rules for targets named EpollServer
 
 # Build rule for target.
@@ -520,320 +533,8 @@ EpollServer: cmake_check_build_system
 
 # fast build rule for target.
 EpollServer/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/build
+	$(MAKE) $(MAKESILENT) -f Server/CMakeFiles/EpollServer.dir/build.make Server/CMakeFiles/EpollServer.dir/build
 .PHONY : EpollServer/fast
-
-Logger.o: Logger.cpp.o
-.PHONY : Logger.o
-
-# target to build an object file
-Logger.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/Logger.cpp.o
-.PHONY : Logger.cpp.o
-
-Logger.i: Logger.cpp.i
-.PHONY : Logger.i
-
-# target to preprocess a source file
-Logger.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/Logger.cpp.i
-.PHONY : Logger.cpp.i
-
-Logger.s: Logger.cpp.s
-.PHONY : Logger.s
-
-# target to generate assembly for a file
-Logger.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/Logger.cpp.s
-.PHONY : Logger.cpp.s
-
-PacketIO.o: PacketIO.cpp.o
-.PHONY : PacketIO.o
-
-# target to build an object file
-PacketIO.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/PacketIO.cpp.o
-.PHONY : PacketIO.cpp.o
-
-PacketIO.i: PacketIO.cpp.i
-.PHONY : PacketIO.i
-
-# target to preprocess a source file
-PacketIO.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/PacketIO.cpp.i
-.PHONY : PacketIO.cpp.i
-
-PacketIO.s: PacketIO.cpp.s
-.PHONY : PacketIO.s
-
-# target to generate assembly for a file
-PacketIO.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/PacketIO.cpp.s
-.PHONY : PacketIO.cpp.s
-
-RingBuffer.o: RingBuffer.cpp.o
-.PHONY : RingBuffer.o
-
-# target to build an object file
-RingBuffer.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/RingBuffer.cpp.o
-.PHONY : RingBuffer.cpp.o
-
-RingBuffer.i: RingBuffer.cpp.i
-.PHONY : RingBuffer.i
-
-# target to preprocess a source file
-RingBuffer.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/RingBuffer.cpp.i
-.PHONY : RingBuffer.cpp.i
-
-RingBuffer.s: RingBuffer.cpp.s
-.PHONY : RingBuffer.s
-
-# target to generate assembly for a file
-RingBuffer.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/RingBuffer.cpp.s
-.PHONY : RingBuffer.cpp.s
-
-SocketManager.o: SocketManager.cpp.o
-.PHONY : SocketManager.o
-
-# target to build an object file
-SocketManager.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/SocketManager.cpp.o
-.PHONY : SocketManager.cpp.o
-
-SocketManager.i: SocketManager.cpp.i
-.PHONY : SocketManager.i
-
-# target to preprocess a source file
-SocketManager.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/SocketManager.cpp.i
-.PHONY : SocketManager.cpp.i
-
-SocketManager.s: SocketManager.cpp.s
-.PHONY : SocketManager.s
-
-# target to generate assembly for a file
-SocketManager.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/SocketManager.cpp.s
-.PHONY : SocketManager.cpp.s
-
-TcpMessagePacket.o: TcpMessagePacket.cpp.o
-.PHONY : TcpMessagePacket.o
-
-# target to build an object file
-TcpMessagePacket.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/TcpMessagePacket.cpp.o
-.PHONY : TcpMessagePacket.cpp.o
-
-TcpMessagePacket.i: TcpMessagePacket.cpp.i
-.PHONY : TcpMessagePacket.i
-
-# target to preprocess a source file
-TcpMessagePacket.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/TcpMessagePacket.cpp.i
-.PHONY : TcpMessagePacket.cpp.i
-
-TcpMessagePacket.s: TcpMessagePacket.cpp.s
-.PHONY : TcpMessagePacket.s
-
-# target to generate assembly for a file
-TcpMessagePacket.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/TcpMessagePacket.cpp.s
-.PHONY : TcpMessagePacket.cpp.s
-
-TcpPacketHandler.o: TcpPacketHandler.cpp.o
-.PHONY : TcpPacketHandler.o
-
-# target to build an object file
-TcpPacketHandler.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/TcpPacketHandler.cpp.o
-.PHONY : TcpPacketHandler.cpp.o
-
-TcpPacketHandler.i: TcpPacketHandler.cpp.i
-.PHONY : TcpPacketHandler.i
-
-# target to preprocess a source file
-TcpPacketHandler.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/TcpPacketHandler.cpp.i
-.PHONY : TcpPacketHandler.cpp.i
-
-TcpPacketHandler.s: TcpPacketHandler.cpp.s
-.PHONY : TcpPacketHandler.s
-
-# target to generate assembly for a file
-TcpPacketHandler.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/TcpPacketHandler.cpp.s
-.PHONY : TcpPacketHandler.cpp.s
-
-TcpService.o: TcpService.cpp.o
-.PHONY : TcpService.o
-
-# target to build an object file
-TcpService.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/TcpService.cpp.o
-.PHONY : TcpService.cpp.o
-
-TcpService.i: TcpService.cpp.i
-.PHONY : TcpService.i
-
-# target to preprocess a source file
-TcpService.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/TcpService.cpp.i
-.PHONY : TcpService.cpp.i
-
-TcpService.s: TcpService.cpp.s
-.PHONY : TcpService.s
-
-# target to generate assembly for a file
-TcpService.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/TcpService.cpp.s
-.PHONY : TcpService.cpp.s
-
-main.o: main.cpp.o
-.PHONY : main.o
-
-# target to build an object file
-main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/main.cpp.o
-.PHONY : main.cpp.o
-
-main.i: main.cpp.i
-.PHONY : main.i
-
-# target to preprocess a source file
-main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/main.cpp.i
-.PHONY : main.cpp.i
-
-main.s: main.cpp.s
-.PHONY : main.s
-
-# target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/main.cpp.s
-.PHONY : main.cpp.s
-
-spbitio.o: spbitio.c.o
-.PHONY : spbitio.o
-
-# target to build an object file
-spbitio.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/spbitio.c.o
-.PHONY : spbitio.c.o
-
-spbitio.i: spbitio.c.i
-.PHONY : spbitio.i
-
-# target to preprocess a source file
-spbitio.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/spbitio.c.i
-.PHONY : spbitio.c.i
-
-spbitio.s: spbitio.c.s
-.PHONY : spbitio.s
-
-# target to generate assembly for a file
-spbitio.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/spbitio.c.s
-.PHONY : spbitio.c.s
-
-spepoll.o: spepoll.c.o
-.PHONY : spepoll.o
-
-# target to build an object file
-spepoll.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/spepoll.c.o
-.PHONY : spepoll.c.o
-
-spepoll.i: spepoll.c.i
-.PHONY : spepoll.i
-
-# target to preprocess a source file
-spepoll.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/spepoll.c.i
-.PHONY : spepoll.c.i
-
-spepoll.s: spepoll.c.s
-.PHONY : spepoll.s
-
-# target to generate assembly for a file
-spepoll.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/spepoll.c.s
-.PHONY : spepoll.c.s
-
-spfileio.o: spfileio.c.o
-.PHONY : spfileio.o
-
-# target to build an object file
-spfileio.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/spfileio.c.o
-.PHONY : spfileio.c.o
-
-spfileio.i: spfileio.c.i
-.PHONY : spfileio.i
-
-# target to preprocess a source file
-spfileio.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/spfileio.c.i
-.PHONY : spfileio.c.i
-
-spfileio.s: spfileio.c.s
-.PHONY : spfileio.s
-
-# target to generate assembly for a file
-spfileio.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/spfileio.c.s
-.PHONY : spfileio.c.s
-
-sppacketparser.o: sppacketparser.c.o
-.PHONY : sppacketparser.o
-
-# target to build an object file
-sppacketparser.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/sppacketparser.c.o
-.PHONY : sppacketparser.c.o
-
-sppacketparser.i: sppacketparser.c.i
-.PHONY : sppacketparser.i
-
-# target to preprocess a source file
-sppacketparser.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/sppacketparser.c.i
-.PHONY : sppacketparser.c.i
-
-sppacketparser.s: sppacketparser.c.s
-.PHONY : sppacketparser.s
-
-# target to generate assembly for a file
-sppacketparser.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/sppacketparser.c.s
-.PHONY : sppacketparser.c.s
-
-spsocket.o: spsocket.c.o
-.PHONY : spsocket.o
-
-# target to build an object file
-spsocket.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/spsocket.c.o
-.PHONY : spsocket.c.o
-
-spsocket.i: spsocket.c.i
-.PHONY : spsocket.i
-
-# target to preprocess a source file
-spsocket.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/spsocket.c.i
-.PHONY : spsocket.c.i
-
-spsocket.s: spsocket.c.s
-.PHONY : spsocket.s
-
-# target to generate assembly for a file
-spsocket.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EpollServer.dir/build.make CMakeFiles/EpollServer.dir/spsocket.c.s
-.PHONY : spsocket.c.s
 
 # Help Target
 help:
@@ -875,45 +576,7 @@ help:
 	@echo "... NightlyTest"
 	@echo "... NightlyUpdate"
 	@echo "... EpollServer"
-	@echo "... Logger.o"
-	@echo "... Logger.i"
-	@echo "... Logger.s"
-	@echo "... PacketIO.o"
-	@echo "... PacketIO.i"
-	@echo "... PacketIO.s"
-	@echo "... RingBuffer.o"
-	@echo "... RingBuffer.i"
-	@echo "... RingBuffer.s"
-	@echo "... SocketManager.o"
-	@echo "... SocketManager.i"
-	@echo "... SocketManager.s"
-	@echo "... TcpMessagePacket.o"
-	@echo "... TcpMessagePacket.i"
-	@echo "... TcpMessagePacket.s"
-	@echo "... TcpPacketHandler.o"
-	@echo "... TcpPacketHandler.i"
-	@echo "... TcpPacketHandler.s"
-	@echo "... TcpService.o"
-	@echo "... TcpService.i"
-	@echo "... TcpService.s"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
-	@echo "... spbitio.o"
-	@echo "... spbitio.i"
-	@echo "... spbitio.s"
-	@echo "... spepoll.o"
-	@echo "... spepoll.i"
-	@echo "... spepoll.s"
-	@echo "... spfileio.o"
-	@echo "... spfileio.i"
-	@echo "... spfileio.s"
-	@echo "... sppacketparser.o"
-	@echo "... sppacketparser.i"
-	@echo "... sppacketparser.s"
-	@echo "... spsocket.o"
-	@echo "... spsocket.i"
-	@echo "... spsocket.s"
+	@echo "... KikukeLib"
 .PHONY : help
 
 

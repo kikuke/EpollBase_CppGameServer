@@ -1,67 +1,67 @@
 [
 {
-  "directory": "/home/kikuke/DV/EpollBase_CppGameServer/build",
-  "command": "/usr/bin/g++   -g -o CMakeFiles/EpollServer.dir/main.cpp.o -c /home/kikuke/DV/EpollBase_CppGameServer/main.cpp",
-  "file": "/home/kikuke/DV/EpollBase_CppGameServer/main.cpp"
+  "directory": "/home/kikuke/DV/GameServer_Cp/build/KikukeLib",
+  "command": "/usr/bin/g++  -I/home/kikuke/DV/GameServer_Cp/KikukeLib/lsys -I/home/kikuke/DV/GameServer_Cp/KikukeLib/Server_Define -I/home/kikuke/DV/GameServer_Cp/KikukeLib/service -I/home/kikuke/DV/GameServer_Cp/KikukeLib/struct -I/home/kikuke/DV/GameServer_Cp/KikukeLib/utility -g -o CMakeFiles/KikukeLib.dir/Server_Define/impl/TcpMessagePacket.cpp.o -c /home/kikuke/DV/GameServer_Cp/KikukeLib/Server_Define/impl/TcpMessagePacket.cpp",
+  "file": "/home/kikuke/DV/GameServer_Cp/KikukeLib/Server_Define/impl/TcpMessagePacket.cpp"
 },
 {
-  "directory": "/home/kikuke/DV/EpollBase_CppGameServer/build",
-  "command": "/usr/bin/g++   -g -o CMakeFiles/EpollServer.dir/Logger.cpp.o -c /home/kikuke/DV/EpollBase_CppGameServer/Logger.cpp",
-  "file": "/home/kikuke/DV/EpollBase_CppGameServer/Logger.cpp"
+  "directory": "/home/kikuke/DV/GameServer_Cp/build/KikukeLib",
+  "command": "/usr/bin/gcc  -I/home/kikuke/DV/GameServer_Cp/KikukeLib/lsys -I/home/kikuke/DV/GameServer_Cp/KikukeLib/Server_Define -I/home/kikuke/DV/GameServer_Cp/KikukeLib/service -I/home/kikuke/DV/GameServer_Cp/KikukeLib/struct -I/home/kikuke/DV/GameServer_Cp/KikukeLib/utility -g -o CMakeFiles/KikukeLib.dir/lsys/spbitio.c.o -c /home/kikuke/DV/GameServer_Cp/KikukeLib/lsys/spbitio.c",
+  "file": "/home/kikuke/DV/GameServer_Cp/KikukeLib/lsys/spbitio.c"
 },
 {
-  "directory": "/home/kikuke/DV/EpollBase_CppGameServer/build",
-  "command": "/usr/bin/g++   -g -o CMakeFiles/EpollServer.dir/PacketIO.cpp.o -c /home/kikuke/DV/EpollBase_CppGameServer/PacketIO.cpp",
-  "file": "/home/kikuke/DV/EpollBase_CppGameServer/PacketIO.cpp"
+  "directory": "/home/kikuke/DV/GameServer_Cp/build/KikukeLib",
+  "command": "/usr/bin/gcc  -I/home/kikuke/DV/GameServer_Cp/KikukeLib/lsys -I/home/kikuke/DV/GameServer_Cp/KikukeLib/Server_Define -I/home/kikuke/DV/GameServer_Cp/KikukeLib/service -I/home/kikuke/DV/GameServer_Cp/KikukeLib/struct -I/home/kikuke/DV/GameServer_Cp/KikukeLib/utility -g -o CMakeFiles/KikukeLib.dir/lsys/spepoll.c.o -c /home/kikuke/DV/GameServer_Cp/KikukeLib/lsys/spepoll.c",
+  "file": "/home/kikuke/DV/GameServer_Cp/KikukeLib/lsys/spepoll.c"
 },
 {
-  "directory": "/home/kikuke/DV/EpollBase_CppGameServer/build",
-  "command": "/usr/bin/g++   -g -o CMakeFiles/EpollServer.dir/RingBuffer.cpp.o -c /home/kikuke/DV/EpollBase_CppGameServer/RingBuffer.cpp",
-  "file": "/home/kikuke/DV/EpollBase_CppGameServer/RingBuffer.cpp"
+  "directory": "/home/kikuke/DV/GameServer_Cp/build/KikukeLib",
+  "command": "/usr/bin/gcc  -I/home/kikuke/DV/GameServer_Cp/KikukeLib/lsys -I/home/kikuke/DV/GameServer_Cp/KikukeLib/Server_Define -I/home/kikuke/DV/GameServer_Cp/KikukeLib/service -I/home/kikuke/DV/GameServer_Cp/KikukeLib/struct -I/home/kikuke/DV/GameServer_Cp/KikukeLib/utility -g -o CMakeFiles/KikukeLib.dir/lsys/spfileio.c.o -c /home/kikuke/DV/GameServer_Cp/KikukeLib/lsys/spfileio.c",
+  "file": "/home/kikuke/DV/GameServer_Cp/KikukeLib/lsys/spfileio.c"
 },
 {
-  "directory": "/home/kikuke/DV/EpollBase_CppGameServer/build",
-  "command": "/usr/bin/g++   -g -o CMakeFiles/EpollServer.dir/SocketManager.cpp.o -c /home/kikuke/DV/EpollBase_CppGameServer/SocketManager.cpp",
-  "file": "/home/kikuke/DV/EpollBase_CppGameServer/SocketManager.cpp"
+  "directory": "/home/kikuke/DV/GameServer_Cp/build/KikukeLib",
+  "command": "/usr/bin/gcc  -I/home/kikuke/DV/GameServer_Cp/KikukeLib/lsys -I/home/kikuke/DV/GameServer_Cp/KikukeLib/Server_Define -I/home/kikuke/DV/GameServer_Cp/KikukeLib/service -I/home/kikuke/DV/GameServer_Cp/KikukeLib/struct -I/home/kikuke/DV/GameServer_Cp/KikukeLib/utility -g -o CMakeFiles/KikukeLib.dir/lsys/sppacketparser.c.o -c /home/kikuke/DV/GameServer_Cp/KikukeLib/lsys/sppacketparser.c",
+  "file": "/home/kikuke/DV/GameServer_Cp/KikukeLib/lsys/sppacketparser.c"
 },
 {
-  "directory": "/home/kikuke/DV/EpollBase_CppGameServer/build",
-  "command": "/usr/bin/g++   -g -o CMakeFiles/EpollServer.dir/TcpMessagePacket.cpp.o -c /home/kikuke/DV/EpollBase_CppGameServer/TcpMessagePacket.cpp",
-  "file": "/home/kikuke/DV/EpollBase_CppGameServer/TcpMessagePacket.cpp"
+  "directory": "/home/kikuke/DV/GameServer_Cp/build/KikukeLib",
+  "command": "/usr/bin/gcc  -I/home/kikuke/DV/GameServer_Cp/KikukeLib/lsys -I/home/kikuke/DV/GameServer_Cp/KikukeLib/Server_Define -I/home/kikuke/DV/GameServer_Cp/KikukeLib/service -I/home/kikuke/DV/GameServer_Cp/KikukeLib/struct -I/home/kikuke/DV/GameServer_Cp/KikukeLib/utility -g -o CMakeFiles/KikukeLib.dir/lsys/spsocket.c.o -c /home/kikuke/DV/GameServer_Cp/KikukeLib/lsys/spsocket.c",
+  "file": "/home/kikuke/DV/GameServer_Cp/KikukeLib/lsys/spsocket.c"
 },
 {
-  "directory": "/home/kikuke/DV/EpollBase_CppGameServer/build",
-  "command": "/usr/bin/g++   -g -o CMakeFiles/EpollServer.dir/TcpPacketHandler.cpp.o -c /home/kikuke/DV/EpollBase_CppGameServer/TcpPacketHandler.cpp",
-  "file": "/home/kikuke/DV/EpollBase_CppGameServer/TcpPacketHandler.cpp"
+  "directory": "/home/kikuke/DV/GameServer_Cp/build/KikukeLib",
+  "command": "/usr/bin/g++  -I/home/kikuke/DV/GameServer_Cp/KikukeLib/lsys -I/home/kikuke/DV/GameServer_Cp/KikukeLib/Server_Define -I/home/kikuke/DV/GameServer_Cp/KikukeLib/service -I/home/kikuke/DV/GameServer_Cp/KikukeLib/struct -I/home/kikuke/DV/GameServer_Cp/KikukeLib/utility -g -o CMakeFiles/KikukeLib.dir/service/PacketIO.cpp.o -c /home/kikuke/DV/GameServer_Cp/KikukeLib/service/PacketIO.cpp",
+  "file": "/home/kikuke/DV/GameServer_Cp/KikukeLib/service/PacketIO.cpp"
 },
 {
-  "directory": "/home/kikuke/DV/EpollBase_CppGameServer/build",
-  "command": "/usr/bin/g++   -g -o CMakeFiles/EpollServer.dir/TcpService.cpp.o -c /home/kikuke/DV/EpollBase_CppGameServer/TcpService.cpp",
-  "file": "/home/kikuke/DV/EpollBase_CppGameServer/TcpService.cpp"
+  "directory": "/home/kikuke/DV/GameServer_Cp/build/KikukeLib",
+  "command": "/usr/bin/g++  -I/home/kikuke/DV/GameServer_Cp/KikukeLib/lsys -I/home/kikuke/DV/GameServer_Cp/KikukeLib/Server_Define -I/home/kikuke/DV/GameServer_Cp/KikukeLib/service -I/home/kikuke/DV/GameServer_Cp/KikukeLib/struct -I/home/kikuke/DV/GameServer_Cp/KikukeLib/utility -g -o CMakeFiles/KikukeLib.dir/service/SocketManager.cpp.o -c /home/kikuke/DV/GameServer_Cp/KikukeLib/service/SocketManager.cpp",
+  "file": "/home/kikuke/DV/GameServer_Cp/KikukeLib/service/SocketManager.cpp"
 },
 {
-  "directory": "/home/kikuke/DV/EpollBase_CppGameServer/build",
-  "command": "/usr/bin/gcc   -g -o CMakeFiles/EpollServer.dir/spbitio.c.o -c /home/kikuke/DV/EpollBase_CppGameServer/spbitio.c",
-  "file": "/home/kikuke/DV/EpollBase_CppGameServer/spbitio.c"
+  "directory": "/home/kikuke/DV/GameServer_Cp/build/KikukeLib",
+  "command": "/usr/bin/g++  -I/home/kikuke/DV/GameServer_Cp/KikukeLib/lsys -I/home/kikuke/DV/GameServer_Cp/KikukeLib/Server_Define -I/home/kikuke/DV/GameServer_Cp/KikukeLib/service -I/home/kikuke/DV/GameServer_Cp/KikukeLib/struct -I/home/kikuke/DV/GameServer_Cp/KikukeLib/utility -g -o CMakeFiles/KikukeLib.dir/service/TcpPacketHandler.cpp.o -c /home/kikuke/DV/GameServer_Cp/KikukeLib/service/TcpPacketHandler.cpp",
+  "file": "/home/kikuke/DV/GameServer_Cp/KikukeLib/service/TcpPacketHandler.cpp"
 },
 {
-  "directory": "/home/kikuke/DV/EpollBase_CppGameServer/build",
-  "command": "/usr/bin/gcc   -g -o CMakeFiles/EpollServer.dir/spepoll.c.o -c /home/kikuke/DV/EpollBase_CppGameServer/spepoll.c",
-  "file": "/home/kikuke/DV/EpollBase_CppGameServer/spepoll.c"
+  "directory": "/home/kikuke/DV/GameServer_Cp/build/KikukeLib",
+  "command": "/usr/bin/g++  -I/home/kikuke/DV/GameServer_Cp/KikukeLib/lsys -I/home/kikuke/DV/GameServer_Cp/KikukeLib/Server_Define -I/home/kikuke/DV/GameServer_Cp/KikukeLib/service -I/home/kikuke/DV/GameServer_Cp/KikukeLib/struct -I/home/kikuke/DV/GameServer_Cp/KikukeLib/utility -g -o CMakeFiles/KikukeLib.dir/service/TcpService.cpp.o -c /home/kikuke/DV/GameServer_Cp/KikukeLib/service/TcpService.cpp",
+  "file": "/home/kikuke/DV/GameServer_Cp/KikukeLib/service/TcpService.cpp"
 },
 {
-  "directory": "/home/kikuke/DV/EpollBase_CppGameServer/build",
-  "command": "/usr/bin/gcc   -g -o CMakeFiles/EpollServer.dir/spfileio.c.o -c /home/kikuke/DV/EpollBase_CppGameServer/spfileio.c",
-  "file": "/home/kikuke/DV/EpollBase_CppGameServer/spfileio.c"
+  "directory": "/home/kikuke/DV/GameServer_Cp/build/KikukeLib",
+  "command": "/usr/bin/g++  -I/home/kikuke/DV/GameServer_Cp/KikukeLib/lsys -I/home/kikuke/DV/GameServer_Cp/KikukeLib/Server_Define -I/home/kikuke/DV/GameServer_Cp/KikukeLib/service -I/home/kikuke/DV/GameServer_Cp/KikukeLib/struct -I/home/kikuke/DV/GameServer_Cp/KikukeLib/utility -g -o CMakeFiles/KikukeLib.dir/struct/RingBuffer.cpp.o -c /home/kikuke/DV/GameServer_Cp/KikukeLib/struct/RingBuffer.cpp",
+  "file": "/home/kikuke/DV/GameServer_Cp/KikukeLib/struct/RingBuffer.cpp"
 },
 {
-  "directory": "/home/kikuke/DV/EpollBase_CppGameServer/build",
-  "command": "/usr/bin/gcc   -g -o CMakeFiles/EpollServer.dir/sppacketparser.c.o -c /home/kikuke/DV/EpollBase_CppGameServer/sppacketparser.c",
-  "file": "/home/kikuke/DV/EpollBase_CppGameServer/sppacketparser.c"
+  "directory": "/home/kikuke/DV/GameServer_Cp/build/KikukeLib",
+  "command": "/usr/bin/g++  -I/home/kikuke/DV/GameServer_Cp/KikukeLib/lsys -I/home/kikuke/DV/GameServer_Cp/KikukeLib/Server_Define -I/home/kikuke/DV/GameServer_Cp/KikukeLib/service -I/home/kikuke/DV/GameServer_Cp/KikukeLib/struct -I/home/kikuke/DV/GameServer_Cp/KikukeLib/utility -g -o CMakeFiles/KikukeLib.dir/utility/Logger.cpp.o -c /home/kikuke/DV/GameServer_Cp/KikukeLib/utility/Logger.cpp",
+  "file": "/home/kikuke/DV/GameServer_Cp/KikukeLib/utility/Logger.cpp"
 },
 {
-  "directory": "/home/kikuke/DV/EpollBase_CppGameServer/build",
-  "command": "/usr/bin/gcc   -g -o CMakeFiles/EpollServer.dir/spsocket.c.o -c /home/kikuke/DV/EpollBase_CppGameServer/spsocket.c",
-  "file": "/home/kikuke/DV/EpollBase_CppGameServer/spsocket.c"
+  "directory": "/home/kikuke/DV/GameServer_Cp/build/Server",
+  "command": "/usr/bin/g++  -I/home/kikuke/DV/GameServer_Cp/KikukeLib/lsys -I/home/kikuke/DV/GameServer_Cp/KikukeLib/Server_Define -I/home/kikuke/DV/GameServer_Cp/KikukeLib/service -I/home/kikuke/DV/GameServer_Cp/KikukeLib/struct -I/home/kikuke/DV/GameServer_Cp/KikukeLib/utility -g -o CMakeFiles/EpollServer.dir/main.cpp.o -c /home/kikuke/DV/GameServer_Cp/Server/main.cpp",
+  "file": "/home/kikuke/DV/GameServer_Cp/Server/main.cpp"
 }
 ]

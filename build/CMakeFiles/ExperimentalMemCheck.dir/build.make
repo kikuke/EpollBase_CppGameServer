@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/kikuke/DV/EpollBase_CppGameServer
+CMAKE_SOURCE_DIR = /home/kikuke/DV/GameServer_Cp
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/kikuke/DV/EpollBase_CppGameServer/build
+CMAKE_BINARY_DIR = /home/kikuke/DV/GameServer_Cp/build
 
 # Utility rule file for ExperimentalMemCheck.
 
@@ -82,6 +82,6 @@ CMakeFiles/ExperimentalMemCheck.dir/clean:
 .PHONY : CMakeFiles/ExperimentalMemCheck.dir/clean
 
 CMakeFiles/ExperimentalMemCheck.dir/depend:
-	cd /home/kikuke/DV/EpollBase_CppGameServer/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/kikuke/DV/EpollBase_CppGameServer /home/kikuke/DV/EpollBase_CppGameServer /home/kikuke/DV/EpollBase_CppGameServer/build /home/kikuke/DV/EpollBase_CppGameServer/build /home/kikuke/DV/EpollBase_CppGameServer/build/CMakeFiles/ExperimentalMemCheck.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/kikuke/DV/GameServer_Cp/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/kikuke/DV/GameServer_Cp /home/kikuke/DV/GameServer_Cp /home/kikuke/DV/GameServer_Cp/build /home/kikuke/DV/GameServer_Cp/build /home/kikuke/DV/GameServer_Cp/build/CMakeFiles/ExperimentalMemCheck.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/ExperimentalMemCheck.dir/depend
 

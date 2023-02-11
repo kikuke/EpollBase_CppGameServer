@@ -8,6 +8,12 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
   "../CMakeLists.txt"
+  "../KikukeLib/CMakeLists.txt"
+  "../KikukeLib/lsys/CMakeLists.txt"
+  "../KikukeLib/service/CMakeLists.txt"
+  "../KikukeLib/struct/CMakeLists.txt"
+  "../KikukeLib/utility/CMakeLists.txt"
+  "../Server/CMakeLists.txt"
   "CMakeFiles/3.22.1/CMakeCCompiler.cmake"
   "CMakeFiles/3.22.1/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.22.1/CMakeSystem.cmake"
@@ -49,6 +55,12 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "CPackConfig.cmake"
   "CPackSourceConfig.cmake"
   "CMakeFiles/CMakeDirectoryInformation.cmake"
+  "KikukeLib/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "KikukeLib/lsys/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "KikukeLib/service/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "KikukeLib/struct/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "KikukeLib/utility/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "Server/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
@@ -81,5 +93,6 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/ContinuousCoverage.dir/DependInfo.cmake"
   "CMakeFiles/ContinuousMemCheck.dir/DependInfo.cmake"
   "CMakeFiles/ContinuousSubmit.dir/DependInfo.cmake"
-  "CMakeFiles/EpollServer.dir/DependInfo.cmake"
+  "KikukeLib/CMakeFiles/KikukeLib.dir/DependInfo.cmake"
+  "Server/CMakeFiles/EpollServer.dir/DependInfo.cmake"
   )
