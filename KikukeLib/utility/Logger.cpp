@@ -29,7 +29,7 @@ int Logger::LoggerSetting(LOGLEVEL _runLevel, const char* _saveRootDir, size_t _
 Logger::Logger(const char* logFolderName)
 {
     if(!isSet){
-        LoggerSetting(LOGLEVEL::DEBUG, "./Log", DEFAULT_LOG_BUFFER_SIZE);
+        LoggerSetting(LOGLEVEL::DEBUG, "../Log", DEFAULT_LOG_BUFFER_SIZE);
     }
     
     sprintf(savePath, "%s/%s/", saveRootDir, logFolderName);
