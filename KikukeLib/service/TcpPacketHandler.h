@@ -18,7 +18,8 @@ private:
 
     Logger* log;
 
-    int TCPHeaderCheck(TCPTestPacketHeader* header);
+    //나중에 인자 필요해지면 아예 소켓을 넣던가 해서 추가정보 주기
+    int TCPHeaderCheck(TCPTestPacketHeader* header, size_t useSz);
     //call packetHandler's execute()
     int ExecuteOP(int sock, unsigned int mainOp, unsigned int subOp);
     //call packetHandler's catchError()

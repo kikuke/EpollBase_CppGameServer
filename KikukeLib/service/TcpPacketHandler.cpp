@@ -8,6 +8,7 @@ int TcpPacketHandler::ExecuteOP(int sock, unsigned int mainOp, unsigned int subO
             return (*(handlers[i])).execute(sock, subOp, readBuf);
     }
 
+    (*log).Log(LOGLEVEL::ERROR, "ExecuteOp() - Undefined MainOp: %d", mainOp);
    return 0;
 }
 
@@ -18,6 +19,7 @@ int TcpPacketHandler::CatchError(int sock, unsigned int mainOp, unsigned int err
             return (*(handlers[i])).catchError(sock, errorCode);
     }
 
+    (*log).Log(LOGLEVEL::ERROR, "CatchError() - Undefined MainOp: %d", mainOp);
     return 0;
 }
 
@@ -27,16 +29,14 @@ int TcpPacketHandler::execute(int sock)
     TCPTestPacketHeader header;
     int ret;
 
-    int useSz = info->recvBuffer.getUseSize();
+    size_t useSz = info->recvBuffer.getUseSize();
 
     if(sizeof(TCPTestPacketHeader) > useSz)
         return 0;
 
     info->recvBuffer.peek(&header, sizeof(header));
-    if(header.packetLen > useSz)
-        return 0;
 
-    ret = TCPHeaderCheck(&header);
+    ret = TCPHeaderCheck(&header, useSz);
     if(ret != 1){
         (*log).Log(LOGLEVEL::ERROR, "TCPHeaderChcek()");
         return 0;
@@ -60,11 +60,18 @@ int TcpPacketHandler::execute(int sock)
     return 1;
 }
 
-int TcpPacketHandler::TCPHeaderCheck(TCPTestPacketHeader* header)
+int TcpPacketHandler::TCPHeaderCheck(TCPTestPacketHeader* header, size_t useSz)
 {
     //인증, 인가, 플래그 체크 등등의 작업하기
-    if(!(header->startCode == TCP_PACKET_START_CODE))
+    if(!(header->startCode == TCP_PACKET_START_CODE)){
+        (*log).Log(LOGLEVEL::ERROR, "TCPHeaderCheck() - Undefined StartCode");
         return 0;
+    }
+
+    if(header->packetLen > useSz){
+        (*log).Log(LOGLEVEL::DEBUG, "TCPHeaderCheck() - packetLen: %d, useSiz: %d", header->packetLen, useSz);
+        return 0;
+    }
 
     return 1;
 }
