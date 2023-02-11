@@ -1,1 +1,0 @@
-/usr/bin/g++ -g -rdynamic CMakeFiles/EpollServer.dir/main.cpp.o -o EpollServer  ../KikukeLib/libKikukeLib.a 

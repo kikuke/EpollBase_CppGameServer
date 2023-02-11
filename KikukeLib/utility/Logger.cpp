@@ -4,7 +4,7 @@
 #include <sys/time.h>
 #include <time.h>
 
-#include "../lsys/spfileio.h"
+#include "spfileio.h"
 #include "Logger.h"
 
 bool Logger::isSet;

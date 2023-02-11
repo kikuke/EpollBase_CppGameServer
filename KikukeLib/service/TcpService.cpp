@@ -3,7 +3,7 @@
 #include <sys/socket.h>
 #include <sys/epoll.h>
 
-#include "../lsys/spepoll.h"
+#include "spepoll.h"
 #include "SocketManager.h"
 #include "TcpService.h"
 

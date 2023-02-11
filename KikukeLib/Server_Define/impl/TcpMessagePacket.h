@@ -1,8 +1,8 @@
 #ifndef TCP_MESSAGE_PACKET
 #define TCP_MESSAGE_PACKET
 
-#include "../PacketDefine.h"
-#include "../../service/PacketHandler.h"
+#include "PacketDefine.h"
+#include "PacketHandler.h"
 
 class TcpMessagePacket : public PacketHandler
 {

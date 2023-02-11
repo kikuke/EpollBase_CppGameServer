@@ -11,8 +11,8 @@
 #include "TcpService.h"
 #include "PacketHandler.h"
 #include "TcpPacketHandler.h"
-#include "impl/TcpMessagePacket.h"
 #include "Logger.h"
+#include "impl/TcpMessagePacket.h"
 
 int main(void)
 {

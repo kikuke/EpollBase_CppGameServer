@@ -1,8 +1,4 @@
 message("#KikukeLib#")
-add_subdirectory(lsys)
-add_subdirectory(service)
-add_subdirectory(struct)
-add_subdirectory(utility)
 
 file(GLOB_RECURSE KIKUKELIB "*.h" "*.c" "*.cpp")
 

@@ -1,7 +1,7 @@
 #include <arpa/inet.h>
 
-#include "../../service/SocketManager.h"
-#include "../../utility/Logger.h"
+#include "SocketManager.h"
+#include "Logger.h"
 #include "TcpMessagePacket.h"
 
 int TcpMessagePacket::execute(int sock, unsigned int subOp, RingBuffer& buffer)

@@ -1,7 +1,7 @@
 #ifndef TCP_SERVICE
 #define TCP_SERVICE
 
-#include "../utility/Logger.h"
+#include "Logger.h"
 
 class TcpService
 {

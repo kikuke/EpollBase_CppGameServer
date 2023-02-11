@@ -3,10 +3,10 @@
 
 #include <sys/types.h>
 
-#include "../Server_Define/impl/TcpMessagePacket.h"
-#include "../struct/RingBuffer.h"
+#include "impl/TcpMessagePacket.h"
+#include "RingBuffer.h"
 #include "PacketHandler.h"
-#include "../utility/Logger.h"
+#include "Logger.h"
 
 class TcpPacketHandler
 {

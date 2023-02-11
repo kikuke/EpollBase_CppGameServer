@@ -3,7 +3,7 @@
 
 #include <netinet/in.h>
 
-#include "../struct/RingBuffer.h"
+#include "RingBuffer.h"
 
 struct TCPSOCKETINFO
 {

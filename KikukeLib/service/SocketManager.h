@@ -3,8 +3,8 @@
 
 #include <map>
 
-#include "../utility/Logger.h"
-#include "../Server_Define/socketinfo.h"
+#include "Logger.h"
+#include "socketinfo.h"
 
 class SocketManager
 {

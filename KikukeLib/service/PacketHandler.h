@@ -1,7 +1,7 @@
 #ifndef PACKET_HANDLER
 #define PACKET_HANDLER
 
-#include "../struct/RingBuffer.h"
+#include "RingBuffer.h"
 
 class PacketHandler
 {
