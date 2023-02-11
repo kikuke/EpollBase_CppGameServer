@@ -7,6 +7,7 @@ enable_testing()
 
 add_subdirectory(KikukeLib)
 add_subdirectory(Server)
+add_subdirectory(Client)
 
 message("END")
 
