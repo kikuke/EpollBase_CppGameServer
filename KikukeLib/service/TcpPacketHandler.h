@@ -3,7 +3,7 @@
 
 #include <sys/types.h>
 
-#include "impl/TcpMessagePacket.h"
+#include "PacketDefine.h"
 #include "RingBuffer.h"
 #include "PacketHandler.h"
 #include "Logger.h"
