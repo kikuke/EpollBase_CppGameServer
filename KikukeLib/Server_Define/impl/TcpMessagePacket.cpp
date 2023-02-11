@@ -1,4 +1,6 @@
 #include <arpa/inet.h>
+#include <unistd.h>
+#include <string.h>
 
 #include "SocketManager.h"
 #include "Logger.h"
@@ -43,12 +45,14 @@ int TcpMessagePacket::MessageEcho(int sock, MessageEchoData meData)
     switch (meData.target)
     {
     case MESSAGE_ECHO_DATA_TARGET_SELF:
-        (*log).Log(LOGLEVEL::INFO, "[%s] SELF ECHO MESSAGE", inet_ntoa(SocketManager::getInstance().getTcpSocketInfo(sock)->sockAddr.sin_addr));
-
+        (*log).Log(LOGLEVEL::INFO, "[%s] SELF ECHO MESSAGE: %s", inet_ntoa(SocketManager::getInstance().getTcpSocketInfo(sock)->sockAddr.sin_addr), meData.msg);
+        //임시 전송처리
+        write(sock, meData.msg, strlen((const char*)meData.msg));
         break;
     case MESSAGE_ECHO_DATA_TARGET_ALL:
-        (*log).Log(LOGLEVEL::INFO, "[%s] ALL ECHO MESSAGE", inet_ntoa(SocketManager::getInstance().getTcpSocketInfo(sock)->sockAddr.sin_addr));
-        //아직 미구현이지만 임시로 SELF 에코 처리하기.
+        (*log).Log(LOGLEVEL::INFO, "[%s] ALL ECHO MESSAGE: %s", inet_ntoa(SocketManager::getInstance().getTcpSocketInfo(sock)->sockAddr.sin_addr), meData.msg);
+        //아직 미구현이지만 임시로 SELF 에코 처리하기. 임시 전송처리
+        write(sock, meData.msg, strlen((const char*)meData.msg));
         break;
     default:
         (*log).Log(LOGLEVEL::ERROR, "[%s] MessageEcho - Undefined Target: %d", inet_ntoa(SocketManager::getInstance().getTcpSocketInfo(sock)->sockAddr.sin_addr), meData.target);
