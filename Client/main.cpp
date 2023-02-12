@@ -75,8 +75,8 @@ void * send_msg(void * arg)   // send thread main
     MessageEchoData* msgData = SelfEchoDataFactory();
 
 	int sock=*((int*)arg);
-	char name_msgBuf[2048];
-    char end[2] = {TCP_PACKET_END_CODE, '\0'};
+	unsigned char name_msgBuf[2048];
+    unsigned char end = TCP_PACKET_END_CODE;
 	while(1) 
 	{
 		fgets(msg, BUF_SIZE, stdin);
@@ -89,7 +89,7 @@ void * send_msg(void * arg)   // send thread main
 		sprintf((char *)msgData->msg,"%s %s", name, msg);
         memcpy(name_msgBuf, header, sizeof(TCPTestPacketHeader));
         memcpy(name_msgBuf + sizeof(TCPTestPacketHeader), msgData, sizeof(MessageEchoData));
-        strcpy(name_msgBuf + sizeof(TCPTestPacketHeader) + sizeof(MessageEchoData), end);
+        memcpy(name_msgBuf + sizeof(TCPTestPacketHeader) + sizeof(MessageEchoData), &end, sizeof(unsigned char));
 		write(sock, name_msgBuf, sizeof(TCPTestPacketHeader) + sizeof(MessageEchoData) + sizeof(unsigned char));
 	}
 	return NULL;
