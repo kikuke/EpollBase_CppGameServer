@@ -4,7 +4,7 @@
 #include <map>
 
 #include "Logger.h"
-#include "socketinfo.h"
+#include "ServerInfo.h"
 
 class SocketManager
 {

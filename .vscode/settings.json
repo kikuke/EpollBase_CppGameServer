@@ -45,7 +45,15 @@
         "typeinfo": "cpp",
         "types.h": "c",
         "string.h": "c",
-        "spfileio.h": "c"
+        "spfileio.h": "c",
+        "chrono": "cpp",
+        "condition_variable": "cpp",
+        "ctime": "cpp",
+        "ratio": "cpp",
+        "mutex": "cpp",
+        "semaphore": "cpp",
+        "stop_token": "cpp",
+        "thread": "cpp"
     },
     "cmake.sourceDirectory": "${workspaceFolder}"
 }
