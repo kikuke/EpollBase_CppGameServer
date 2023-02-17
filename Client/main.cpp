@@ -18,7 +18,8 @@ void error_handling(const char * msg);
 char name[NAME_SIZE]="[DEFAULT]";
 char msg[BUF_SIZE];
 char tempName[NAME_SIZE-3];
-	
+
+//Todo: 테스트 클라이언트 코드로 새로 구성하기
 int main(void)
 {
     constexpr int SERV_PORT = 1234;
@@ -77,7 +78,7 @@ void * send_msg(void * arg)   // send thread main
 	int sock=*((int*)arg);
 	unsigned char name_msgBuf[2048];
     unsigned char end = TCP_PACKET_END_CODE;
-	while(1) 
+	while(1)//Todo: 이렇게 하기보단 와일문안에 조건을 넣어주는것으로 strcmp저걸 넣던가, 또한 와일문안은 종료를 리턴이 있는것이 아닌 브레이크로 
 	{
 		fgets(msg, BUF_SIZE, stdin);
 		if(!strcmp(msg,"q\n")||!strcmp(msg,"Q\n")) 
