@@ -1,6 +1,7 @@
 #ifndef TCP_SERVICE
 #define TCP_SERVICE
 
+#include "ServerInfo.h"
 #include "Logger.h"
 
 class TcpService
@@ -13,6 +14,7 @@ public:
 
     bool AcceptTcpSocket(int serv_sock, int epfd);
     bool CloseTcpSocket(int clnt_sock, int epfd);
+    void Networking(int serv_sock, int event_sock, int epfd, JobQueue* jobQueue);
 };
 
 #endif

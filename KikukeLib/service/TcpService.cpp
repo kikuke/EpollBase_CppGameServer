@@ -46,3 +46,20 @@ bool TcpService::CloseTcpSocket(int clnt_sock, int epfd)
     close(clnt_sock);
     return true;
 }
+
+void TcpService::Networking(int serv_sock, int event_sock, int epfd, JobQueue* jobQueue)
+{
+    if (event_sock == serv_sock)//Todo: 얘를 함수로 추가 분리하기 시멘틱 프로그래밍
+    {
+        if(!AcceptTcpSocket(event_sock, epfd)){
+            (*log).Log(LOGLEVEL::ERROR, "AcceptTcpSocket Failed!");
+        }
+        (*log).Log(LOGLEVEL::DEBUG, "AcceptTcpSocket()");
+
+        return;
+    }
+
+    jobQueue->readQueue.push(event_sock);
+    (*log).Log(LOGLEVEL::DEBUG, "Push ReadQueue: %d", event_sock);
+    return;
+}
