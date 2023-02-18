@@ -29,7 +29,7 @@ int main(void)
     JobQueue jobQueue;
     
     //Todo: 읽기 파일 만들어서 할당시키기 - 읽기수준, 저장 경로
-    Logger::LoggerSetting(LOGLEVEL::DEBUG, "../TestLog", DEFAULT_LOG_BUFFER_SIZE);
+    Logger::LoggerSetting(LOGLEVEL::DEBUG, "/home/kikuke/Documents/TestLog", DEFAULT_LOG_BUFFER_SIZE);
     Logger log("MainLog");
 
     TcpService tcpService;
