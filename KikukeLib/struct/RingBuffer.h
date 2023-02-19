@@ -32,18 +32,18 @@ public:
     RingBuffer(int buf_sz);
     virtual ~RingBuffer();
 
-    size_t getUseSize();
+    virtual size_t getUseSize();
 
-    size_t peek(void* dest_buf, size_t size);
-    size_t enqueue(const void* src_buf, size_t size);
-    size_t dequeue(void* dest_buf, size_t size);
+    virtual size_t peek(void* dest_buf, size_t size);
+    virtual size_t enqueue(const void* src_buf, size_t size);
+    virtual size_t dequeue(void* dest_buf, size_t size);
 
     //flush and reuse. no destroy.
-    void flush();
+    virtual void flush();
 
-    RingBuffer& operator <<(RingBuffer& data);
+    virtual RingBuffer& operator <<(RingBuffer& data);
 
-    RingBuffer& operator >>(RingBuffer& data);
+    virtual RingBuffer& operator >>(RingBuffer& data);
 
     template <typename T>
     RingBuffer& operator <<(T const& data)
