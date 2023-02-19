@@ -1,6 +1,7 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 
+#include "ThreadSafe/TSRingBuffer.h"
 #include "SocketManager.h"
 
 SocketManager* SocketManager::m_Instance;
@@ -21,6 +22,7 @@ bool SocketManager::addTcpSocketInfo(int socket)
     TCPSOCKETINFO* info_ptr = new TCPSOCKETINFO;
     socklen_t sockLen = sizeof(info_ptr->sockAddr);
     
+    info_ptr->recvBuffer = new TSRingBuffer();
     info_ptr->socket = socket;
     getpeername(socket, (struct sockaddr *)&(info_ptr->sockAddr), &sockLen);
     
@@ -39,6 +41,7 @@ bool SocketManager::delTcpSocketInfo(int socket)
         return false;
     }
 
+    delete iter->second->recvBuffer;
     (*log).Log(LOGLEVEL::INFO, "[%s] DeleteTcpInfo - Socket: %d", inet_ntoa(iter->second->sockAddr.sin_addr), iter->second->socket);
 
     delete iter->second;

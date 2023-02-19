@@ -23,21 +23,21 @@ public:
     {
         std::unique_lock<std::recursive_mutex> lock(m_mutex);
 
-        RingBuffer::peek(dest_buf, size);
+        return RingBuffer::peek(dest_buf, size);
     }
 
     virtual size_t enqueue(const void* src_buf, size_t size)
     {
         std::unique_lock<std::recursive_mutex> lock(m_mutex);
 
-        RingBuffer::enqueue(src_buf, size);
+        return RingBuffer::enqueue(src_buf, size);
     }
 
     virtual size_t dequeue(void* dest_buf, size_t size)
     {
         std::unique_lock<std::recursive_mutex> lock(m_mutex);
 
-        RingBuffer::dequeue(dest_buf, size);
+        return RingBuffer::dequeue(dest_buf, size);
     }
 
     //flush and reuse. no destroy.

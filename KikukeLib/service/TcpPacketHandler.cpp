@@ -29,12 +29,12 @@ int TcpPacketHandler::execute(int sock)
     TCPTestPacketHeader header;
     int ret;
 
-    size_t useSz = info->recvBuffer.getUseSize();
+    size_t useSz = (*(info->recvBuffer)).getUseSize();
 
     if(sizeof(TCPTestPacketHeader) > useSz)
         return 0;
 
-    info->recvBuffer.peek(&header, sizeof(header));
+    (*(info->recvBuffer)).peek(&header, sizeof(header));
 
     ret = TCPHeaderCheck(&header, useSz);
     if(ret != 1){
@@ -42,9 +42,9 @@ int TcpPacketHandler::execute(int sock)
         return 0;
     }
     
-    info->recvBuffer >> header;
+    (*(info->recvBuffer)) >> header;
     readBuf.flush();
-    readBuf << info->recvBuffer;
+    readBuf << (*(info->recvBuffer));
 
     ret = ExecuteOP(sock, header.mainOp, header.subOp);
     if(ret != 1){
@@ -55,7 +55,7 @@ int TcpPacketHandler::execute(int sock)
         return 0;
     }
 
-    readBuf >> info->recvBuffer;
+    readBuf >> (*(info->recvBuffer));
 
     return 1;
 }

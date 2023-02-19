@@ -3,7 +3,7 @@
 
 #include <netinet/in.h>
 
-#include "RingBuffer.h"
+#include "ThreadSafe/TSRingBuffer.h"
 #include "ThreadSafe/TSQueue.h"
 
 struct JobQueue
@@ -17,7 +17,7 @@ struct TCPSOCKETINFO
     int socket;
     struct sockaddr_in sockAddr;
 
-    RingBuffer recvBuffer;
+    RingBuffer* recvBuffer;
 };
 
 #endif
