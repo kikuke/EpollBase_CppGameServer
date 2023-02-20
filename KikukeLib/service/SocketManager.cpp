@@ -16,10 +16,8 @@ SocketManager::~SocketManager()
     delete log;
 }
 
-bool SocketManager::addTcpSocketInfo(int socket)
+bool SocketManager::addTcpSocketInfo(int socket)//Todo: 재사용 방식으로 바꾸기 ip기준으로 체크
 {
-    std::unique_lock<std::recursive_mutex> lock(m_mutex);
-
     //나중에 inform 세팅 관련 함수 만들기
     TCPSOCKETINFO* info_ptr = new TCPSOCKETINFO;
     socklen_t sockLen = sizeof(info_ptr->sockAddr);
@@ -35,10 +33,8 @@ bool SocketManager::addTcpSocketInfo(int socket)
     return tcpInfoMap.insert(inform).second;
 }
 
-bool SocketManager::delTcpSocketInfo(int socket)
+bool SocketManager::delTcpSocketInfo(int socket)//Todo: 재사용 방식으로 바꾸기 ip기준으로 체크
 {
-    std::unique_lock<std::recursive_mutex> lock(m_mutex);
-
     std::map<int, TCPSOCKETINFO*>::iterator iter = tcpInfoMap.find(socket);
     if(iter == tcpInfoMap.end()){
         (*log).Log(LOGLEVEL::ERROR, "[%s] DeleteTcpInfo Failed - Socket: %d", inet_ntoa(iter->second->sockAddr.sin_addr), iter->second->socket);
@@ -53,10 +49,8 @@ bool SocketManager::delTcpSocketInfo(int socket)
     return true;
 }
 
-TCPSOCKETINFO* SocketManager::getTcpSocketInfo(int socket)
+TCPSOCKETINFO* SocketManager::getTcpSocketInfo(int socket)//Todo: 재사용 방식으로 바꾸기 ip기준으로 체크
 {
-    std::unique_lock<std::recursive_mutex> lock(m_mutex);
-    
     std::map<int, TCPSOCKETINFO*>::iterator iter = tcpInfoMap.find(socket);
     if(iter == tcpInfoMap.end())
         return NULL;

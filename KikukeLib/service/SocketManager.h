@@ -14,7 +14,6 @@ private:
     static SocketManager* m_Instance;
 
     std::map<int, TCPSOCKETINFO*> tcpInfoMap;
-    std::recursive_mutex m_mutex;
     
     Logger* log;
 public:

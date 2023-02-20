@@ -22,6 +22,8 @@ void SendEchoPacket(int sock, char* buf, TCPTestPacketHeader* header, MessageEch
 ssize_t PrintRecv(int sock, const void* buf, size_t sz);
 void EpollClientsThread(const int maxEpollClients);
 
+int mode;
+
 int main(void)
 {
 	int maxClientsThread;
@@ -33,6 +35,8 @@ int main(void)
 	clientsThreads = new thread*[maxClientsThread];
 	cout << "Input Max Epoll Clients Size: ";
 	cin >> maxEpollClients;
+	cout << "\nFull Message: 1\nReceive Count: 2\nSelect Mode: ";
+	cin >> mode;
 
 	for(int i=0; i<maxClientsThread; i++){
 		clientsThreads[i] = new thread(EpollClientsThread, maxEpollClients);
@@ -52,6 +56,7 @@ int main(void)
 void EpollClientsThread(const int maxEpollClients)
 {
 	int clntSocks[maxEpollClients];
+	int clntRecvCnt = 0;
 	int epfd, event_cnt, recv_sz;
 	struct sockaddr_in serv_addr;
 	char buf[BUF_SIZE];
@@ -102,7 +107,15 @@ void EpollClientsThread(const int maxEpollClients)
 		for(int i=0; i<event_cnt; i++){
 			recv_sz = ReadET(ep_events[i].data.fd, buf, BUF_SIZE, PrintRecv);
 			SendEchoPacket(ep_events[i].data.fd, buf, header, msgData, TCP_PACKET_END_CODE);
-			printf("Receive Packet - Socket: %d	Size: %d\n", ep_events[i].data.fd, recv_sz);
+			if(mode == 1){
+				printf("Receive Packet - Socket: %d	Size: %d\n", ep_events[i].data.fd, recv_sz);
+			}
+			else if(mode == 2){
+				if(ep_events[i].data.fd == 50){
+					clntRecvCnt++;
+					printf("Socket Receive Count: %d\n", clntRecvCnt);
+				}
+			}
 		}
 	}
 
