@@ -29,11 +29,6 @@ int TcpPacketHandler::execute(int sock)
     TCPTestPacketHeader header;
     int ret;
 
-    if(info == NULL){
-        (*log).Log(LOGLEVEL::DEBUG, "execute() - Null Data: %d", sock);
-        return 0;
-    }
-
     size_t useSz = (*(info->recvBuffer)).getUseSize();
 
     if(sizeof(TCPTestPacketHeader) > useSz)
