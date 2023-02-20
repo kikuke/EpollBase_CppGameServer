@@ -18,6 +18,8 @@ SocketManager::~SocketManager()
 
 bool SocketManager::addTcpSocketInfo(int socket)
 {
+    std::unique_lock<std::recursive_mutex> lock(m_mutex);
+
     //나중에 inform 세팅 관련 함수 만들기
     TCPSOCKETINFO* info_ptr = new TCPSOCKETINFO;
     socklen_t sockLen = sizeof(info_ptr->sockAddr);
@@ -35,6 +37,8 @@ bool SocketManager::addTcpSocketInfo(int socket)
 
 bool SocketManager::delTcpSocketInfo(int socket)
 {
+    std::unique_lock<std::recursive_mutex> lock(m_mutex);
+
     std::map<int, TCPSOCKETINFO*>::iterator iter = tcpInfoMap.find(socket);
     if(iter == tcpInfoMap.end()){
         (*log).Log(LOGLEVEL::ERROR, "[%s] DeleteTcpInfo Failed - Socket: %d", inet_ntoa(iter->second->sockAddr.sin_addr), iter->second->socket);
@@ -51,6 +55,8 @@ bool SocketManager::delTcpSocketInfo(int socket)
 
 TCPSOCKETINFO* SocketManager::getTcpSocketInfo(int socket)
 {
+    std::unique_lock<std::recursive_mutex> lock(m_mutex);
+    
     std::map<int, TCPSOCKETINFO*>::iterator iter = tcpInfoMap.find(socket);
     if(iter == tcpInfoMap.end())
         return NULL;

@@ -2,6 +2,7 @@
 #define SOCKET_MANAGER
 
 #include <map>
+#include <mutex>
 
 #include "Logger.h"
 #include "ServerInfo.h"
@@ -13,6 +14,7 @@ private:
     static SocketManager* m_Instance;
 
     std::map<int, TCPSOCKETINFO*> tcpInfoMap;
+    std::recursive_mutex m_mutex;
     
     Logger* log;
 public:

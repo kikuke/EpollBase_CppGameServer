@@ -102,7 +102,7 @@ void EpollClientsThread(const int maxEpollClients)
 		for(int i=0; i<event_cnt; i++){
 			recv_sz = ReadET(ep_events[i].data.fd, buf, BUF_SIZE, PrintRecv);
 			SendEchoPacket(ep_events[i].data.fd, buf, header, msgData, TCP_PACKET_END_CODE);
-			printf("Receive Packet - Socket: %d	Size: %d", ep_events[i].data.fd, recv_sz);
+			printf("Receive Packet - Socket: %d	Size: %d\n", ep_events[i].data.fd, recv_sz);
 		}
 	}
 
