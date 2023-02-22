@@ -17,7 +17,7 @@ TcpService::~TcpService()
     delete log;
 }
 
-bool TcpService::AcceptTcpSocket(int serv_sock, int epfd)
+bool TcpService::AcceptTcpSocket(int serv_sock, int epfd)//Todo: Handler로 기능 옮기기
 {
     int clnt_sock;
     struct sockaddr_in clnt_adr;
@@ -33,7 +33,7 @@ bool TcpService::AcceptTcpSocket(int serv_sock, int epfd)
     return SocketManager::getInstance().addTcpSocketInfo(clnt_sock);
 }
 
-bool TcpService::CloseTcpSocket(int clnt_sock, int epfd)
+bool TcpService::CloseTcpSocket(int clnt_sock, int epfd)//Todo: Handler로 기능 옮기기
 {
     (*log).Log(LOGLEVEL::INFO, "[%s] Disconnecting Server!", inet_ntoa(SocketManager::getInstance().getTcpSocketInfo(clnt_sock)->sockAddr.sin_addr));
 

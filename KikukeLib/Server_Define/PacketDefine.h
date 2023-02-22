@@ -18,13 +18,29 @@ struct TCPTestPacketHeader
 #define TCP_PACKET_START_CODE 0x77
 #define TCP_PACKET_END_CODE 0x33
 
-//TCP MAIN_OP 4Bit
-#define MESSAGE 3
+//Disconnect
+//TCP Message MAIN_OP 4Bit
+#define DISCONNECT 0xF
 
-//TCP SUB_OP 8Bit
-#define MESSAGE_ECHO 7
+//TCP Message SUB_OP 8Bit
+#define DISCONNECT_OK 0x00
+#define DISCONNECT_ERROR 0x01
 
-//TCP PACKET_DATA
+//TCP Message PACKET_DATA
+struct DisconnectData
+{
+    unsigned int temp : 8;//미사용
+    unsigned int : 24;//4Byte
+};//4Byte
+
+//Message
+//TCP Message MAIN_OP 4Bit
+#define MESSAGE 0x3
+
+//TCP Message SUB_OP 8Bit
+#define MESSAGE_ECHO 0x07
+
+//TCP Message PACKET_DATA
 struct MessageEchoData
 {
     unsigned int target : 8;//전체 말인지, 혼잣말인지
@@ -32,7 +48,8 @@ struct MessageEchoData
 
     unsigned char msg[100];//100Byte
 };//104Byte
-#define MESSAGE_ECHO_DATA_TARGET_SELF 1
-#define MESSAGE_ECHO_DATA_TARGET_ALL 2
+//TCP Message PACKET_DATA target Code
+#define MESSAGE_ECHO_DATA_TARGET_SELF 0x01
+#define MESSAGE_ECHO_DATA_TARGET_ALL 0x02
 
 #endif
