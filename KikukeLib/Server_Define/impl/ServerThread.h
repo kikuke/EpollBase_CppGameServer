@@ -3,8 +3,8 @@
 
 #include "ServerInfo.h"
 
-void WorkThread(JobQueue* jobQueue);
+void WorkThread(JobQueue* jobQueue, const int epfd);
 
-void ReadThread(JobQueue* jobQueue, const int epfd, const int buf_sz);
+void ReadThread(JobQueue* jobQueue, const int buf_sz);
 
 #endif

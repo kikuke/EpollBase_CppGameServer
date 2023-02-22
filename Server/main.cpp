@@ -57,11 +57,11 @@ int main(void)
 
     //읽기 스레드 생성
     for(int i=0; i<READTHREAD_SIZE; i++){
-        readThreads[i] = new std::thread(ReadThread, &jobQueue, epfd, BUF_SIZE);
+        readThreads[i] = new std::thread(ReadThread, &jobQueue, BUF_SIZE);
     }
 
     //작업 스레드 생성
-    workThread = new std::thread(WorkThread, &jobQueue);
+    workThread = new std::thread(WorkThread, &jobQueue, epfd);
 
     //Todo: 나중에 멀티스레딩도적용해보기 아직은 tcp 요청만 처리하지만 나중에 udp등의 요청을 처리하거나 다른 스레드나 프로세스로 연결해주기
     do

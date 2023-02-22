@@ -1,6 +1,7 @@
 #ifndef TCP_MESSAGE_PACKET
 #define TCP_MESSAGE_PACKET
 
+#include "Logger.h"
 #include "PacketDefine.h"
 #include "PacketHandler.h"
 

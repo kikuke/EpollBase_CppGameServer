@@ -33,20 +33,6 @@ bool TcpService::AcceptTcpSocket(int serv_sock, int epfd)//Todo: Handler로 기�
     return SocketManager::getInstance().addTcpSocketInfo(clnt_sock);
 }
 
-bool TcpService::CloseTcpSocket(int clnt_sock, int epfd)//Todo: Handler로 기능 옮기기
-{
-    (*log).Log(LOGLEVEL::INFO, "[%s] Disconnecting Server!", inet_ntoa(SocketManager::getInstance().getTcpSocketInfo(clnt_sock)->sockAddr.sin_addr));
-
-    if(!SocketManager::getInstance().delTcpSocketInfo(clnt_sock)){
-        perror("CloseTcpSocket delTcpSocketInfo Error");
-        return false;
-    }
-
-    epoll_ctl(epfd, EPOLL_CTL_DEL, clnt_sock, NULL);
-    close(clnt_sock);
-    return true;
-}
-
 void TcpService::Networking(int serv_sock, int event_sock, int epfd, JobQueue* jobQueue)
 {
     if (event_sock == serv_sock)//Todo: 얘를 함수로 추가 분리하기 시멘틱 프로그래밍

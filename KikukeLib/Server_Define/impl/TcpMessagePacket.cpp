@@ -3,7 +3,6 @@
 #include <string.h>
 
 #include "SocketManager.h"
-#include "Logger.h"
 #include "TcpMessagePacket.h"
 
 int TcpMessagePacket::execute(int sock, unsigned int subOp, RingBuffer& buffer)

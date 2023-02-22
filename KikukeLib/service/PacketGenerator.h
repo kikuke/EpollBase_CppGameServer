@@ -2,9 +2,24 @@
 #define PACKET_GENERATOR
 
 #include <sys/types.h>
+#include <string.h>
 
 //return packet length
 template <typename T1, typename T2>
-size_t MakePacket(void* buf, T1 header, T2 data, unsigned char endCode);
+size_t MakePacket(void* buf, T1* header, T2* data, unsigned char endCode)
+{
+    size_t packetLen = 0;
+
+    memcpy((unsigned char*)buf + packetLen, header, sizeof(header));
+    packetLen += sizeof(header);
+
+    memcpy((unsigned char*)buf + packetLen, data, sizeof(data));
+    packetLen += sizeof(data);
+
+    memcpy((unsigned char*)buf + packetLen, &endCode, sizeof(endCode));
+    packetLen += sizeof(endCode);
+
+    return packetLen;
+}
 
 #endif
