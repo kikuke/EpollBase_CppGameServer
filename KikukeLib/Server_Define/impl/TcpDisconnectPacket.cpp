@@ -53,6 +53,7 @@ int TcpDisconnectPacket::catchError(int sock, unsigned int errorCode)
 int TcpDisconnectPacket::Disconnect(int sock, DisconnectData data)
 {
     //Comment: 아직은 단순한 종료 로직.
+    //Todo: 지연처리 하거나 데이터 남겨두기. 다른 스레드에서 아직 데이터가 남는 경우가 있을수가 있어서.
     (*log).Log(LOGLEVEL::INFO, "[%s] Disconnecting Server!", inet_ntoa(SocketManager::getInstance().getTcpSocketInfo(sock)->sockAddr.sin_addr));
 
     if(!SocketManager::getInstance().delTcpSocketInfo(sock)){

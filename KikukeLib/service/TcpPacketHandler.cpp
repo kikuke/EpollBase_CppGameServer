@@ -1,11 +1,11 @@
 #include "SocketManager.h"
 #include "TcpPacketHandler.h"
 
-int TcpPacketHandler::ExecuteOP(int sock, unsigned int mainOp, unsigned int subOp)
+int TcpPacketHandler::ExecuteOP(int sock, unsigned int mainOp, unsigned int subOp, RingBuffer& buffer)
 {
     for(int i=0; i<handler_size; i++){
         if((*(handlers[i])).getMainOp() == mainOp)
-            return (*(handlers[i])).execute(sock, subOp, readBuf);
+            return (*(handlers[i])).execute(sock, subOp, buffer);
     }
 
     (*log).Log(LOGLEVEL::ERROR, "ExecuteOp() - Undefined MainOp: %d", mainOp);
@@ -29,6 +29,11 @@ int TcpPacketHandler::execute(int sock)
     TCPTestPacketHeader header;
     int ret;
 
+    if(info == nullptr){
+        (*log).Log(LOGLEVEL::ERROR, "%d TcpSocketInfo is null", sock);
+        return 0;
+    }
+    
     size_t useSz = (*(info->recvBuffer)).getUseSize();
 
     if(sizeof(TCPTestPacketHeader) > useSz)
@@ -43,10 +48,8 @@ int TcpPacketHandler::execute(int sock)
     }
     
     (*(info->recvBuffer)) >> header;
-    readBuf.flush();
-    readBuf << (*(info->recvBuffer));
 
-    ret = ExecuteOP(sock, header.mainOp, header.subOp);
+    ret = ExecuteOP(sock, header.mainOp, header.subOp, *(info->recvBuffer));
     if(ret != 1){
         (*log).Log(LOGLEVEL::ERROR, "ExecuteOP()");
         //해당 소켓의 버퍼는 비게됨.
@@ -54,8 +57,6 @@ int TcpPacketHandler::execute(int sock)
         CatchError(sock, header.mainOp, ret);
         return 0;
     }
-
-    readBuf >> (*(info->recvBuffer));
 
     return 1;
 }
