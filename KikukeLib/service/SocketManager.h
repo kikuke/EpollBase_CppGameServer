@@ -2,7 +2,6 @@
 #define SOCKET_MANAGER
 
 #include <map>
-#include <mutex>
 
 #include "Logger.h"
 #include "ServerInfo.h"
@@ -30,7 +29,7 @@ public:
     bool addTcpSocketInfo(int socket);
     bool delTcpSocketInfo(int socket);
 
-    TCPSOCKETINFO* getTcpSocketInfo(int socket);
+    TCPSOCKETINFO* getTcpSocketInfo(int socket);//Todo: 참조를 최대한 줄이기
 };
 
 #endif

@@ -9,6 +9,7 @@
 #include "TcpMessagePacket.h"
 #include "TcpDisconnectPacket.h"
 #include "PacketGenerator.h"
+#include "SocketManager.h"
 #include "ServerThread.h"
 
 size_t DisconnectPacketFactory(void* buf);
@@ -40,6 +41,7 @@ void ReadThread(JobQueue* jobQueue, const int buf_sz)//Todo: 위치 옮기기
 {
     //Todo: 스레드id 로그에 찍기
     int sock;
+    TCPSOCKETINFO* info;
 
     unsigned char buf[buf_sz];
 
@@ -50,7 +52,13 @@ void ReadThread(JobQueue* jobQueue, const int buf_sz)//Todo: 위치 옮기기
     while((sock = jobQueue->readQueue.pop()) > 2)
     {
         log.Log(LOGLEVEL::DEBUG, "Read ReadQueue: %d", sock);
-        if (ReadET(sock, buf, buf_sz, WriteRingBuffer) == 0)
+        info = SocketManager::getInstance().getTcpSocketInfo(sock);
+        if(info == nullptr){//Todo: Disconnect된 클라이언트를 참고하지 않기.
+            log.Log(LOGLEVEL::ERROR, "ReadThread - %d TcpSocketInfo is null", sock);
+            return;
+        }
+
+        if (ReadETRingBuffer(sock, buf, buf_sz) == 0)
         {
             //Write Disconnect Packet in sender recv RingBuffer
             int len;

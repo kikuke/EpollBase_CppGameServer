@@ -30,7 +30,7 @@ int TcpPacketHandler::execute(int sock)
     int ret;
 
     if(info == nullptr){
-        (*log).Log(LOGLEVEL::ERROR, "%d TcpSocketInfo is null", sock);
+        (*log).Log(LOGLEVEL::ERROR, "TcpPacketHandler - %d TcpSocketInfo is null", sock);
         return 0;
     }
     
