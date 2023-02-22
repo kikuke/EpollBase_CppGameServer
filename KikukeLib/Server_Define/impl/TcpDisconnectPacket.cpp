@@ -1,4 +1,3 @@
-#include <unistd.h>
 #include <string.h>
 #include <arpa/inet.h>
 #include <sys/epoll.h>
@@ -62,6 +61,5 @@ int TcpDisconnectPacket::Disconnect(int sock, DisconnectData data)
     }
 
     epoll_ctl(epfd, EPOLL_CTL_DEL, sock, NULL);
-    close(sock);
     return 1;
 }

@@ -29,17 +29,27 @@ bool TcpService::AcceptTcpSocket(int serv_sock, int epfd)//Todo: Handler로 기�
     (*log).Log(LOGLEVEL::INFO, "[%s] Connecting Server!", inet_ntoa(clnt_adr.sin_addr));
 
     AddETClntSock(epfd, clnt_sock);
+    if(!SocketManager::getInstance().addTcpSocketInfo(clnt_sock)){
+        (*log).Log(LOGLEVEL::ERROR, "[%s] Failed AddTcpSocketInfo!", inet_ntoa(clnt_adr.sin_addr));
 
-    return SocketManager::getInstance().addTcpSocketInfo(clnt_sock);
+        epoll_ctl(epfd, EPOLL_CTL_DEL, clnt_sock, NULL);
+        close(clnt_sock);
+
+        return false;
+    }
+    
+    return true;
 }
 
 void TcpService::Networking(int serv_sock, int event_sock, int epfd, JobQueue* jobQueue)
 {
-    if (event_sock == serv_sock)//Todo: 얘를 함수로 추가 분리하기 시멘틱 프로그래밍
+    if (event_sock == serv_sock)
     {
-        if(!AcceptTcpSocket(event_sock, epfd)){
-            (*log).Log(LOGLEVEL::ERROR, "AcceptTcpSocket Failed!");
+        if(!AcceptTcpSocket(event_sock, epfd)){//Todo: 안되는 이유 찾기
+            (*log).Log(LOGLEVEL::ERROR, "%d AcceptTcpSocket Failed!", event_sock);
+            return;
         }
+
         (*log).Log(LOGLEVEL::DEBUG, "AcceptTcpSocket()");
 
         return;

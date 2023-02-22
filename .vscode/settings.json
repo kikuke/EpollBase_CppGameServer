@@ -54,7 +54,8 @@
         "semaphore": "cpp",
         "stop_token": "cpp",
         "thread": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "istream": "cpp"
     },
     "cmake.sourceDirectory": "${workspaceFolder}"
 }

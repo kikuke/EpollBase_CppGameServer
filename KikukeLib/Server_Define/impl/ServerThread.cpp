@@ -1,3 +1,5 @@
+#include <unistd.h>
+
 #include "spepoll.h"
 #include "PacketIO.h"
 #include "TcpService.h"
@@ -51,7 +53,10 @@ void ReadThread(JobQueue* jobQueue, const int buf_sz)//Todo: 위치 옮기기
         if (ReadET(sock, buf, buf_sz, WriteRingBuffer) == 0)
         {
             //Write Disconnect Packet in sender recv RingBuffer
-            int len = DisconnectPacketFactory(buf);
+            int len;
+            close(sock);
+
+            len = DisconnectPacketFactory(buf);
             WriteRingBuffer(sock, buf, len);
 
             log.Log(LOGLEVEL::DEBUG, "CloseTcpSocket()");

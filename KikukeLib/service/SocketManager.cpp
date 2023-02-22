@@ -27,10 +27,15 @@ bool SocketManager::addTcpSocketInfo(int socket)//Todo: 재사용 방식으로 �
     getpeername(socket, (struct sockaddr *)&(info_ptr->sockAddr), &sockLen);
     
     std::pair<int, TCPSOCKETINFO*> inform = std::pair<int, TCPSOCKETINFO*>(socket, info_ptr);
+    if(!tcpInfoMap.insert(inform).second){
+        delete info_ptr;
+        
+        return false;
+    }
 
     (*log).Log(LOGLEVEL::INFO, "[%s] AddTcpInfo - Socket: %d", inet_ntoa(info_ptr->sockAddr.sin_addr), info_ptr->socket);
 
-    return tcpInfoMap.insert(inform).second;
+    return true;
 }
 
 bool SocketManager::delTcpSocketInfo(int socket)//Todo: 재사용 방식으로 바꾸기 ip기준으로 체크
