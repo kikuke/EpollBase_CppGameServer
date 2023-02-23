@@ -7,8 +7,12 @@
 #include "SocketManager.h"
 #include "TcpService.h"
 
-TcpService::TcpService()
+TcpService::TcpService(int epfd, int serv_sock, JobQueue* jobQueue)
 {
+    this->epfd = epfd;
+    this->serv_sock = serv_sock;
+    this->jobQueue = jobQueue;
+
     log = new Logger("TcpServce");
 }
 
@@ -17,7 +21,7 @@ TcpService::~TcpService()
     delete log;
 }
 
-bool TcpService::AcceptTcpSocket(int serv_sock, int epfd)//Todo: Handler로 기능 옮기기
+bool TcpService::AcceptTcpSocket()//Todo: Handler로 기능 옮기기
 {
     int clnt_sock;
     struct sockaddr_in clnt_adr;
@@ -41,11 +45,11 @@ bool TcpService::AcceptTcpSocket(int serv_sock, int epfd)//Todo: Handler로 기�
     return true;
 }
 
-void TcpService::Networking(int serv_sock, int event_sock, int epfd, JobQueue* jobQueue)
+void TcpService::Networking(int event_sock)
 {
     if (event_sock == serv_sock)
     {
-        if(!AcceptTcpSocket(event_sock, epfd)){//Todo: 안되는 이유 찾기
+        if(!AcceptTcpSocket()){//Todo: 안되는 이유 찾기
             (*log).Log(LOGLEVEL::ERROR, "%d AcceptTcpSocket Failed!", event_sock);
             return;
         }
