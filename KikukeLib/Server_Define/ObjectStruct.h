@@ -15,18 +15,24 @@ struct Obj_Force
 
 enum Obj_State{
     IDLE,
-    MOV,
-    ATTACK
+    MOVE,
+    ATTACK,
+    MAX_NUM
 };
 
-struct Object_Inform
+struct Obj_StateTime{
+    timeval start_time;
+    timeval end_time;
+};
+
+struct Object_Info
 {
     int id;
-    timeval time;
 
     Obj_Position pos;
     Obj_Force force;
     Obj_State state;
+    Obj_StateTime st_time;
 };
 
 #endif
