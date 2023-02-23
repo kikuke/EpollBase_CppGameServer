@@ -34,7 +34,7 @@ int main(void)
     Logger::LoggerSetting(LOGLEVEL::WARNING, "/home/kikuke/Documents/TestLog", DEFAULT_LOG_BUFFER_SIZE);
     Logger log("MainLog");
 
-    TcpService tcpService;
+    TcpService* tcpService;
 
     std::thread* readThreads[READTHREAD_SIZE];
     std::thread* workThread;
@@ -54,6 +54,8 @@ int main(void)
 
     SetETServSock(epfd, serv_sock);
     log.Log(LOGLEVEL::DEBUG, "SetETServSock()");
+
+    tcpService = new TcpService(epfd, serv_sock, &jobQueue);
 
     //읽기 스레드 생성
     for(int i=0; i<READTHREAD_SIZE; i++){
@@ -77,11 +79,13 @@ int main(void)
     
         for (i = 0; i < event_cnt; i++)
         {
-            tcpService.Networking(serv_sock, ep_events[i].data.fd, epfd, &jobQueue);
+            (*tcpService).Networking(ep_events[i].data.fd);
         }
     } while (true);//Todo: dowhile사용 하지않기 반복문 탈출은 break나 와일조건 검사안에 true가 아닌 조건문넣어서 bool값을 넣고 내부에서 bool값 변경해도 됨.
 
     log.Log(LOGLEVEL::INFO, "Shutdown Server...");
+
+    delete tcpService;
     close(serv_sock);
     close(epfd);
     return 0;

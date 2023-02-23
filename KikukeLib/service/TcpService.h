@@ -7,13 +7,19 @@
 class TcpService
 {
 private:
+    int epfd;
+    int serv_sock;
+    JobQueue* jobQueue;
+
     Logger* log;
+    
+    bool AcceptTcpSocket();
+
 public:
-    TcpService();
+    TcpService(int epfd, int serv_sock, JobQueue* jobQueue);
     ~TcpService();
 
-    bool AcceptTcpSocket(int serv_sock, int epfd);
-    void Networking(int serv_sock, int event_sock, int epfd, JobQueue* jobQueue);
+    void Networking(int serv_sock);
 };
 
 #endif
