@@ -3,6 +3,12 @@
 
 #include <time.h>
 
+struct Obj_Control
+{
+    bool isPlayable;
+    bool isDead;
+};
+
 struct Obj_Position
 {
     float x, y, z;
@@ -29,6 +35,7 @@ struct Object_Info
 {
     int id;
 
+    Obj_Control ctrl;
     Obj_Position pos;
     Obj_Force force;
     Obj_State state;
