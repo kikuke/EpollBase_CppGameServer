@@ -6,7 +6,7 @@
 #include "Logger.h"
 #include "ServerInfo.h"
 
-class SocketManager
+class SocketManager//Todo: 시간나면 종속적이지 않게 generic으로 수정하기
 {
 private:
     SocketManager();

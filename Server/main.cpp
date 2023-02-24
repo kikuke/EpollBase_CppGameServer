@@ -10,7 +10,7 @@
 #include "spsocket.h"
 #include "spepoll.h"
 #include "TcpService.h"
-#include "impl/ServerThread.h"
+#include "main/ServerThread.h"
 #include "Logger.h"
 
 //Todo: 나중에 읽기 파일 만들어서 할당시키기 자리도 옮기기

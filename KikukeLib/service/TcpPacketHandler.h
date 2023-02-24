@@ -16,6 +16,7 @@ private:
 
     Logger* log;
 
+    //Todo: 시간나면 generic으로 종속적이지 않게 수정하기
     //나중에 인자 필요해지면 아예 소켓을 넣던가 해서 추가정보 주기
     int TCPHeaderCheck(TCPTestPacketHeader* header, size_t useSz);
     //call packetHandler's execute()
