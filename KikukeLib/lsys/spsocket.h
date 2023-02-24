@@ -5,6 +5,8 @@
 extern "C" {
 #endif
 
+#include <arpa/inet.h>
+
 //Make zero memory sockaddr_in and init s_addr, sin_port
 void SetSockaddr_In(struct sockaddr_in* addr_in, in_addr_t s_addr, in_port_t sin_port);
 
