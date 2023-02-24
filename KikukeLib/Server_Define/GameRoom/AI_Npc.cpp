@@ -1,6 +1,7 @@
 #include <sys/time.h>
 #include <math.h>
 
+#include "sptime.h"
 #include "AI_Npc.h"
 
 AI_Npc::AI_Npc(Object_Info* info)
@@ -21,8 +22,8 @@ AI_Npc::~AI_Npc()
 Object_Info& AI_Npc::getInfo(timeval& nowtime)
 {
     if(info->state == Obj_State::MOVE){
-        double actionTime = getTimeDist(info->st_time.start_time, info->st_time.end_time);
-        double elapsed = getTimeDist(info->st_time.start_time, nowtime);
+        double actionTime = getTimeDist(&(info->st_time.start_time), &(info->st_time.end_time));
+        double elapsed = getTimeDist(&(info->st_time.start_time), &nowtime);
 
         if(elapsed < actionTime)
             actionTime = elapsed;
@@ -113,16 +114,6 @@ void AI_Npc::SetRandomNormVector()
     if(cos_val<0){
         info->force.y *= -1;
     }
-}
-
-double getTimeDist(timeval& start, timeval& end)
-{
-    double dist;
-
-    dist = (end.tv_sec - start.tv_sec);
-    dist += (end.tv_usec - start.tv_usec) / 1000000;
-
-    return dist;
 }
 
 bool AI_Npc::SetStateTime(int stateTime)

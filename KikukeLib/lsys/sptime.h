@@ -5,7 +5,9 @@
 extern "C" {
 #endif
 
+#include <sys/time.h>
 
+double getTimeDist(struct timeval* start, struct timeval* end);
 
 #ifdef __cplusplus
 }

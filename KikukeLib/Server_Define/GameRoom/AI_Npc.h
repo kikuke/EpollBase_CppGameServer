@@ -15,8 +15,6 @@ private:
     std::mt19937* gen;
     std::uniform_int_distribution<int>* rand;
 
-    double getTimeDist(timeval& start, timeval& end);
-
     //return success value
     bool SetNowTime(timeval* target);
     bool SetStateTime(int stateTime);
