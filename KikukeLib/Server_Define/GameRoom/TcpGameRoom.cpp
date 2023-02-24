@@ -5,22 +5,46 @@
 TcpGameRoom::TcpGameRoom()
 {
     gen = new std::mt19937(rand_dv());
-    rand = new std::uniform_int_distribution<int>(0, 99);
+    rand_world_pos = new std::uniform_int_distribution<int>(-99, 99);
 }
 
 TcpGameRoom::~TcpGameRoom()
 {
     delete gen;
-    delete rand;
+    delete rand_world_pos;
+}
+
+void TcpGameRoom::InterruptEvent(Object_Info* info)
+{
+
 }
 
 //Todo: 재사용 할수 있는 로직으로 바꾸기 잦은 new delete줄이기
-void TcpGameRoom::InitGame(int room_num, int max_npc_num, int clnt_num, int* clnt_socks)
+void TcpGameRoom::InitGame(int room_num, int npc_num, int clnt_num, int* clnt_socks)
 {
     Object_Info* info;
 
     this->room_num = room_num;
-    this->max_npc_num = max_npc_num;
+    this->obj_idCnt = 0;
+    this->max_npc_num = npc_num;
+    this->max_clnt_num = clnt_num;
+    this->clnt_socks = clnt_socks;
+    this->max_obj_num = npc_num + clnt_num;
+
+    //Todo: delete 해주기
+    log = new Logger("GameRoom " + room_num);
+
+    //Todo: 안의 포인터들 Null로 만들고 delete로 삭제. 다른 것들중에 이런것 있나 체크하기.
+    obj_infoMap = new Object_Info*[max_obj_num];
+    ai_infoMap = new AI_Npc*[max_npc_num];
+
+    //Todo: 안의 포인터들 Null로 만들고 delete로 삭제. 다른 것들중에 이런것 있나 체크하기.
+    updateInfo = new Object_Info*[max_obj_num];
+
+    for(int i=0; i<clnt_num; i++){
+        info = CreateObject_Info(RandomObjPos());
+        info->ctrl.isPlayable = true;
+    }
 
     npc_pool = new AI_Npc*[max_npc_num];
     for(int i=0; i<max_npc_num; i++){
@@ -32,13 +56,20 @@ void TcpGameRoom::InitGame(int room_num, int max_npc_num, int clnt_num, int* cln
 void TcpGameRoom::StartGame(timeval& nowtime)
 {
     ObjectEvent event;
+    Object_Info* info;
 
+    //Todo: 오브젝트들이 겹칠경우 서로 조금씩 밀어내는 식으로?
     //Comment: npc들에게 초기 행동을 부여 후 정보를 가져와 events에 푸시
     for(int i=0; i<max_npc_num; i++){
         npc_pool[i]->action();
-        event.set(npc_pool[i]->update(nowtime));
+
+        info = npc_pool[i]->update(nowtime);
+        info->ctrl.isDead = false;
+        event.set(info);
         obj_events.push(event);
     }
+
+    //Todo: 초기데이터 전송
 }
 
 void TcpGameRoom::update(timeval& nowtime)//Todo: 함수 분리
@@ -51,23 +82,97 @@ void TcpGameRoom::update(timeval& nowtime)//Todo: 함수 분리
         event = obj_events.top();
         info = event.get();
 
+        //Comment: 동작의 시간이 끝났을 경우임.
         if(getTimeDist(&(info->st_time.end_time), &nowtime) >= 0){
             obj_events.pop();
 
-            //Todo: 이벤트 처리
+            //Todo: 충돌 계산, 보간 등 이벤트 처리.
 
             //Todo: npc의 action과 update 합쳐서 액션 발생 클라이언트들에게 전송하는 함수 만들기
             //Comment: AI일 경우 처리와 행동 재시작
-            if(!(info->ctrl.isPlayable)){
+            if(info->ctrl.isPlayable){
+                info->state = Obj_State::IDLE;
+            }
+            else{
                 npc = FindAI_Npc(info->id);
+
+                //Todo: 이거 세개 묶어서 함수로 만들지 고민
                 npc->action();
                 npc->update(nowtime);
+                AddUpdateInfo(info);
 
                 obj_events.push(event);
             }
+
+            //Todo: 함수로 따로 분리해서 시간 다시 잘 표시하기
+            (*log).Log(LOGLEVEL::INFO, "[%s] Object Update - ID: %d, State: %d\n\
+            StartTime: %d, EndTime: %d\n\
+            Pos: (%f, %f, %f), Force: (%f, %f, %f)",\
+            "GameRoom " + room_num, info->id, info->state,\
+            info->st_time.start_time.tv_sec, info->st_time.end_time.tv_sec,
+            info->pos.x, info->pos.y, info->pos.z, info->force.x, info->force.y, info->force.z);
             continue;
         }
 
         break;
     }
+
+    //Todo: 업데이트된 데이터들 전송
+}
+
+void TcpGameRoom::EndGame(timeval& nowtime)
+{
+    //Todo: 재사용하게 원상태로 되돌리는 로직
+}
+
+void TcpGameRoom::SendUpdateObject_Info(int sock)
+{
+    //Todo: 이런식으로 구상하기
+    //memcpy(,,updateNum*sizeof())
+}
+
+void TcpGameRoom::AddUpdateInfo(Object_Info* info)
+{
+    updateInfo[updateNum] = info;
+    updateNum++;
+}
+
+Object_Info* TcpGameRoom::FindObjInfo(int id)
+{
+    return obj_infoMap[id];
+}
+
+AI_Npc* TcpGameRoom::FindAI_Npc(int id)
+{
+    return ai_infoMap[id];
+}
+
+AI_Npc* TcpGameRoom::CreateAI_Npc(Object_Info* info)
+{
+    AI_Npc* npc = new AI_Npc(info);
+
+    ai_infoMap[info->id] = npc;
+
+    return npc;
+}
+
+Object_Info* TcpGameRoom::CreateObject_Info(Obj_Position pos)
+{
+    Object_Info* info = new Object_Info;
+    info->id = obj_idCnt++;
+    info->ctrl.isDead = true;
+    info->ctrl.isPlayable = false;
+    info->pos = pos;
+    info->force = {0};
+    info->state = Obj_State::IDLE;
+    info->st_time = {0};
+
+    obj_infoMap[info->id] = info;
+
+    return info;
+}
+
+Obj_Position TcpGameRoom::RandomObjPos()
+{
+    return {(float)((*rand_world_pos)(*gen)), (float)((*rand_world_pos)(*gen)), 0};
 }

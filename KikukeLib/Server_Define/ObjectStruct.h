@@ -36,10 +36,10 @@ struct Object_Info
     int id;
 
     Obj_Control ctrl;
-    Obj_Position pos;
-    Obj_Force force;
     Obj_State state;
     Obj_StateTime st_time;
+    Obj_Position pos;
+    Obj_Force force;
 };
 
 #endif
