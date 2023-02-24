@@ -32,7 +32,7 @@ public:
 
     //return end Time
     timeval* action();
-    Object_Info& getInfo(timeval& nowtime);
+    Object_Info* update(timeval& nowtime);
 };
 
 #endif

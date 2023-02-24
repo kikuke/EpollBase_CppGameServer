@@ -19,7 +19,7 @@ AI_Npc::~AI_Npc()
     delete rand;
 }
 
-Object_Info& AI_Npc::getInfo(timeval& nowtime)
+Object_Info* AI_Npc::update(timeval& nowtime)
 {
     if(info->state == Obj_State::MOVE){
         double actionTime = getTimeDist(&(info->st_time.start_time), &(info->st_time.end_time));
@@ -31,7 +31,7 @@ Object_Info& AI_Npc::getInfo(timeval& nowtime)
         info->pos.x += info->force.x * actionTime;
         info->pos.y += info->force.y * actionTime;
     }
-    return *info;
+    return info;
 }
 
 //Todo: Get해서 정보를 가져오는 순간, 또는 끝날때 시간 계산해서 현재 위치(pos) 반환하기 근데 어차피 이걸 호출하는 경우는 끝났거나 이벤트 발생했거나라서 정보 가져갈때 갱신해주면 됨.
