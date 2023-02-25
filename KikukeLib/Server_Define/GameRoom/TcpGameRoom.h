@@ -32,9 +32,9 @@ private:
 
     int max_obj_num;
     int updateNum;
-    //Comment: 업데이트 할 이벤트 계산을 위한 업데이트 이전 정보 임시 저장 공간. 인덱스 = id.
+    //Comment: 업데이트 이전 정보 임시 저장 공간. 인덱스 = id.
     Object_Info** nowObjInfo;
-    //Comment: 업데이트 된 정보들만 넘겨주는 용도. 인덱스는 id가 아닌 업데이트된 순서.
+    //Comment: 정보 업데이트를 위해 사용되는 계산용 임시 공간.
     Object_Info** updateObjInfo;
 
     std::random_device rand_dv;
@@ -46,7 +46,7 @@ private:
     //Todo: 나중에 분리하기
     Obj_Position RandomObjPos();
     Object_Info* CreateObject_Info(Obj_Position pos);
-    AI_Npc* CreateAI_Npc(Object_Info* info);
+    AI_Npc* CreateAI_Npc(Object_Info* info, float speed);
 
     AI_Npc* FindAI_Npc(int id);
     Object_Info* FindObjInfo(int id);

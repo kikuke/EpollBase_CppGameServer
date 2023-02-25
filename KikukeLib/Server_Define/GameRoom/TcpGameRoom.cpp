@@ -45,7 +45,9 @@ void TcpGameRoom::InitGame(int room_num, int npc_num, int clnt_num, int* clnt_so
     npc_pool = new AI_Npc*[max_npc_num];
     for(int i=0; i<max_npc_num; i++){
         info = CreateObject_Info(RandomObjPos());
-        npc_pool[i] = CreateAI_Npc(info);
+
+        //Todo: 나중에 speed같은 애들 설정하는 구조체 만들기
+        npc_pool[i] = CreateAI_Npc(info, 3);
     }
 }
 
@@ -71,6 +73,7 @@ void TcpGameRoom::StartGame(timeval& nowtime)
 //Comment: 변경되는 이벤트들에 대한 처리. 새로운 입력에 대한 처리임.
 //Comment: AI입력도 여기에 넣기
 //Comment: 즉각 반영 되진 않고 매 프레임마다 실행되는 update때 반영되게끔.
+//Comment: nowObjInfo에 데이터를 갱신함.
 void TcpGameRoom::InterruptEvent(timeval& nowtime, Object_Info* info)
 {
     if(!CheckValidateObjInfo(nowtime, info)){
@@ -84,6 +87,7 @@ void TcpGameRoom::InterruptEvent(timeval& nowtime, Object_Info* info)
 //Todo: 계산을 통해 기존의 예상 값들이 변경됐다면 이것도 다시 전송하기.
 
 //Comment: 이건 단순히 정보 계산만 해주는 것임. 최종 업데이트 된 정보는 updateObjInfo를 통해 전달되고, nowObjInfo에 다시 저장되어 서버가 갱신된 정보들을 들고있음.
+//Comment: nowObjInfo에 있는 정보들을 토대로 다시 정보들을 업데이트 시킴
 void TcpGameRoom::update(timeval& nowtime)//Todo: 함수 분리
 {
     ObjectEvent event;
@@ -148,6 +152,7 @@ void TcpGameRoom::SendUpdateObject_Info(int sock)
 bool TcpGameRoom::CheckValidateObjInfo(timeval& nowtime, Object_Info* newObjInfo)
 {
     //Todo: 이런식으로 이전 데이터 비교해서 유효성 검사
+    //Todo: 플레이어쪽에서 전송한 현재 오브젝트의 이동정보가 지금 속도와 일치하는지 체크.
     if(nowObjInfo[newObjInfo->id]){
 
     }
@@ -171,9 +176,9 @@ AI_Npc* TcpGameRoom::FindAI_Npc(int id)
     return ai_infoMap[id];
 }
 
-AI_Npc* TcpGameRoom::CreateAI_Npc(Object_Info* info)
+AI_Npc* TcpGameRoom::CreateAI_Npc(Object_Info* info, float speed)
 {
-    AI_Npc* npc = new AI_Npc(info);
+    AI_Npc* npc = new AI_Npc(info, speed);
 
     ai_infoMap[info->id] = npc;
 

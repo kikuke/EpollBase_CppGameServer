@@ -4,9 +4,10 @@
 #include "sptime.h"
 #include "AI_Npc.h"
 
-AI_Npc::AI_Npc(Object_Info* info)
+AI_Npc::AI_Npc(Object_Info* info, float speed)
 {
     this->info = info;
+    this->speed = speed;
 
     gen = new std::mt19937(rand_dv());
     rand = new std::uniform_int_distribution<int>(0, 99);
@@ -72,11 +73,8 @@ bool AI_Npc::Idle()
 bool AI_Npc::Move()
 {
     int time = (*rand)(*gen);
-    float speed = (*rand)(*gen);
 
     SetRandomNormVector();
-    //Comment: 최소 1에서 최대 2
-    speed = log10(time + 10);
 
     info->force.x *= speed;
     info->force.y *= speed;

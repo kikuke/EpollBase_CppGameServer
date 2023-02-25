@@ -6,10 +6,12 @@
 
 #include "ObjectStruct.h"
 
-class AI_Npc//Todo: 게임룸에 큐같은거 만들어서 종료시간 순으로 빼내는거 구현하기
+class AI_Npc
 {
 private:
     Object_Info* info;
+    //Todo: 나중에 AI 설정정보 모아서 구조체로 만들어 일괄 전달 받기
+    float speed;
 
     std::random_device rand_dv;
     std::mt19937* gen;
@@ -27,7 +29,7 @@ private:
     bool Move();
 
 public:
-    AI_Npc(Object_Info* info);//Todo: 시간은 자동으로 초기화 되게끔
+    AI_Npc(Object_Info* info, float speed);//Todo: 시간은 자동으로 초기화 되게끔
     ~AI_Npc();
 
     //return end Time
