@@ -4,10 +4,10 @@
 #include "sptime.h"
 #include "AI_Npc.h"
 
-AI_Npc::AI_Npc(Object_Info* info, float speed)
+AI_Npc::AI_Npc(Object_Info* info, Object_Rule* rule)
 {
     this->info = info;
-    this->speed = speed;
+    this->speed = rule->speed;
 
     gen = new std::mt19937(rand_dv());
     rand = new std::uniform_int_distribution<int>(0, 99);

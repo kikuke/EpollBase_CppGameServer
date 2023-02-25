@@ -16,6 +16,7 @@ class TcpGameRoom
 private:
     int room_num;
     int obj_idCnt;
+    Object_Rule obj_rule;
     //Todo: interupt event 발생하면 전부 빼내서 다시계산하는 방식으로.
     //Comment: low endTime sort
     std::priority_queue<ObjectEvent, std::vector<ObjectEvent>, std::greater<ObjectEvent>> obj_end_events;
@@ -46,7 +47,7 @@ private:
     //Todo: 나중에 분리하기
     Obj_Position RandomObjPos();
     Object_Info* CreateObject_Info(Obj_Position pos);
-    AI_Npc* CreateAI_Npc(Object_Info* info, float speed);
+    AI_Npc* CreateAI_Npc(Object_Info* info, Object_Rule* rule);
 
     AI_Npc* FindAI_Npc(int id);
     Object_Info* FindObjInfo(int id);
@@ -68,7 +69,7 @@ public:
 
     //Comment: 클라이언트의 입력신호
     void InterruptEvent(timeval& nowtime, Object_Info* info);
-    void InitGame(int room_num, int npc_num, int clnt_num, int* clnt_socks);
+    void InitGame(int room_num, Object_Rule obj_rule, int npc_num, int clnt_num, int* clnt_socks);
     void StartGame(timeval& nowtime);
     void update(timeval& nowtime);
     void EndGame(timeval& nowtime);

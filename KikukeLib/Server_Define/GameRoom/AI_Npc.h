@@ -29,7 +29,7 @@ private:
     bool Move();
 
 public:
-    AI_Npc(Object_Info* info, float speed);//Todo: 시간은 자동으로 초기화 되게끔
+    AI_Npc(Object_Info* info, Object_Rule* rule);//Todo: 시간은 자동으로 초기화 되게끔
     ~AI_Npc();
 
     //return end Time

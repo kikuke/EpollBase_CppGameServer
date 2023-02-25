@@ -42,4 +42,9 @@ struct Object_Info
     Obj_Force force;
 };
 
+struct Object_Rule
+{
+    float speed;
+};
+
 #endif

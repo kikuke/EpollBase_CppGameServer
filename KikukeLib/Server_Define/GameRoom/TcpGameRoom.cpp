@@ -15,12 +15,13 @@ TcpGameRoom::~TcpGameRoom()
 }
 
 //Todo: 재사용 할수 있는 로직으로 바꾸기 잦은 new delete줄이기
-void TcpGameRoom::InitGame(int room_num, int npc_num, int clnt_num, int* clnt_socks)
+void TcpGameRoom::InitGame(int room_num, Object_Rule obj_rule, int npc_num, int clnt_num, int* clnt_socks)
 {
     Object_Info* info;
 
     this->room_num = room_num;
     this->obj_idCnt = 0;
+    this->obj_rule = obj_rule;
     this->max_npc_num = npc_num;
     this->max_clnt_num = clnt_num;
     this->clnt_socks = clnt_socks;
@@ -47,7 +48,7 @@ void TcpGameRoom::InitGame(int room_num, int npc_num, int clnt_num, int* clnt_so
         info = CreateObject_Info(RandomObjPos());
 
         //Todo: 나중에 speed같은 애들 설정하는 구조체 만들기
-        npc_pool[i] = CreateAI_Npc(info, 3);
+        npc_pool[i] = CreateAI_Npc(info, &(this->obj_rule));
     }
 }
 
@@ -149,6 +150,7 @@ void TcpGameRoom::SendUpdateObject_Info(int sock)
     //memcpy(,,updateNum*sizeof())
 }
 
+//Comment: ObjectRule에 의한 판단.
 bool TcpGameRoom::CheckValidateObjInfo(timeval& nowtime, Object_Info* newObjInfo)
 {
     //Todo: 이런식으로 이전 데이터 비교해서 유효성 검사
@@ -176,9 +178,9 @@ AI_Npc* TcpGameRoom::FindAI_Npc(int id)
     return ai_infoMap[id];
 }
 
-AI_Npc* TcpGameRoom::CreateAI_Npc(Object_Info* info, float speed)
+AI_Npc* TcpGameRoom::CreateAI_Npc(Object_Info* info, Object_Rule* rule)
 {
-    AI_Npc* npc = new AI_Npc(info, speed);
+    AI_Npc* npc = new AI_Npc(info, rule);
 
     ai_infoMap[info->id] = npc;
 
