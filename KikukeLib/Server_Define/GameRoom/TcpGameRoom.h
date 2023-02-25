@@ -32,11 +32,6 @@ private:
     int* clnt_socks;
 
     int max_obj_num;
-    int updateNum;
-    //Comment: 업데이트 이전 정보 임시 저장 공간. 인덱스 = id.
-    Object_Info** nowObjInfo;
-    //Comment: 정보 업데이트를 위해 사용되는 계산용 임시 공간.
-    Object_Info** updateObjInfo;
 
     std::random_device rand_dv;
     std::mt19937* gen;
@@ -56,19 +51,21 @@ private:
     //return true if validate
     bool CheckValidateObjInfo(timeval& nowtime, Object_Info* newObjInfo);
 
+    void UpdateEndEvents(timeval& nowtime);
+
     //Todo: AI_Npc와 Object_Info 상태를 결정짓는 함수가 필요함.
+    void NextFrame(timeval& nowtime);
 
-    void AddUpdateInfo(Object_Info* info);
-
-    //Comment: 업데이트 된 정보들만 클라이언트들에게 넘겨줌.
     void SendUpdateObject_Info(int sock);
+
+    void LogObjInfo(Object_Info* info);
 
 public:
     TcpGameRoom();
     ~TcpGameRoom();
 
     //Comment: 클라이언트의 입력신호
-    void InterruptEvent(timeval& nowtime, Object_Info* info);
+    void InterruptEvent(timeval& nowtime, Object_Info info);
     void InitGame(int room_num, Object_Rule obj_rule, int npc_num, int clnt_num, int* clnt_socks);
     void StartGame(timeval& nowtime);
     void update(timeval& nowtime);

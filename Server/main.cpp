@@ -77,7 +77,7 @@ int main(void)
     TcpGameRoom gameroom;
     timeval time;
     gettimeofday(&time, NULL);
-    gameroom.InitGame(1, 4, 0, nullptr);
+    gameroom.InitGame(1, {3}, 4, 0, nullptr);
     gameroom.StartGame(time);
     while(true)
     {
