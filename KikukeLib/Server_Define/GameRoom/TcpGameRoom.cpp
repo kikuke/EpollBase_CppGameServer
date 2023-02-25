@@ -14,11 +14,6 @@ TcpGameRoom::~TcpGameRoom()
     delete rand_world_pos;
 }
 
-void TcpGameRoom::InterruptEvent(Object_Info* info)
-{
-
-}
-
 //Todo: 재사용 할수 있는 로직으로 바꾸기 잦은 new delete줄이기
 void TcpGameRoom::InitGame(int room_num, int npc_num, int clnt_num, int* clnt_socks)
 {
@@ -39,7 +34,8 @@ void TcpGameRoom::InitGame(int room_num, int npc_num, int clnt_num, int* clnt_so
     ai_infoMap = new AI_Npc*[max_npc_num];
 
     //Todo: 안의 포인터들 Null로 만들고 delete로 삭제. 다른 것들중에 이런것 있나 체크하기.
-    updateInfo = new Object_Info*[max_obj_num];
+    nowObjInfo = new Object_Info*[max_obj_num];
+    updateObjInfo = new Object_Info*[max_obj_num];
 
     for(int i=0; i<clnt_num; i++){
         info = CreateObject_Info(RandomObjPos());
@@ -72,6 +68,21 @@ void TcpGameRoom::StartGame(timeval& nowtime)
     //Todo: 초기데이터 전송
 }
 
+//Comment: 변경되는 이벤트들에 대한 처리. 새로운 입력에 대한 처리임.
+//Comment: AI입력도 여기에 넣기
+void TcpGameRoom::InterruptEvent(Object_Info* info)
+{
+    if(!CheckValidateObjInfo(info)){
+        (*log).Log(LOGLEVEL::WARNING, "[%s] Invalidate Info - ID: %d", "GameRoom " + room_num, info->id);
+        return;
+    }
+
+    
+}
+
+//Todo: 계산을 통해 기존의 예상 값들이 변경됐다면 이것도 다시 전송하기.
+
+//Comment: 이건 단순히 정보 계산만 해주는 것임. 최종 업데이트 된 정보는 updateObjInfo를 통해 전달되고, nowObjInfo에 다시 저장되어 서버가 갱신된 정보들을 들고있음.
 void TcpGameRoom::update(timeval& nowtime)//Todo: 함수 분리
 {
     ObjectEvent event;
@@ -99,9 +110,11 @@ void TcpGameRoom::update(timeval& nowtime)//Todo: 함수 분리
                 //Todo: 이거 세개 묶어서 함수로 만들지 고민
                 npc->action();
                 npc->update(nowtime);
-                AddUpdateInfo(info);
+                InterruptEvent(info);
 
-                obj_events.push(event);
+                //Comment: 이함수는 마지막에 넣기
+                //AddUpdateInfo(info);
+                //obj_events.push(event);
             }
 
             //Todo: 함수로 따로 분리해서 시간 다시 잘 표시하기
@@ -131,9 +144,19 @@ void TcpGameRoom::SendUpdateObject_Info(int sock)
     //memcpy(,,updateNum*sizeof())
 }
 
+bool TcpGameRoom::CheckValidateObjInfo(Object_Info* newObjInfo)
+{
+    //Todo: 이런식으로 이전 데이터 비교해서 유효성 검사
+    if(nowObjInfo[newObjInfo->id]){
+
+    }
+
+    return true;
+}
+
 void TcpGameRoom::AddUpdateInfo(Object_Info* info)
 {
-    updateInfo[updateNum] = info;
+    updateObjInfo[updateNum] = info;
     updateNum++;
 }
 

@@ -16,8 +16,9 @@ class TcpGameRoom
 private:
     int room_num;
     int obj_idCnt;
+    //Todo: interupt event 발생하면 전부 빼내서 다시계산하는 방식으로.
     //Comment: low endTime sort
-    std::priority_queue<ObjectEvent, std::vector<ObjectEvent>, std::greater<ObjectEvent>> obj_events;
+    std::priority_queue<ObjectEvent, std::vector<ObjectEvent>, std::greater<ObjectEvent>> obj_end_events;
 
     Object_Info** obj_infoMap;
 
@@ -29,10 +30,12 @@ private:
     //Comment: 전체 발송용 배열
     int* clnt_socks;
 
-    //Comment: 업데이트 된 정보들만 넘겨주는 용도
     int max_obj_num;
     int updateNum;
-    Object_Info** updateInfo;
+    //Comment: 업데이트 할 이벤트 계산을 위한 업데이트 이전 정보 임시 저장 공간. 인덱스 = id.
+    Object_Info** nowObjInfo;
+    //Comment: 업데이트 된 정보들만 넘겨주는 용도. 인덱스는 id가 아닌 업데이트된 순서.
+    Object_Info** updateObjInfo;
 
     std::random_device rand_dv;
     std::mt19937* gen;
@@ -47,6 +50,12 @@ private:
 
     AI_Npc* FindAI_Npc(int id);
     Object_Info* FindObjInfo(int id);
+
+    //Comment: 조작된 정보인지 유효한 데이터인지 체크.
+    //return true if validate
+    bool CheckValidateObjInfo(Object_Info* newObjInfo);
+
+    //Todo: AI_Npc와 Object_Info 상태를 결정짓는 함수가 필요함.
 
     void AddUpdateInfo(Object_Info* info);
 
