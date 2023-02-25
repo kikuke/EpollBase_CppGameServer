@@ -22,6 +22,8 @@ private:
     std::priority_queue<ObjectEvent, std::vector<ObjectEvent>, std::greater<ObjectEvent>> obj_end_events;
 
     Object_Info** obj_infoMap;
+    //Comment: 업데이트 전 임시 저장용
+    Object_Info** obj_preInfoMap;
 
     int max_npc_num;
     AI_Npc** npc_pool;
@@ -52,6 +54,11 @@ private:
     bool CheckValidateObjInfo(timeval& nowtime, Object_Info* newObjInfo);
 
     void UpdateEndEvents(timeval& nowtime);
+
+    void MoveObject(timeval& nowtime, Object_Info* info);
+    //Todo: 위치순으로 정렬해놓은 데이터 테이블이 필요함. x,y 각각.
+    //Todo: 인자도 이게 맞는지 다시 체크
+    bool CheckObjectCollision();
 
     //Todo: AI_Npc와 Object_Info 상태를 결정짓는 함수가 필요함.
     void NextFrame(timeval& nowtime);

@@ -34,7 +34,7 @@ public:
 
     //return end Time
     timeval* action();
-    Object_Info* update(timeval& nowtime);
+    Object_Info* getObjInfo();
 };
 
 #endif
