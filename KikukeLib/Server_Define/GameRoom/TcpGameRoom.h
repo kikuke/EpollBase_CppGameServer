@@ -53,7 +53,7 @@ private:
 
     //Comment: 조작된 정보인지 유효한 데이터인지 체크.
     //return true if validate
-    bool CheckValidateObjInfo(Object_Info* newObjInfo);
+    bool CheckValidateObjInfo(timeval& nowtime, Object_Info* newObjInfo);
 
     //Todo: AI_Npc와 Object_Info 상태를 결정짓는 함수가 필요함.
 
@@ -67,7 +67,7 @@ public:
     ~TcpGameRoom();
 
     //Comment: 클라이언트의 입력신호
-    void InterruptEvent(Object_Info* info);
+    void InterruptEvent(timeval& nowtime, Object_Info* info);
     void InitGame(int room_num, int npc_num, int clnt_num, int* clnt_socks);
     void StartGame(timeval& nowtime);
     void update(timeval& nowtime);
