@@ -1,4 +1,6 @@
+#include <cmath>
 
+#include "ServerDefine.h"
 #include "sptime.h"
 #include "TcpGameRoom.h"
 
@@ -31,13 +33,13 @@ void TcpGameRoom::InitGame(int room_num, Object_Rule obj_rule, int npc_num, int 
     log = new Logger("GameRoom " + room_num);
 
     //Todo: 안의 포인터들 Null로 만들고 delete로 삭제. 다른 것들중에 이런것 있나 체크하기.
-    obj_infoMap = new Object_Info*[max_obj_num];
+    obj_nowInfoMap = new Object_Info*[max_obj_num];
     ai_infoMap = new AI_Npc*[max_npc_num];
 
     //Todo: 종료시에 꼭 삭제하거나 재활용하게끔 바꿔주기
-    obj_preInfoMap = new Object_Info*[max_obj_num];
+    obj_oldInfoMap = new Object_Info*[max_obj_num];
     for(int i=0; i<max_obj_num; i++){
-        obj_preInfoMap[i] = new Object_Info;
+        obj_oldInfoMap[i] = new Object_Info;
     }
 
     npc_pool = new AI_Npc*[max_npc_num];
@@ -64,9 +66,10 @@ void TcpGameRoom::StartGame(timeval& nowtime)
     for(int i=0; i<max_npc_num; i++){
         info = npc_pool[i]->getObjInfo();
         info->ctrl.isDead = false;
+        
+        //Todo: UpdateNpcEndEvent에서의 코드 중복 함수 만들기
 
         endTime = npc_pool[i]->action();
-
         event.set(info, endTime);
         npc_end_events.push(event);
     }
@@ -89,7 +92,7 @@ void TcpGameRoom::InterruptEvent(timeval& nowtime, Object_Info info)
     //Todo: ******end큐에서 정보들 꺼내와서 다시 갱신하기.******
     //Todo: 플레이어 입력은 endTime을 무한으로 설정할 거라 뒤에서 찾으면 될듯.
     //Todo: 자료 구조 dequeue로 바꾸는 것도 생각
-    *(obj_infoMap[info.id]) = info;
+    *(obj_nowInfoMap[info.id]) = info;
 }
 
 void TcpGameRoom::MoveObject(timeval& nowtime, Object_Info* info)
@@ -102,17 +105,53 @@ void TcpGameRoom::MoveObject(timeval& nowtime, Object_Info* info)
     }
 }
 
+double TcpGameRoom::GetObjPosDistance(Obj_Position pos1, Obj_Position pos2)
+{
+    return sqrt(pow(pos1.x - pos2.x, 2) + pow(pos1.y - pos2.y, 2));
+}
+
+//Todo: oldObjInfo 배열 만들어놓기
+//Todo: info는 이 함수를 사용하기 전에 시간에 맞춰 예상해 업데이트 되어있다는 것이 전제임.
+//Comment: 많이 움직이게 되면 값들을 조정함.
+void TcpGameRoom::DeadReckoning(Object_Info* oldObjInfo, Object_Info* nowObjInfo, Object_Info* newObjInfo)
+{
+    Obj_Position bef_velocity;
+    Obj_Position aft_velocity;
+    Obj_Position accel;
+    double distTime;
+
+    distTime = getTimeDist(&(oldObjInfo->st_time), &(newObjInfo->st_time));
+
+    bef_velocity = (nowObjInfo->pos - oldObjInfo->pos)/distTime;
+    aft_velocity = (newObjInfo->pos - oldObjInfo->pos)/distTime;
+    accel = (aft_velocity - bef_velocity)/distTime;
+
+    nowObjInfo->pos = oldObjInfo->pos + bef_velocity*distTime + (accel)*pow(distTime,2)*0.5f;
+}
+
+bool TcpGameRoom::SyncPos(Object_Info* newObjInfo)
+{
+    Object_Info* info = obj_nowInfoMap[newObjInfo->id];
+
+    if(GetObjPosDistance(info->pos, newObjInfo->pos) < DEADRECKONING_THRESHOLD){
+        return false;
+    }
+    DeadReckoning(obj_oldInfoMap[newObjInfo->id], info, newObjInfo);
+
+    return true;
+}
+
 void TcpGameRoom::NextFrame(timeval& nowtime)
 {
     Object_Info info;
     //Todo: 한번 쭉 이동시켜보고 이전 정보에 따라 충돌난 것들 처리해주기
     for(int i=0; i<max_obj_num; i++){
-        //Todo: 케이스로 나눠서 처리하기
-        MoveObject(nowtime, &info);
+        //Todo: 케이스로 나눠서 처리하기 이거아님.
+        //MoveObject(nowtime, &info);
         //Todo: 이런식으로 하는데 검사해서 움직여주기
         CheckObjectCollision();
 
-        *(obj_preInfoMap[i]) = info;
+        //*(obj_oldInfoMap[i]) = info;
     }
 
     //Comment: 실제 반영 부분
@@ -158,7 +197,6 @@ void TcpGameRoom::UpdateNpcEndEvents(timeval& nowtime)
             //Todo: 이거 세개 묶어서 함수로 만들지 고민
             endTime = npc->action();
             event.set(info, endTime);
-
             npc_end_events.push(event);
 
             LogObjInfo(info);
@@ -187,7 +225,7 @@ bool TcpGameRoom::CheckValidateObjInfo(timeval& nowtime, Object_Info* newObjInfo
 {
     //Todo: 이런식으로 이전 데이터 비교해서 유효성 검사
     //Todo: 플레이어쪽에서 전송한 현재 오브젝트의 이동정보가 지금 속도와 일치하는지 체크.
-    if(obj_infoMap[newObjInfo->id]){
+    if(obj_nowInfoMap[newObjInfo->id]){
 
     }
 
@@ -196,7 +234,7 @@ bool TcpGameRoom::CheckValidateObjInfo(timeval& nowtime, Object_Info* newObjInfo
 
 Object_Info* TcpGameRoom::FindObjInfo(int id)
 {
-    return obj_infoMap[id];
+    return obj_nowInfoMap[id];
 }
 
 AI_Npc* TcpGameRoom::FindAI_Npc(int id)
@@ -224,7 +262,7 @@ Object_Info* TcpGameRoom::CreateObject_Info(Obj_Position pos)
     info->state = Obj_State::IDLE;
     info->st_time = {0};
 
-    obj_infoMap[info->id] = info;
+    obj_nowInfoMap[info->id] = info;
 
     return info;
 }

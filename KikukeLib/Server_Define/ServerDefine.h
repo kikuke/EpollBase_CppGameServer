@@ -1,0 +1,8 @@
+#ifndef SERVER_DEFINE
+#define SERVER_DEFINE
+
+#define SERVER_FRAME 20;
+
+#define DEADRECKONING_THRESHOLD 3
+
+#endif

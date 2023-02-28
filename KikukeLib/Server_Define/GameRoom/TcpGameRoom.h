@@ -22,9 +22,9 @@ private:
     //Comment: low endTime sort
     std::priority_queue<NpcEndEvent, std::vector<NpcEndEvent>, std::greater<NpcEndEvent>> npc_end_events;
 
-    Object_Info** obj_infoMap;
+    Object_Info** obj_nowInfoMap;
     //Comment: 업데이트 전 임시 저장용
-    Object_Info** obj_preInfoMap;
+    Object_Info** obj_oldInfoMap;
 
     int max_npc_num;
     AI_Npc** npc_pool;
@@ -65,6 +65,12 @@ private:
     void NextFrame(timeval& nowtime);
 
     void SendUpdateObject_Info(int sock);
+
+    double GetObjPosDistance(Obj_Position pos1, Obj_Position pos2);
+
+    //Comment: oldObjInfo는 움직이기 전의 위치, newObjInfo는 움직임을 전달받은 클라이언트의 위치.
+    void DeadReckoning(Object_Info* oldObjInfo, Object_Info* nowObjInfo, Object_Info* newObjInfo);
+    bool SyncPos(Object_Info* newObjInfo);
 
     void LogObjInfo(Object_Info* info);
 
