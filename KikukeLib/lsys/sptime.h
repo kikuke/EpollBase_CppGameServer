@@ -7,7 +7,7 @@ extern "C" {
 
 #include <sys/time.h>
 
-double getTimeDist(struct timeval* start, struct timeval* end);
+double getTimeDist(const struct timeval* start, const struct timeval* end);
 
 #ifdef __cplusplus
 }

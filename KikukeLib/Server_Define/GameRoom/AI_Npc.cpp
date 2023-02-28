@@ -23,30 +23,29 @@ AI_Npc::~AI_Npc()
 //Todo: Get해서 정보를 가져오는 순간, 또는 끝날때 시간 계산해서 현재 위치(pos) 반환하기 근데 어차피 이걸 호출하는 경우는 끝났거나 이벤트 발생했거나라서 정보 가져갈때 갱신해주면 됨.
 //Todo: priorityqueue?
 //Todo: Attack은 나중에 거리 체크해서 실행하는 것으로. 또는 게임룸에서 Npc에게 원격으로 실행?
-timeval* AI_Npc::action()
+timeval AI_Npc::action()
 {
+    timeval endTime;
     info->state = RandomState();
     switch (info->state)
     {
     case IDLE:
-        if(!Idle())
-            return nullptr;
+        endTime = Idle();
         break;
 
     case MOVE://Todo: 움직임 길이는 로그로 해서 맨 앞값이 잘나오도록. 방향은 균등하게
-        if(!Move())
-            return nullptr;
+        endTime = Idle();
         break;
 
     default:
-        return nullptr;
+
         break;
     }
 
-    return &(info->st_time.end_time);
+    return endTime;
 }
 
-bool AI_Npc::Idle()
+timeval AI_Npc::Idle()
 {
     int val = (*rand)(*gen);
     //Comment: 최소 1에서 최대 2
@@ -55,7 +54,7 @@ bool AI_Npc::Idle()
     return SetStateTime(val);
 }
 
-bool AI_Npc::Move()
+timeval AI_Npc::Move()
 {
     int time = (*rand)(*gen);
 
@@ -99,13 +98,15 @@ void AI_Npc::SetRandomNormVector()
     }
 }
 
-bool AI_Npc::SetStateTime(int stateTime)
+timeval AI_Npc::SetStateTime(int stateTime)
 {
-    if(!SetNowTime(&(info->st_time.start_time)))
-        return false;
-    info->st_time.end_time.tv_sec = info->st_time.start_time.tv_sec + stateTime;
-    
-    return true;
+    timeval endTime;
+
+    SetNowTime(&(info->st_time));
+    endTime.tv_sec = info->st_time.tv_sec + stateTime;
+    endTime.tv_usec = info->st_time.tv_usec;
+
+    return endTime;
 }
 
 bool AI_Npc::SetNowTime(timeval* target)

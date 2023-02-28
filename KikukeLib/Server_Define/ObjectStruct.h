@@ -26,18 +26,13 @@ enum Obj_State{
     MAX_NUM
 };
 
-struct Obj_StateTime{
-    timeval start_time;
-    timeval end_time;
-};
-
 struct Object_Info
 {
     int id;
-
+    timeval st_time;
+    
     Obj_Control ctrl;
     Obj_State state;
-    Obj_StateTime st_time;
     Obj_Position pos;
     Obj_Force force;
 };

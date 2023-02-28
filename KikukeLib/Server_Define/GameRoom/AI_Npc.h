@@ -19,21 +19,21 @@ private:
 
     //return success value
     bool SetNowTime(timeval* target);
-    bool SetStateTime(int stateTime);
+    timeval SetStateTime(int stateTime);
     void SetRandomNormVector();
 
     //Todo: 나중에 확률 쉽게 수정할수 있도록 변수 빼내기
     Obj_State RandomState();
 
-    bool Idle();
-    bool Move();
+    timeval Idle();
+    timeval Move();
 
 public:
     AI_Npc(Object_Info* info, Object_Rule* rule);//Todo: 시간은 자동으로 초기화 되게끔
     ~AI_Npc();
 
     //return end Time
-    timeval* action();
+    timeval action();
     Object_Info* getObjInfo();
 };
 

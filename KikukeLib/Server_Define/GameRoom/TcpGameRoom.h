@@ -18,8 +18,9 @@ private:
     int obj_idCnt;
     Object_Rule obj_rule;
     //Todo: interupt event 발생하면 전부 빼내서 다시계산하는 방식으로.
+    //Comment: AI_Npc에서만 사용. 플레이어는 측정할 필요가 없기 때문
     //Comment: low endTime sort
-    std::priority_queue<ObjectEvent, std::vector<ObjectEvent>, std::greater<ObjectEvent>> obj_end_events;
+    std::priority_queue<NpcEndEvent, std::vector<NpcEndEvent>, std::greater<NpcEndEvent>> npc_end_events;
 
     Object_Info** obj_infoMap;
     //Comment: 업데이트 전 임시 저장용
@@ -53,7 +54,7 @@ private:
     //return true if validate
     bool CheckValidateObjInfo(timeval& nowtime, Object_Info* newObjInfo);
 
-    void UpdateEndEvents(timeval& nowtime);
+    void UpdateNpcEndEvents(timeval& nowtime);
 
     void MoveObject(timeval& nowtime, Object_Info* info);
     //Todo: 위치순으로 정렬해놓은 데이터 테이블이 필요함. x,y 각각.

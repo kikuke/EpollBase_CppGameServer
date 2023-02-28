@@ -40,32 +40,35 @@ void TcpGameRoom::InitGame(int room_num, Object_Rule obj_rule, int npc_num, int 
         obj_preInfoMap[i] = new Object_Info;
     }
 
-    for(int i=0; i<clnt_num; i++){
-        info = CreateObject_Info(RandomObjPos());
-        info->ctrl.isPlayable = true;
-    }
-
     npc_pool = new AI_Npc*[max_npc_num];
     for(int i=0; i<max_npc_num; i++){
         info = CreateObject_Info(RandomObjPos());
 
         npc_pool[i] = CreateAI_Npc(info, &(this->obj_rule));
     }
+
+    for(int i=0; i<clnt_num; i++){
+        info = CreateObject_Info(RandomObjPos());
+        info->ctrl.isPlayable = true;
+    }
 }
 
 void TcpGameRoom::StartGame(timeval& nowtime)
 {
-    ObjectEvent event;
+    NpcEndEvent event;
     Object_Info* info;
+    timeval endTime;
 
     //Todo: 오브젝트들이 겹칠경우 서로 조금씩 밀어내는 식으로?
     //Comment: npc들에게 초기 행동을 부여 후 정보를 가져와 events에 푸시
     for(int i=0; i<max_npc_num; i++){
-        npc_pool[i]->action();
         info = npc_pool[i]->getObjInfo();
         info->ctrl.isDead = false;
-        event.set(info);
-        obj_end_events.push(event);
+
+        endTime = npc_pool[i]->action();
+
+        event.set(info, endTime);
+        npc_end_events.push(event);
     }
 
     //Todo: 초기데이터 전송
@@ -92,14 +95,10 @@ void TcpGameRoom::InterruptEvent(timeval& nowtime, Object_Info info)
 void TcpGameRoom::MoveObject(timeval& nowtime, Object_Info* info)
 {
     if(info->state == Obj_State::MOVE){
-        double actionTime = getTimeDist(&(info->st_time.start_time), &(info->st_time.end_time));
-        double elapsed = getTimeDist(&(info->st_time.start_time), &nowtime);
+        double moveTime = getTimeDist(&(info->st_time), &nowtime);
 
-        if(elapsed < actionTime)
-            actionTime = elapsed;
-
-        info->pos.x += info->force.x * actionTime;
-        info->pos.y += info->force.y * actionTime;
+        info->pos.x += info->force.x * moveTime;
+        info->pos.y += info->force.y * moveTime;
     }
 }
 
@@ -130,7 +129,7 @@ void TcpGameRoom::update(timeval& nowtime)//Todo: 함수 분리
     //Todo: 충돌 계산, 보간 등 이벤트 처리.
     NextFrame(nowtime);
 
-    UpdateEndEvents(nowtime);
+    UpdateNpcEndEvents(nowtime);
 
     for(int i=0; i<max_clnt_num; i++){
         SendUpdateObject_Info(clnt_socks[i]);
@@ -140,28 +139,27 @@ void TcpGameRoom::update(timeval& nowtime)//Todo: 함수 분리
 
 //Comment: 동작의 시간이 끝났을 경우임.
 //Comment: AI일 경우 처리와 행동 재시작
-void TcpGameRoom::UpdateEndEvents(timeval& nowtime)
+void TcpGameRoom::UpdateNpcEndEvents(timeval& nowtime)
 {
-    ObjectEvent event;
+    NpcEndEvent event;
     Object_Info* info;
     AI_Npc* npc;
-    while(!obj_end_events.empty())
+    timeval endTime;
+
+    while(!npc_end_events.empty())
     {
-        event = obj_end_events.top();
-        info = event.get();
+        event = npc_end_events.top();
+        info = event.getObjInfo();
 
-        if(getTimeDist(&(info->st_time.end_time), &nowtime) >= 0){
-            obj_end_events.pop();
+        if(getTimeDist(event.getEndTime(), &nowtime) >= 0){
+            npc_end_events.pop();
 
-            if(info->ctrl.isPlayable){
-                info->state = Obj_State::IDLE;
-            }
-            else{
-                npc = FindAI_Npc(info->id);
-                //Todo: 이거 세개 묶어서 함수로 만들지 고민
-                npc->action();
-                obj_end_events.push(event);
-            }
+            npc = FindAI_Npc(info->id);
+            //Todo: 이거 세개 묶어서 함수로 만들지 고민
+            endTime = npc->action();
+            event.set(info, endTime);
+
+            npc_end_events.push(event);
 
             LogObjInfo(info);
             continue;
@@ -239,10 +237,8 @@ Obj_Position TcpGameRoom::RandomObjPos()
 void TcpGameRoom::LogObjInfo(Object_Info* info)
 {
     //Todo: 함수로 따로 분리해서 시간 다시 잘 표시하기
-    (*log).Log(LOGLEVEL::INFO, "[%s] Object Update - ID: %d, State: %d\n\
-    StartTime: %d, EndTime: %d\n\
+    (*log).Log(LOGLEVEL::INFO, "[%s] Object Update - ID: %d, StartTime: %d, State: %d\n\
     Pos: (%f, %f, %f), Force: (%f, %f, %f)",\
-    "GameRoom " + room_num, info->id, info->state,\
-    info->st_time.start_time.tv_sec, info->st_time.end_time.tv_sec,
+    "GameRoom " + room_num, info->id, info->st_time, info->state,\
     info->pos.x, info->pos.y, info->pos.z, info->force.x, info->force.y, info->force.z);
 }
