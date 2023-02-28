@@ -27,6 +27,7 @@ timeval AI_Npc::action()
 {
     timeval endTime;
     info->state = RandomState();
+    info->force = {0};
     switch (info->state)
     {
     case IDLE:
@@ -34,7 +35,7 @@ timeval AI_Npc::action()
         break;
 
     case MOVE://Todo: 움직임 길이는 로그로 해서 맨 앞값이 잘나오도록. 방향은 균등하게
-        endTime = Idle();
+        endTime = Move();
         break;
 
     default:

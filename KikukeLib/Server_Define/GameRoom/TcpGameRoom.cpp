@@ -32,6 +32,9 @@ void TcpGameRoom::InitGame(int room_num, Object_Rule obj_rule, int npc_num, int 
     //Todo: delete 해주기
     log = new Logger("GameRoom " + room_num);
 
+    //Todo: delete 해주기
+    isUpdateId = new bool[max_obj_num];
+
     //Todo: 안의 포인터들 Null로 만들고 delete로 삭제. 다른 것들중에 이런것 있나 체크하기.
     obj_nowInfoMap = new Object_Info*[max_obj_num];
     ai_infoMap = new AI_Npc*[max_npc_num];
@@ -89,20 +92,21 @@ void TcpGameRoom::InterruptEvent(timeval& nowtime, Object_Info info)
         return;
     }
 
-    //Todo: ******end큐에서 정보들 꺼내와서 다시 갱신하기.******
-    //Todo: 플레이어 입력은 endTime을 무한으로 설정할 거라 뒤에서 찾으면 될듯.
-    //Todo: 자료 구조 dequeue로 바꾸는 것도 생각
-    *(obj_nowInfoMap[info.id]) = info;
+    if(SyncPos(&info)){
+        info.pos = obj_nowInfoMap[info.id]->pos;
+
+        (*log).Log(LOGLEVEL::DEBUG, "[%s] Dead Reckoning Ocurred - ID: %d", "GameRoom " + room_num, info.id);
+    }
+
+    AddUpdate(&info);
 }
 
 void TcpGameRoom::MoveObject(timeval& nowtime, Object_Info* info)
 {
-    if(info->state == Obj_State::MOVE){
-        double moveTime = getTimeDist(&(info->st_time), &nowtime);
+    double moveTime = getTimeDist(&(info->st_time), &nowtime);
 
-        info->pos.x += info->force.x * moveTime;
-        info->pos.y += info->force.y * moveTime;
-    }
+    info->pos.x += info->force.x * moveTime;
+    info->pos.y += info->force.y * moveTime;
 }
 
 double TcpGameRoom::GetObjPosDistance(Obj_Position pos1, Obj_Position pos2)
@@ -141,26 +145,41 @@ bool TcpGameRoom::SyncPos(Object_Info* newObjInfo)
     return true;
 }
 
+//Todo: 충돌 관련 처리 구상
+//Todo: AI의 동작이 바뀌게 될경우 큐에서 빼주기
+void TcpGameRoom::CheckObjectEvent()
+{
+
+}
+
 void TcpGameRoom::NextFrame(timeval& nowtime)
 {
-    Object_Info info;
     //Todo: 한번 쭉 이동시켜보고 이전 정보에 따라 충돌난 것들 처리해주기
     for(int i=0; i<max_obj_num; i++){
-        //Todo: 케이스로 나눠서 처리하기 이거아님.
-        //MoveObject(nowtime, &info);
-        //Todo: 이런식으로 하는데 검사해서 움직여주기
-        CheckObjectCollision();
-
-        //*(obj_oldInfoMap[i]) = info;
+        MoveObject(nowtime, obj_nowInfoMap[i]);
     }
 
-    //Comment: 실제 반영 부분
-    for(int i=0; i<max_obj_num; i++){
-        //Todo: 케이스로 나눠서 처리하기
+    CheckObjectEvent();
+}
 
+void TcpGameRoom::AddUpdate(Object_Info* info)
+{
+    (*obj_oldInfoMap[info->id]) = (*obj_nowInfoMap[info->id]);
+    (*obj_nowInfoMap[info->id]) = *info;
+    isUpdateId[info->id] = true;
+}
+
+//Todo: 업데이트된 id들 패킷으로 만들기
+void TcpGameRoom::MakeUpdateObjectPacket()
+{
+    for(int i=0; i<max_obj_num; i++){
+        if(isUpdateId[i]){
+            //패킷에 데이터 추가하는 함수
+        }
     }
 }
 
+//Comment: 매프레임마다 실행.
 //Comment: 이건 단순히 정보 계산만 해주는 것임. 최종 업데이트 된 정보는 updateObjInfo를 통해 전달되고, nowObjInfo에 다시 저장되어 서버가 갱신된 정보들을 들고있음.
 //Comment: nowObjInfo에 있는 정보들을 토대로 다시 정보들을 업데이트 시킴
 void TcpGameRoom::update(timeval& nowtime)//Todo: 함수 분리
@@ -170,8 +189,15 @@ void TcpGameRoom::update(timeval& nowtime)//Todo: 함수 분리
 
     UpdateNpcEndEvents(nowtime);
 
+    MakeUpdateObjectPacket();
+
+    //Todo: 올드 정보와 비교해서 달라진 오브젝트만 전송하기
     for(int i=0; i<max_clnt_num; i++){
         SendUpdateObject_Info(clnt_socks[i]);
+    }
+
+    for(int i=0; i<max_obj_num; i++){
+        isUpdateId[i] = false;
     }
 }
 
@@ -196,6 +222,9 @@ void TcpGameRoom::UpdateNpcEndEvents(timeval& nowtime)
             npc = FindAI_Npc(info->id);
             //Todo: 이거 세개 묶어서 함수로 만들지 고민
             endTime = npc->action();
+
+            AddUpdate(info);
+
             event.set(info, endTime);
             npc_end_events.push(event);
 
@@ -262,6 +291,7 @@ Object_Info* TcpGameRoom::CreateObject_Info(Obj_Position pos)
     info->state = Obj_State::IDLE;
     info->st_time = {0};
 
+    obj_oldInfoMap[info->id] = info;
     obj_nowInfoMap[info->id] = info;
 
     return info;

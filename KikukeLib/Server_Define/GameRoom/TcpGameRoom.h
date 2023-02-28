@@ -17,7 +17,9 @@ private:
     int room_num;
     int obj_idCnt;
     Object_Rule obj_rule;
-    //Todo: interupt event 발생하면 전부 빼내서 다시계산하는 방식으로.
+    //Comment: 변경한 정보만 발송하는용도.
+    bool* isUpdateId;
+
     //Comment: AI_Npc에서만 사용. 플레이어는 측정할 필요가 없기 때문
     //Comment: low endTime sort
     std::priority_queue<NpcEndEvent, std::vector<NpcEndEvent>, std::greater<NpcEndEvent>> npc_end_events;
@@ -50,6 +52,8 @@ private:
     AI_Npc* FindAI_Npc(int id);
     Object_Info* FindObjInfo(int id);
 
+    void AddUpdate(Object_Info* info);
+
     //Comment: 조작된 정보인지 유효한 데이터인지 체크.
     //return true if validate
     bool CheckValidateObjInfo(timeval& nowtime, Object_Info* newObjInfo);
@@ -59,11 +63,12 @@ private:
     void MoveObject(timeval& nowtime, Object_Info* info);
     //Todo: 위치순으로 정렬해놓은 데이터 테이블이 필요함. x,y 각각.
     //Todo: 인자도 이게 맞는지 다시 체크
-    bool CheckObjectCollision();
+    void CheckObjectEvent();
 
     //Todo: AI_Npc와 Object_Info 상태를 결정짓는 함수가 필요함.
     void NextFrame(timeval& nowtime);
 
+    void MakeUpdateObjectPacket();
     void SendUpdateObject_Info(int sock);
 
     double GetObjPosDistance(Obj_Position pos1, Obj_Position pos2);
