@@ -4,16 +4,20 @@
 #include "PacketDefine.h"
 #include "PacketGenerator.h"
 #include "sptime.h"
+#include "PacketIO.h"
+#include "ThreadSafe/TSRingBuffer.h"
 #include "TcpGameRoom.h"
 
 TcpGameRoom::TcpGameRoom()
 {
+    broadCastBuffer = new TSRingBuffer;
     gen = new std::mt19937(rand_dv());
     rand_world_pos = new std::uniform_int_distribution<int>(-99, 99);
 }
 
 TcpGameRoom::~TcpGameRoom()
 {
+    delete broadCastBuffer;
     delete gen;
     delete rand_world_pos;
 }
@@ -179,14 +183,14 @@ void TcpGameRoom::AddUpdate(Object_Info* info)
 size_t UpdateObjectPacketFactory(void* buf, GameRoomUpdateObjectData* data)
 {
     size_t data_sz = sizeof(unsigned int) + sizeof(OBJECT_DATA)*(data->update_obj_num);
-    TCPTestPacketHeader header = {TCP_PACKET_START_CODE, data_sz + sizeof(unsigned char),
+    TCPTestPacketHeader header = {TCP_PACKET_START_CODE, (unsigned int)(data_sz + sizeof(unsigned char)),
         GAMEROOM, GAMEROOM_UPDATE_OBJECT, 0x000, 0x000};
 
     return MakePacket(buf, &header, data, data_sz, TCP_PACKET_END_CODE);
 }
 
 //Todo: 업데이트된 id들 패킷으로 만들기
-void TcpGameRoom::MakeUpdateObjectPacket()
+void TcpGameRoom::SendUpdateObjectPacket()
 {
     size_t len;
     int update_obj_num;
@@ -209,9 +213,13 @@ void TcpGameRoom::MakeUpdateObjectPacket()
         }
     }
 
+    for(int i=0; i<max_obj_num; i++){
+        isUpdateId[i] = false;
+    }
+
     //Todo: 패킷화, 전체 발송용 버퍼 설정하기
-    len = UpdateObjectPacketFactory();
-    //WriteRingBuffer(sock, buf, len);
+    len = UpdateObjectPacketFactory(buf, &data);
+    broadCastBuffer->enqueue(buf, len);
 
     delete data.objs_data;
 }
@@ -226,16 +234,7 @@ void TcpGameRoom::update(timeval& nowtime)//Todo: 함수 분리
 
     UpdateNpcEndEvents(nowtime);
 
-    MakeUpdateObjectPacket();
-
-    //Todo: 올드 정보와 비교해서 달라진 오브젝트만 전송하기
-    for(int i=0; i<max_clnt_num; i++){
-        SendUpdateObject_Info(clnt_socks[i]);
-    }
-
-    for(int i=0; i<max_obj_num; i++){
-        isUpdateId[i] = false;
-    }
+    SendUpdateObjectPacket();
 }
 
 
@@ -276,14 +275,6 @@ void TcpGameRoom::UpdateNpcEndEvents(timeval& nowtime)
 void TcpGameRoom::EndGame(timeval& nowtime)
 {
     //Todo: 재사용하게 원상태로 되돌리는 로직
-}
-
-void TcpGameRoom::SendUpdateObject_Info(int sock)
-{
-    //Todo: 이런식으로 구상하기
-    //Todo: 전체 Obj 정보를 뭉텅이로 줌
-    //Todo: 일어난 사건들을 연달아 줘야할지 고민해보기
-    //memcpy(,,updateNum*sizeof())
 }
 
 //Comment: ObjectRule에 의한 판단.

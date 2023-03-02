@@ -24,7 +24,8 @@ public:
         delete isEmptyRoom;
     }
 
-    TcpGameRoom* OpenGameRoom(int room_id, Object_Rule obj_rule, int npc_num, int clnt_num, int* clnt_socks);
+    //return room_id
+    int OpenGameRoom(Object_Rule obj_rule, int npc_num, int clnt_num, int* clnt_socks);
     bool CloseGameRoom();
     TcpGameRoom* GetGameRoom(int room_id);
 };

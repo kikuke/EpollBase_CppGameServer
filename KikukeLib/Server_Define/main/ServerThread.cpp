@@ -81,13 +81,15 @@ void ReadThread(JobQueue* jobQueue, const int buf_sz)//Todo: 위치 옮기기
 void BroadcastThread(JobQueue* jobQueue, GameRoomManager& gameRoomManager)
 {
     int room_id;
+    TcpGameRoom* gameRoom;
 
     Logger log("MainLog");
     log.Log(LOGLEVEL::DEBUG, "Broadcast Thread Start");
 
     while((room_id = jobQueue->broadcastQueue.pop()) >= 0)
     {
-
+        gameRoom = gameRoomManager.GetGameRoom(room_id);
+        //Todo: 게임룸의 링 버퍼 가져와서 비지 않았을경우 그안의 모든 멤버들에게 패킷 보내주면 됨.
     }
 
     log.Log(LOGLEVEL::ERROR, "Broadcast Thread Down!");
@@ -96,7 +98,7 @@ void BroadcastThread(JobQueue* jobQueue, GameRoomManager& gameRoomManager)
 
 void GameRoomThread(GameRoomManager& gameRoomManager)
 {
-
+    //Todo: room_cnt만큼 계속 순회. 엠프티가 아닐경우만.
 }
 
 size_t DisconnectPacketFactory(void* buf)

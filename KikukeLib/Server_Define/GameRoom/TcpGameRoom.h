@@ -8,7 +8,10 @@
 #include "ServerInfo.h"
 #include "ObjectEvent.h"
 #include "AI_Npc.h"
+#include "RingBuffer.h"
 #include "Logger.h"
+
+#define TCP_GAMEROOM_BUFFER_SIZE 2048
 
 //Todo: 메시지 그냥 여기서 바로 보내거나 TcpInfo에 send버퍼 만들어서 일괄 전송하기
 class TcpGameRoom
@@ -37,6 +40,9 @@ private:
     int max_clnt_num;
     //Comment: 전체 발송용 배열
     int* clnt_socks;
+
+    unsigned char buf[TCP_GAMEROOM_BUFFER_SIZE];
+    RingBuffer* broadCastBuffer;
 
     std::random_device rand_dv;
     std::mt19937* gen;
@@ -68,8 +74,7 @@ private:
     //Todo: AI_Npc와 Object_Info 상태를 결정짓는 함수가 필요함.
     void NextFrame(timeval& nowtime);
 
-    void MakeUpdateObjectPacket();
-    void SendUpdateObject_Info(int sock);
+    void SendUpdateObjectPacket();
 
     double GetObjPosDistance(Obj_Position pos1, Obj_Position pos2);
 
