@@ -78,11 +78,32 @@ void ReadThread(JobQueue* jobQueue, const int buf_sz)//Todo: 위치 옮기기
     return;
 }
 
+void BroadcastThread(JobQueue* jobQueue, GameRoomManager& gameRoomManager)
+{
+    int room_id;
+
+    Logger log("MainLog");
+    log.Log(LOGLEVEL::DEBUG, "Broadcast Thread Start");
+
+    while((room_id = jobQueue->broadcastQueue.pop()) >= 0)
+    {
+
+    }
+
+    log.Log(LOGLEVEL::ERROR, "Broadcast Thread Down!");
+    return;
+}
+
+void GameRoomThread(GameRoomManager& gameRoomManager)
+{
+
+}
+
 size_t DisconnectPacketFactory(void* buf)
 {
     constexpr TCPTestPacketHeader header = {TCP_PACKET_START_CODE, sizeof(DisconnectData) + sizeof(unsigned char),
         DISCONNECT, DISCONNECT_OK, 0x000, 0x000};
     constexpr DisconnectData data = {0x00};
 
-    return MakePacket(buf, &header, &data, TCP_PACKET_END_CODE);
+    return MakePacket(buf, &header, &data, sizeof(data), TCP_PACKET_END_CODE);
 }

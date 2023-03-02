@@ -14,19 +14,21 @@
 class TcpGameRoom
 {
 private:
-    int room_num;
+    int room_id;
     int obj_idCnt;
     Object_Rule obj_rule;
     //Comment: 변경한 정보만 발송하는용도.
     bool* isUpdateId;
 
-    //Comment: AI_Npc에서만 사용. 플레이어는 측정할 필요가 없기 때문
-    //Comment: low endTime sort
-    std::priority_queue<NpcEndEvent, std::vector<NpcEndEvent>, std::greater<NpcEndEvent>> npc_end_events;
+    int max_obj_num;
 
     Object_Info** obj_nowInfoMap;
     //Comment: 업데이트 전 임시 저장용
     Object_Info** obj_oldInfoMap;
+
+    //Comment: AI_Npc에서만 사용. 플레이어는 측정할 필요가 없기 때문
+    //Comment: low endTime sort
+    std::priority_queue<NpcEndEvent, std::vector<NpcEndEvent>, std::greater<NpcEndEvent>> npc_end_events;
 
     int max_npc_num;
     AI_Npc** npc_pool;
@@ -35,8 +37,6 @@ private:
     int max_clnt_num;
     //Comment: 전체 발송용 배열
     int* clnt_socks;
-
-    int max_obj_num;
 
     std::random_device rand_dv;
     std::mt19937* gen;
@@ -85,7 +85,7 @@ public:
 
     //Comment: 클라이언트의 입력신호
     void InterruptEvent(timeval& nowtime, Object_Info info);
-    void InitGame(int room_num, Object_Rule obj_rule, int npc_num, int clnt_num, int* clnt_socks);
+    void InitGame(int room_id, Object_Rule obj_rule, int npc_num, int clnt_num, int* clnt_socks);
     void StartGame(timeval& nowtime);
     void update(timeval& nowtime);
     void EndGame(timeval& nowtime);

@@ -1,6 +1,8 @@
 #ifndef PACKET_DEFINE
 #define PACKET_DEFINE
 
+#include "ObjectStruct.h"
+
 //TCP HEADER
 struct TCPTestPacketHeader
 {
@@ -17,6 +19,49 @@ struct TCPTestPacketHeader
 //TCP CODE 1Byte
 #define TCP_PACKET_START_CODE 0x77
 #define TCP_PACKET_END_CODE 0x33
+
+//OBJECT_PAKCET_DATA
+struct OBJECT_DATA
+{
+    Object_Info info;
+};
+
+//GAMEROOM
+
+//GAMEROOM MAIN_OP 4Bit
+#define GAMEROOM 0x5
+
+//GAMEROOM SUB_OP 8Bit
+#define GAMEROOM_UPDATE_OBJECT 0x03
+
+//Todo: 게임룸 번호도 넣어서 전달.
+
+//GAMEROOM_UPDATE_OBJECT PACKET_DATA
+struct GameRoomUpdateObjectData
+{
+    unsigned int room_id : 16;//방번호
+    unsigned int update_obj_num : 16;//업데이트된 오브젝트 개수//4Byte
+    OBJECT_DATA* objs_data;
+};//4Byte + (sizeof(OBJECT_DATA) * update_obj_num) Byte
+
+//PLAYER
+
+//PLAYER MAIN_OP 4Bit
+#define PLAYER 0x6
+
+//PLAYER SUB_OP 8Bit
+#define PLAYER_UPDATE_OBJECT 0x03
+
+//Todo: 게임룸 번호도 넣어서 전달.
+
+//PLAYER_UPDATE_OBJECT PACKET_DATA
+struct PlayerUpdateObjectData
+{
+    unsigned int room_id : 16;//방번호
+    unsigned int : 16;
+
+    OBJECT_DATA obj_data;
+};//4Byte + sizeof(OBJECT_DATA) Byte
 
 //Disconnect
 //TCP Message MAIN_OP 4Bit

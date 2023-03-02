@@ -10,6 +10,7 @@ struct JobQueue
 {
     TSQueue<int> readQueue;
     TSQueue<int> workQueue;
+    TSQueue<int> broadcastQueue;
 };
 
 struct TCPSOCKETINFO

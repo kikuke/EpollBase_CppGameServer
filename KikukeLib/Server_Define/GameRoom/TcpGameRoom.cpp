@@ -1,6 +1,8 @@
 #include <cmath>
 
 #include "ServerDefine.h"
+#include "PacketDefine.h"
+#include "PacketGenerator.h"
 #include "sptime.h"
 #include "TcpGameRoom.h"
 
@@ -17,11 +19,11 @@ TcpGameRoom::~TcpGameRoom()
 }
 
 //Todo: 재사용 할수 있는 로직으로 바꾸기 잦은 new delete줄이기
-void TcpGameRoom::InitGame(int room_num, Object_Rule obj_rule, int npc_num, int clnt_num, int* clnt_socks)
+void TcpGameRoom::InitGame(int room_id, Object_Rule obj_rule, int npc_num, int clnt_num, int* clnt_socks)
 {
     Object_Info* info;
 
-    this->room_num = room_num;
+    this->room_id = room_id;
     this->obj_idCnt = 0;
     this->obj_rule = obj_rule;
     this->max_npc_num = npc_num;
@@ -30,7 +32,7 @@ void TcpGameRoom::InitGame(int room_num, Object_Rule obj_rule, int npc_num, int 
     this->max_obj_num = npc_num + clnt_num;
 
     //Todo: delete 해주기
-    log = new Logger("GameRoom " + room_num);
+    log = new Logger("GameRoom " + room_id);
 
     //Todo: delete 해주기
     isUpdateId = new bool[max_obj_num];
@@ -77,6 +79,9 @@ void TcpGameRoom::StartGame(timeval& nowtime)
         npc_end_events.push(event);
     }
 
+    for(int i=0; i<max_obj_num; i++){
+        AddUpdate(obj_nowInfoMap[i]);
+    }
     //Todo: 초기데이터 전송
 }
 
@@ -88,14 +93,14 @@ void TcpGameRoom::StartGame(timeval& nowtime)
 void TcpGameRoom::InterruptEvent(timeval& nowtime, Object_Info info)
 {
     if(!CheckValidateObjInfo(nowtime, &info)){
-        (*log).Log(LOGLEVEL::WARNING, "[%s] Invalidate Info - ID: %d", "GameRoom " + room_num, info.id);
+        (*log).Log(LOGLEVEL::WARNING, "[%s] Invalidate Info - ID: %d", "GameRoom " + room_id, info.id);
         return;
     }
 
     if(SyncPos(&info)){
         info.pos = obj_nowInfoMap[info.id]->pos;
 
-        (*log).Log(LOGLEVEL::DEBUG, "[%s] Dead Reckoning Ocurred - ID: %d", "GameRoom " + room_num, info.id);
+        (*log).Log(LOGLEVEL::DEBUG, "[%s] Dead Reckoning Ocurred - ID: %d", "GameRoom " + room_id, info.id);
     }
 
     AddUpdate(&info);
@@ -149,7 +154,9 @@ bool TcpGameRoom::SyncPos(Object_Info* newObjInfo)
 //Todo: AI의 동작이 바뀌게 될경우 큐에서 빼주기
 void TcpGameRoom::CheckObjectEvent()
 {
+    for(int i=0; i<max_obj_num; i++){
 
+    }
 }
 
 void TcpGameRoom::NextFrame(timeval& nowtime)
@@ -169,14 +176,44 @@ void TcpGameRoom::AddUpdate(Object_Info* info)
     isUpdateId[info->id] = true;
 }
 
+size_t UpdateObjectPacketFactory(void* buf, GameRoomUpdateObjectData* data)
+{
+    size_t data_sz = sizeof(unsigned int) + sizeof(OBJECT_DATA)*(data->update_obj_num);
+    TCPTestPacketHeader header = {TCP_PACKET_START_CODE, data_sz + sizeof(unsigned char),
+        GAMEROOM, GAMEROOM_UPDATE_OBJECT, 0x000, 0x000};
+
+    return MakePacket(buf, &header, data, data_sz, TCP_PACKET_END_CODE);
+}
+
 //Todo: 업데이트된 id들 패킷으로 만들기
 void TcpGameRoom::MakeUpdateObjectPacket()
 {
+    size_t len;
+    int update_obj_num;
+    GameRoomUpdateObjectData data;
+
+    data.room_id = this->room_id;
+    update_obj_num = 0;
     for(int i=0; i<max_obj_num; i++){
         if(isUpdateId[i]){
-            //패킷에 데이터 추가하는 함수
+            update_obj_num++;
         }
     }
+    data.update_obj_num = update_obj_num;
+    data.objs_data = new OBJECT_DATA[update_obj_num];
+
+    update_obj_num = 0;
+    for(int i=0; i<max_obj_num; i++){
+        if(isUpdateId[i]){
+            data.objs_data[update_obj_num++].info = *(obj_nowInfoMap[i]);
+        }
+    }
+
+    //Todo: 패킷화, 전체 발송용 버퍼 설정하기
+    len = UpdateObjectPacketFactory();
+    //WriteRingBuffer(sock, buf, len);
+
+    delete data.objs_data;
 }
 
 //Comment: 매프레임마다 실행.
@@ -307,6 +344,6 @@ void TcpGameRoom::LogObjInfo(Object_Info* info)
     //Todo: 함수로 따로 분리해서 시간 다시 잘 표시하기
     (*log).Log(LOGLEVEL::INFO, "[%s] Object Update - ID: %d, StartTime: %d, State: %d\n\
     Pos: (%f, %f, %f), Force: (%f, %f, %f)",\
-    "GameRoom " + room_num, info->id, info->st_time, info->state,\
+    "GameRoom " + room_id, info->id, info->st_time, info->state,\
     info->pos.x, info->pos.y, info->pos.z, info->force.x, info->force.y, info->force.z);
 }
