@@ -3,17 +3,28 @@
 
 #include "TcpGameRoom.h"
 
+#define DEFALT_GAMEROOM_SIZE 10
+
 class GameRoomManager
 {
 private:
     int room_cnt;
     TcpGameRoom** gameRooms;
-    bool* isEmptyRoom;
+    bool* isUseRoom;
+
+    size_t DoubleBuffer();
 
 public:
     GameRoomManager()
     {
-        room_cnt = 0;
+        room_cnt = DEFALT_GAMEROOM_SIZE;
+
+        gameRooms = new TcpGameRoom*[room_cnt];
+        for(int i=0; i<room_cnt; i++){
+            gameRooms[i] = new TcpGameRoom;
+        }
+
+        isUseRoom = new bool[room_cnt];
     }
 
     ~GameRoomManager()
@@ -21,7 +32,7 @@ public:
         for(int i=0; i<room_cnt; i++){
             delete gameRooms[i];
         }
-        delete isEmptyRoom;
+        delete isUseRoom;
     }
 
     //return room_id
