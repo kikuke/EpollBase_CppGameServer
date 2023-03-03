@@ -20,6 +20,8 @@ size_t GameRoomManager::DoubleBuffer()
     room_cnt = new_room_cnt;
     gameRooms = newGameRooms;
     isUseRoom = newIsUseRoom;
+
+    return room_cnt;
 }
 
 int GameRoomManager::OpenGameRoom(Object_Rule obj_rule, int npc_num, int clnt_num, int* clnt_socks)
@@ -27,14 +29,29 @@ int GameRoomManager::OpenGameRoom(Object_Rule obj_rule, int npc_num, int clnt_nu
     int i;
     for(i=0; i<room_cnt; i++){
         if(!isUseRoom[i]){
-            gameRooms[i]->InitGame(i, obj_rule, npc_num, clnt_num, clnt_socks);
-            isUseRoom[i] = true;
-            return i;
+            break;
         }
     }
 
-    DoubleBuffer();
+    if(i >= room_cnt){
+        DoubleBuffer();
+    }
+
     gameRooms[i]->InitGame(i, obj_rule, npc_num, clnt_num, clnt_socks);
     isUseRoom[i] = true;
     return i;
+}
+
+bool GameRoomManager::CloseGameRoom(int room_id)
+{
+
+}
+
+TcpGameRoom* GameRoomManager::GetGameRoom(int room_id)
+{
+    if(room_id >= room_cnt || !isUseRoom[room_id]){
+        return nullptr;
+    }
+
+    return gameRooms[room_id];
 }

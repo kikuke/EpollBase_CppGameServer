@@ -37,7 +37,7 @@ public:
 
     //return room_id
     int OpenGameRoom(Object_Rule obj_rule, int npc_num, int clnt_num, int* clnt_socks);
-    bool CloseGameRoom();
+    bool CloseGameRoom(int room_id);
     TcpGameRoom* GetGameRoom(int room_id);
 };
 
