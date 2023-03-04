@@ -1,5 +1,6 @@
 #include <unistd.h>
 
+#include "ServerDefine.h"
 #include "spepoll.h"
 #include "PacketIO.h"
 #include "TcpService.h"
@@ -11,6 +12,8 @@
 #include "PacketGenerator.h"
 #include "SocketManager.h"
 #include "ServerThread.h"
+
+#define BROADCAST_BUFFER_SIZE 2048
 
 size_t DisconnectPacketFactory(void* buf);
 
@@ -82,6 +85,12 @@ void BroadcastThread(JobQueue* jobQueue, GameRoomManager& gameRoomManager)
 {
     int room_id;
     TcpGameRoom* gameRoom;
+    int clnt_num;
+    int* clnt_socks;
+
+    unsigned char buf[BROADCAST_BUFFER_SIZE];
+
+    int sendLen;
 
     Logger log("MainLog");
     log.Log(LOGLEVEL::DEBUG, "Broadcast Thread Start");
@@ -89,7 +98,17 @@ void BroadcastThread(JobQueue* jobQueue, GameRoomManager& gameRoomManager)
     while((room_id = jobQueue->broadcastQueue.pop()) >= 0)
     {
         gameRoom = gameRoomManager.GetGameRoom(room_id);
+        clnt_num = gameRoom->getClientNum();
+        clnt_socks = gameRoom->getClientSocks();
+
         //Todo: 게임룸의 링 버퍼 가져와서 비지 않았을경우 그안의 모든 멤버들에게 패킷 보내주면 됨.
+        //Todo: 게임룸의 링버퍼에 넣는 로직 추가해줘야함. 생성자에서 넣기
+        gameRoom->getBroadCastBuffer()->dequeue(buf, BROADCAST_BUFFER_SIZE);
+        for(int i=0; i<clnt_num; i++){
+            sendLen = write(clnt_socks[i], buf, BROADCAST_BUFFER_SIZE);
+            
+            log.Log(LOGLEVEL::DEBUG, "Broadcast %d Len to %d Socket", sendLen, clnt_socks[i]);
+        }
     }
 
     log.Log(LOGLEVEL::ERROR, "Broadcast Thread Down!");
@@ -98,7 +117,26 @@ void BroadcastThread(JobQueue* jobQueue, GameRoomManager& gameRoomManager)
 
 void GameRoomThread(GameRoomManager& gameRoomManager)
 {
-    //Todo: room_cnt만큼 계속 순회. 엠프티가 아닐경우만.
+    timeval serverTime;
+    timeval beforeTime = {0};
+    double frameTime = 1/SERVER_FRAME;
+
+    Logger log("GameRoomThread");
+    log.Log(LOGLEVEL::DEBUG, "GameRoom Thread Start");
+    //Todo: 프레임 단위로 시간 이용해 굴리기
+    while(true){
+        gettimeofday(&serverTime, NULL);
+
+        if(getTimeDist(&beforeTime, &serverTime) > frameTime){
+            log.Log(LOGLEVEL::INFO, "Frame Start");
+
+            gameRoomManager.UpdateGameRooms(serverTime);
+
+            beforeTime = serverTime;
+        }
+    }
+
+    return;
 }
 
 size_t DisconnectPacketFactory(void* buf)

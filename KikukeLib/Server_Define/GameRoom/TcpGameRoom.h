@@ -17,6 +17,7 @@
 class TcpGameRoom
 {
 private:
+    JobQueue* jobQueue;
     int room_id;
     int obj_idCnt;
     Object_Rule obj_rule;
@@ -85,7 +86,7 @@ private:
     void LogObjInfo(Object_Info* info);
 
 public:
-    TcpGameRoom();
+    TcpGameRoom(JobQueue* jobQueue);
     ~TcpGameRoom();
 
     //Comment: 클라이언트의 입력신호
@@ -94,6 +95,9 @@ public:
     void StartGame(timeval& nowtime);
     void update(timeval& nowtime);
     void EndGame(timeval& nowtime);
+    RingBuffer* getBroadCastBuffer();
+    int getClientNum();
+    int* getClientSocks();
 };
 
 #endif

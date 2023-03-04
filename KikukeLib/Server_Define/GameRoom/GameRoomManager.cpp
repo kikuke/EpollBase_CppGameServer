@@ -7,7 +7,7 @@ size_t GameRoomManager::DoubleBuffer()
     bool* newIsUseRoom = new bool[new_room_cnt];
     for(int i=0; i<room_cnt; i++){
         newGameRooms[i] = gameRooms[i];
-        newGameRooms[room_cnt + i] = new TcpGameRoom;
+        newGameRooms[room_cnt + i] = new TcpGameRoom(jobQueue);
     }
 
     for(int i=0; i<room_cnt; i++){
@@ -22,6 +22,17 @@ size_t GameRoomManager::DoubleBuffer()
     isUseRoom = newIsUseRoom;
 
     return room_cnt;
+}
+
+void GameRoomManager::UpdateGameRooms(timeval& nowtime)
+{
+    int roomCnt = this->room_cnt;
+
+    for(int i=0; i<roomCnt; i++){
+        if(isUseRoom[i]){
+            gameRooms[i]->update(nowtime);
+        }
+    }
 }
 
 int GameRoomManager::OpenGameRoom(Object_Rule obj_rule, int npc_num, int clnt_num, int* clnt_socks)
@@ -44,7 +55,7 @@ int GameRoomManager::OpenGameRoom(Object_Rule obj_rule, int npc_num, int clnt_nu
 
 bool GameRoomManager::CloseGameRoom(int room_id)
 {
-
+    return true;
 }
 
 TcpGameRoom* GameRoomManager::GetGameRoom(int room_id)

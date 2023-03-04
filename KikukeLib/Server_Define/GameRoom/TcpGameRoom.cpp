@@ -8,8 +8,10 @@
 #include "ThreadSafe/TSRingBuffer.h"
 #include "TcpGameRoom.h"
 
-TcpGameRoom::TcpGameRoom()
+TcpGameRoom::TcpGameRoom(JobQueue* jobQueue)
 {
+    this->jobQueue = jobQueue;
+
     broadCastBuffer = new TSRingBuffer;
     gen = new std::mt19937(rand_dv());
     rand_world_pos = new std::uniform_int_distribution<int>(-99, 99);
@@ -221,7 +223,24 @@ void TcpGameRoom::SendUpdateObjectPacket()
     len = UpdateObjectPacketFactory(buf, &data);
     broadCastBuffer->enqueue(buf, len);
 
+    jobQueue->broadcastQueue.push(this->room_id);
+
     delete data.objs_data;
+}
+
+RingBuffer* TcpGameRoom::getBroadCastBuffer()
+{
+    return broadCastBuffer;
+}
+
+int TcpGameRoom::getClientNum()
+{
+    return max_clnt_num;
+}
+
+int* TcpGameRoom::getClientSocks()
+{
+    return clnt_socks;
 }
 
 //Comment: 매프레임마다 실행.

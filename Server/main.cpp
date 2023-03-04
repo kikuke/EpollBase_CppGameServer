@@ -13,12 +13,6 @@
 #include "main/ServerThread.h"
 #include "Logger.h"
 
-//Test: test include
-//Test: TestStart
-#include "time.h"
-#include "GameRoom/TcpGameRoom.h"
-//Test: TestEnd
-
 //Todo: 나중에 읽기 파일 만들어서 할당시키기 자리도 옮기기
 constexpr unsigned int SERV_ADDR = INADDR_ANY;
 constexpr unsigned int SERV_PORT = 1234;
@@ -70,22 +64,6 @@ int main(void)
 
     //작업 스레드 생성
     workThread = new std::thread(WorkThread, &jobQueue, epfd);
-
-    //Test: GameRoomTest 끝나면 include랑 다 지워주기
-    //Test: TestStart
-    //Comment: 실제 배치는 워커스레드나 별도의 스레드에 올릴 예정
-    TcpGameRoom gameroom;
-    timeval time;
-    gettimeofday(&time, NULL);
-    gameroom.InitGame(1, {3}, 4, 0, nullptr);
-    gameroom.StartGame(time);
-    while(true)
-    {
-        gameroom.update(time);
-        sleep(1);//Comment: 실제론 이렇게 쓰진 않을것.
-        gettimeofday(&time, NULL);
-    }
-    //Test: TestEnd
 
     //Todo: 나중에 멀티스레딩도적용해보기 아직은 tcp 요청만 처리하지만 나중에 udp등의 요청을 처리하거나 다른 스레드나 프로세스로 연결해주기
     do
