@@ -15,6 +15,8 @@ struct JobQueue
 
 struct TCPSOCKETINFO
 {
+    int id;
+    
     int socket;
     struct sockaddr_in sockAddr;
 

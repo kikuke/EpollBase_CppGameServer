@@ -32,6 +32,18 @@ struct OBJECT_DATA
 #define GAMEROOM 0x5
 
 //GAMEROOM SUB_OP 8Bit
+#define GAMEROOM_CREATE 0xFE
+
+//GAMEROOM_UPDATE_OBJECT PACKET_DATA
+struct GameRoomCreateData
+{
+    Object_Rule rule;
+    int npc_num;
+    int clnt_num;
+    int* clnt_id;
+};//8 + sizeof(Object_Rule) + (4 * clnt_num) Byte
+
+//GAMEROOM SUB_OP 8Bit
 #define GAMEROOM_UPDATE_OBJECT 0x03
 
 //Todo: 게임룸 번호도 넣어서 전달.
@@ -52,7 +64,7 @@ struct GameRoomUpdateObjectData
 //PLAYER SUB_OP 8Bit
 #define PLAYER_UPDATE_OBJECT 0x03
 
-//Todo: 게임룸 번호도 넣어서 전달.
+//Todo: 게임룸 번호도 넣어서 전달. 근데 얘가 게임룸에 들어가는게 맞을수도 있음. 아니면 플레이어 입력 취급이니 플레이어로.
 
 //PLAYER_UPDATE_OBJECT PACKET_DATA
 struct PlayerUpdateObjectData

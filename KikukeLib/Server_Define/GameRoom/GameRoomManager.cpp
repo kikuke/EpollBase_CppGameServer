@@ -55,6 +55,8 @@ int GameRoomManager::OpenGameRoom(Object_Rule obj_rule, int npc_num, int clnt_nu
 
 bool GameRoomManager::CloseGameRoom(int room_id)
 {
+
+    isUseRoom[room_id] = false;
     return true;
 }
 
