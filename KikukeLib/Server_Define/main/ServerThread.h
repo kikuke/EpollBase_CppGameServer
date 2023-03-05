@@ -4,7 +4,7 @@
 #include "GameRoom/GameRoomManager.h"
 #include "ServerInfo.h"
 
-void WorkThread(JobQueue* jobQueue, const int epfd);
+void WorkThread(JobQueue* jobQueue, GameRoomManager* gameRoomManager, const int epfd);
 
 void ReadThread(JobQueue* jobQueue, const int buf_sz);
 

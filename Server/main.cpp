@@ -30,8 +30,8 @@ int main(void)
     
     //Todo: 읽기 파일 만들어서 할당시키기 - 읽기수준, 저장 경로
     //Comment: DEBUG는 디버깅용, 서버는 WARNING 이상으로
-    Logger::LoggerSetting(LOGLEVEL::DEBUG, "/home/kikuke/Documents/TestLog", DEFAULT_LOG_BUFFER_SIZE);
-    //Logger::LoggerSetting(LOGLEVEL::WARNING, "/home/kikuke/Documents/TestLog", DEFAULT_LOG_BUFFER_SIZE);
+    //Logger::LoggerSetting(LOGLEVEL::DEBUG, "/home/kikuke/Documents/TestLog", DEFAULT_LOG_BUFFER_SIZE);
+    Logger::LoggerSetting(LOGLEVEL::WARNING, "/home/kikuke/Documents/TestLog", DEFAULT_LOG_BUFFER_SIZE);
     Logger log("MainLog");
 
     GameRoomManager gameRoomManager(&jobQueue);
@@ -67,7 +67,7 @@ int main(void)
     }
 
     //작업 스레드 생성
-    workThread = new std::thread(WorkThread, &jobQueue, epfd);
+    workThread = new std::thread(WorkThread, &jobQueue, &gameRoomManager, epfd);
 
     gameRoomThread = new std::thread(GameRoomThread, &gameRoomManager);
     broadcastThread = new std::thread(BroadcastThread, &jobQueue, &gameRoomManager);

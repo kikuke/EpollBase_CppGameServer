@@ -9,6 +9,8 @@
 #include "Logger.h"
 #include "impl/handler/TcpMessagePacket.h"
 #include "impl/handler/TcpDisconnectPacket.h"
+#include "impl/handler/TcpGameRoomPacket.h"
+#include "impl/handler/TcpPlayerPacket.h"
 #include "PacketGenerator.h"
 #include "SocketManager.h"
 #include "ServerThread.h"
@@ -17,11 +19,11 @@
 
 size_t DisconnectPacketFactory(void* buf);
 
-void WorkThread(JobQueue* jobQueue, const int epfd)//Todo: RingBuffer 스레드세이프로 바꾸기
+void WorkThread(JobQueue* jobQueue, GameRoomManager* gameRoomManager, const int epfd)//Todo: RingBuffer 스레드세이프로 바꾸기
 {
     int sock;
 
-    PacketHandler *tcpHandles[] = { new TcpDisconnectPacket(epfd), new TcpMessagePacket() };
+    PacketHandler *tcpHandles[] = { new TcpDisconnectPacket(epfd), new TcpMessagePacket(), new TcpGameRoomPacket(gameRoomManager), new TcpPlayerPacket() };
     TcpPacketHandler tcpPacketHandler(tcpHandles, sizeof(tcpHandles) / sizeof(*tcpHandles));
 
     Logger log("MainLog");

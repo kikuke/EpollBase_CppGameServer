@@ -8,23 +8,130 @@
 
 #include "PacketDefine.h"
 #include "spepoll.h"
+#include "PacketGenerator.h"
 
 using namespace std;
-
-constexpr int BUF_SIZE = 2048;
-
-const char* SERV_ADDR = "127.0.0.1";
-constexpr int SERV_PORT = 1234;
 
 TCPTestPacketHeader* EchoHeaderFactory();
 MessageEchoData* SelfEchoDataFactory();
 void SendEchoPacket(int sock, char* buf, TCPTestPacketHeader* header, MessageEchoData* data, unsigned char end);
 ssize_t PrintRecv(int sock, const void* buf, size_t sz);
 void EpollClientsThread(const int maxEpollClients);
+void RequestCreateClientsId(void* buf, GameRoomCreateData* data, int* clntSocks);
+void EchoPacketTest();
+void GameRoomTest();
 
-int mode;
+struct sockaddr_in serv_addr;
+
+constexpr int BUF_SIZE = 2048;
+
+const char* SERV_ADDR = "127.0.0.1";
+constexpr int SERV_PORT = 1234;
+
+int mode=0;
 
 int main(void)
+{
+	memset(&serv_addr, 0, sizeof(serv_addr));
+	serv_addr.sin_family=AF_INET;
+	serv_addr.sin_addr.s_addr=inet_addr(SERV_ADDR);
+	serv_addr.sin_port=htons(SERV_PORT);
+
+	while(!mode)
+	{
+		cout << "Select Mode" << endl;
+		cout << "1: EchoTest" << endl;
+		cout << "2: GameRoomTest" << endl;
+		cout << "Select Mode: ";
+
+		cin >> mode;
+
+		switch (mode)
+		{
+		case 1:
+			EchoPacketTest();
+			break;
+
+		case 2:
+			GameRoomTest();
+			break;
+		
+		default:
+			mode = 0;
+			break;
+		}
+	}
+
+	return 0;
+}
+
+void GameRoomTest()
+{
+	unsigned char buf[BUF_SIZE];
+
+	GameRoomCreateData createRoomData;
+	Object_Rule game_rule;
+	int* clnt_id;
+	int* clntSocks;
+
+	cout << "Input Game rule" << endl;
+	cout << "Object Speed: ";
+	cin >> game_rule.speed;
+	cout << "Input Max Number of Npc: ";
+	cin >> createRoomData.npc_num;
+	cout << "Input Max Number of Clients: ";
+	cin >> createRoomData.clnt_num;
+	clnt_id = new int[createRoomData.clnt_num];
+	for(int i=0; i<createRoomData.clnt_num; i++){
+		cout << "Input " << i << " Client ID(Integer): ";
+		cin >> clnt_id[i];
+	}
+	createRoomData.clnt_id = clnt_id;
+
+	//Comment: 게임서버로 게임 룸 생성 요청은 모든 클라이언트가 서버로부터 id등록 OK응답을 받고 난 후 진행.
+	RequestCreateClientsId(buf, &createRoomData, clntSocks);
+
+	//Todo: Send Create Room Packet
+}
+
+void RequestCreateClientsId(void* buf, GameRoomCreateData* data, int* clntSocks)
+{
+	const TCPTestPacketHeader send_header = {TCP_PACKET_START_CODE, sizeof(PlayerSetIdRequestData) + sizeof(unsigned char),
+        PLAYER, PLAYER_SET_ID_REQUEST, 0x000, 0x000};
+	PlayerSetIdRequestData requestData;
+	TCPTestPacketHeader recv_header;
+
+	size_t packetLen;
+
+	clntSocks = new int[data->clnt_num];
+
+	for(int i=0; i<data->clnt_num; i++){
+		clntSocks[i] = socket(PF_INET, SOCK_STREAM, 0);
+		if(clntSocks[i] == -1){
+			perror("Socket Error: ");
+			exit(1);
+		}
+		if(connect(clntSocks[i], (struct sockaddr*)&serv_addr, sizeof(serv_addr)) == -1){
+			perror("Connecting Error: ");
+			exit(1);
+		}
+
+		requestData.id = data->clnt_id[i];
+		packetLen = MakePacket(buf, &send_header, &requestData, sizeof(requestData), TCP_PACKET_END_CODE);
+
+		write(clntSocks[i], buf, packetLen);
+
+		read(clntSocks[i], buf, BUF_SIZE);
+		memcpy(&recv_header, buf, sizeof(recv_header));
+		if(!(recv_header.subOp == PLAYER_SET_ID_OK)){
+			puts("Create ID Recv Error!");
+			exit(1);
+		}
+		printf("%d Client Create ID Success!\n", data->clnt_id[i]);
+	}
+}
+
+void EchoPacketTest()
 {
 	int maxClientsThread;
 	int maxEpollClients;
@@ -35,8 +142,6 @@ int main(void)
 	clientsThreads = new thread*[maxClientsThread];
 	cout << "Input Max Epoll Clients Size: ";
 	cin >> maxEpollClients;
-	cout << "\nFull Message: 1\nReceive Count: 2\nSelect Mode: ";
-	cin >> mode;
 
 	for(int i=0; i<maxClientsThread; i++){
 		clientsThreads[i] = new thread(EpollClientsThread, maxEpollClients);
@@ -49,8 +154,6 @@ int main(void)
 	for(int i=0; i<maxClientsThread; i++){
 		delete clientsThreads[i];
 	}
-
-	return 0;
 }
 
 void EpollClientsThread(const int maxEpollClients)
@@ -58,7 +161,6 @@ void EpollClientsThread(const int maxEpollClients)
 	int clntSocks[maxEpollClients];
 	int clntRecvCnt = 0;
 	int epfd, event_cnt, recv_sz;
-	struct sockaddr_in serv_addr;
 	char buf[BUF_SIZE];
 
 	struct epoll_event* ep_events;
@@ -73,11 +175,6 @@ void EpollClientsThread(const int maxEpollClients)
 		perror("Init Epoll Error: ");
 		exit(1);
 	}
-
-	memset(&serv_addr, 0, sizeof(serv_addr));
-	serv_addr.sin_family=AF_INET;
-	serv_addr.sin_addr.s_addr=inet_addr(SERV_ADDR);
-	serv_addr.sin_port=htons(SERV_PORT);
 
 	//connecting
 	for(int i=0; i<maxEpollClients; i++){
@@ -107,15 +204,7 @@ void EpollClientsThread(const int maxEpollClients)
 		for(int i=0; i<event_cnt; i++){
 			recv_sz = ReadET(ep_events[i].data.fd, buf, BUF_SIZE, PrintRecv);
 			SendEchoPacket(ep_events[i].data.fd, buf, header, msgData, TCP_PACKET_END_CODE);
-			if(mode == 1){
-				printf("Receive Packet - Socket: %d	Size: %d\n", ep_events[i].data.fd, recv_sz);
-			}
-			else if(mode == 2){
-				if(ep_events[i].data.fd == 50){
-					clntRecvCnt++;
-					printf("Socket Receive Count: %d\n", clntRecvCnt);
-				}
-			}
+			printf("Receive Packet - Socket: %d	Size: %d\n", ep_events[i].data.fd, recv_sz);
 		}
 	}
 
