@@ -124,12 +124,13 @@ void GameRoomThread(GameRoomManager* gameRoomManager)
 
     Logger log("GameRoomThread");
     log.Log(LOGLEVEL::DEBUG, "GameRoom Thread Start - FrameTime: %lf", frameTime);
-    
+
     while(true){
         gettimeofday(&serverTime, NULL);
         interval = getTimeDist(&beforeTime, &serverTime);
+        
         if(interval > frameTime){
-            log.Log(LOGLEVEL::INFO, "Frame FrameTime: %lf, interval: %lf", frameTime, interval);
+            log.Log(LOGLEVEL::DEBUG, "Frame FrameTime: %lf, interval: %lf", frameTime, interval);
 
             gameRoomManager->UpdateGameRooms(serverTime);
 
