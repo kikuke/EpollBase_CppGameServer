@@ -25,7 +25,7 @@ int TcpGameRoomPacket::execute(int sock, unsigned int subOp, RingBuffer& buffer)
             return 0;//Todo: 에러코드로 바꿔주기
         }
 
-        //id to sock
+        //Comment: id to sock
         clnt_socks = new int[data.clnt_num];
         for(int i=0; i<data.clnt_num; i++){
             clnt_socks[i] = SocketManager::getInstance().getSocketById(data.clnt_id[i]);

@@ -105,6 +105,10 @@ void BroadcastThread(JobQueue* jobQueue, GameRoomManager* gameRoomManager)
 
         //Todo: 게임룸의 링 버퍼 가져와서 비지 않았을경우 그안의 모든 멤버들에게 패킷 보내주면 됨.
         //Todo: 게임룸의 링버퍼에 넣는 로직 추가해줘야함. 생성자에서 넣기
+        if(gameRoom->getBroadCastBuffer()->getUseSize() < sizeof(TCPTestPacketHeader)){
+            continue;
+        }
+
         gameRoom->getBroadCastBuffer()->dequeue(buf, BROADCAST_BUFFER_SIZE);
         for(int i=0; i<clnt_num; i++){
             sendLen = write(clnt_socks[i], buf, BROADCAST_BUFFER_SIZE);

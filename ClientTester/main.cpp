@@ -19,6 +19,7 @@ ssize_t PrintRecv(int sock, const void* buf, size_t sz);
 void EpollClientsThread(const int maxEpollClients);
 void RequestCreateClientsId(void* buf, GameRoomCreateData* data, int* clntSocks);
 void RequestCreateGameRoom(int authSock, void* buf, GameRoomCreateData* createData);
+void PrintObjInfo(Object_Info* info);
 void EchoPacketTest();
 void GameRoomTest();
 
@@ -66,6 +67,14 @@ int main(void)
 	return 0;
 }
 
+void PrintObjInfo(Object_Info* info)
+{
+	printf("Object Update - ID: %d, StartTime: %ld, State: %d\n\
+    Pos: (%f, %f, %f), Force: (%f, %f, %f)\n",\
+    info->id, info->st_time.tv_sec, info->state,\
+    info->pos.x, info->pos.y, info->pos.z, info->force.x, info->force.y, info->force.z);
+}
+
 void GameRoomTest()
 {
 	unsigned char buf[BUF_SIZE];
@@ -75,6 +84,10 @@ void GameRoomTest()
 	int* clnt_id;
 	int* clntSocks;
 	float speed;
+
+	size_t recv_len;
+
+	GameRoomUpdateObjectData updateData;
 
 	cout << "Input Game rule" << endl;
 	cout << "Object Speed: ";
@@ -100,18 +113,47 @@ void GameRoomTest()
 	//Comment: 임시로 아무소켓이나 인증서버로 설정함.
 	RequestCreateGameRoom(clntSocks[0], buf, &createRoomData);
 
-	while(true);
+	//Comment: TCP 특성상 이렇게 받으면 안되고 링버퍼로 해야 하나, 테스트 용도로 간단하게.
+	while(true)
+	{
+		try{
+			recv_len = read(clntSocks[1], (unsigned char*)&updateData, sizeof(int));
+
+			printf("\nRecv: %ld\n", recv_len);
+			updateData.objs_data = new OBJECT_DATA[updateData.update_obj_num];
+			recv_len = read(clntSocks[1], updateData.objs_data, sizeof(OBJECT_DATA)*updateData.update_obj_num);
+			printf("\nRecv: %ld\n", recv_len);
+			printf("\nupdate obj Num: %d\n", updateData.update_obj_num);
+
+			for(int i=0; i<updateData.update_obj_num; i++){
+				//PrintObjInfo(&(updateData.objs_data[i].info));
+			}
+		} catch (exception e){
+			puts("broken packet");
+		}
+	}
 }
 
 void RequestCreateGameRoom(int authSock, void* buf, GameRoomCreateData* createData)
 {
 	//Comment: 가변형이라 이렇게 세팅해야함.
 	size_t data_sz = 8 + sizeof(Object_Rule) + (sizeof(int) * createData->clnt_num);
+	size_t clnt_sz = (sizeof(int) * createData->clnt_num);
+	unsigned char endCode = TCP_PACKET_END_CODE;
 	TCPTestPacketHeader send_header = {TCP_PACKET_START_CODE, (unsigned int)(data_sz + sizeof(unsigned char)),
         GAMEROOM, GAMEROOM_CREATE, 0x000, 0x000};
-	size_t packetLen;
-	
-	packetLen = MakePacket(buf, &send_header, createData, data_sz, TCP_PACKET_END_CODE);
+	size_t packetLen = 0;
+
+	//Comment: 포인터 형때문에 이렇게 처리
+	memcpy((unsigned char*)buf + packetLen, &send_header, sizeof(send_header));
+	packetLen += sizeof(send_header);
+	memcpy((unsigned char*)buf + packetLen, createData, data_sz - clnt_sz);
+	packetLen += data_sz - clnt_sz;
+	memcpy((unsigned char*)buf + packetLen, createData->clnt_id, clnt_sz);
+	packetLen += clnt_sz;
+	memcpy((unsigned char*)buf + packetLen, &endCode, sizeof(endCode));
+	packetLen += sizeof(endCode);
+
 	write(authSock, buf, packetLen);
 }
 

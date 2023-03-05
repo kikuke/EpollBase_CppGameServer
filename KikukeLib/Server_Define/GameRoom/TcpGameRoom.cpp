@@ -187,6 +187,7 @@ void TcpGameRoom::AddUpdate(Object_Info* info)
     LogObjInfo(info);
 }
 
+//Todo: 이거 잘못됨. 포인터를 고정으로 바꾸거나 포인터가리키는곳 복사하기
 size_t UpdateObjectPacketFactory(void* buf, GameRoomUpdateObjectData* data)
 {
     size_t data_sz = sizeof(unsigned int) + sizeof(OBJECT_DATA)*(data->update_obj_num);
