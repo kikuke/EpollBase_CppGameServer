@@ -54,6 +54,29 @@ bool SocketManager::delTcpSocketInfo(int socket)//Todo: 재사용 방식으로 �
     return true;
 }
 
+//Todo: deleteId도 만들기
+bool SocketManager::addID(int sock, int id)
+{
+    std::pair<int, int> data = std::pair<int, int>(id, sock);
+    if(!id_socketMap.insert(data).second){
+        return false;
+    }
+    getTcpSocketInfo(sock)->id = id;
+    
+    (*log).Log(LOGLEVEL::INFO, "AddID - Socket: %d, ID: %d", sock, id);
+
+    return true;
+}
+
+int SocketManager::getSocketById(int id)
+{
+    std::map<int, int>::iterator iter = id_socketMap.find(id);
+    if(iter == id_socketMap.end())
+        return -1;
+
+    return iter->second;
+}
+
 TCPSOCKETINFO* SocketManager::getTcpSocketInfo(int socket)//Todo: 재사용 방식으로 바꾸기 ip기준으로 체크
 {
     std::map<int, TCPSOCKETINFO*>::iterator iter = tcpInfoMap.find(socket);
