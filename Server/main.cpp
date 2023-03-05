@@ -30,14 +30,18 @@ int main(void)
     
     //Todo: 읽기 파일 만들어서 할당시키기 - 읽기수준, 저장 경로
     //Comment: DEBUG는 디버깅용, 서버는 WARNING 이상으로
-    //Logger::LoggerSetting(LOGLEVEL::DEBUG, "/home/kikuke/Documents/TestLog", DEFAULT_LOG_BUFFER_SIZE);
-    Logger::LoggerSetting(LOGLEVEL::WARNING, "/home/kikuke/Documents/TestLog", DEFAULT_LOG_BUFFER_SIZE);
+    Logger::LoggerSetting(LOGLEVEL::DEBUG, "/home/kikuke/Documents/TestLog", DEFAULT_LOG_BUFFER_SIZE);
+    //Logger::LoggerSetting(LOGLEVEL::WARNING, "/home/kikuke/Documents/TestLog", DEFAULT_LOG_BUFFER_SIZE);
     Logger log("MainLog");
+
+    GameRoomManager gameRoomManager(&jobQueue);
 
     TcpService* tcpService;
 
     std::thread* readThreads[READTHREAD_SIZE];
     std::thread* workThread;
+    std::thread* gameRoomThread;
+    std::thread* broadcastThread;
 
     int i=0;
 
@@ -64,6 +68,9 @@ int main(void)
 
     //작업 스레드 생성
     workThread = new std::thread(WorkThread, &jobQueue, epfd);
+
+    gameRoomThread = new std::thread(GameRoomThread, &gameRoomManager);
+    broadcastThread = new std::thread(BroadcastThread, &jobQueue, &gameRoomManager);
 
     //Todo: 나중에 멀티스레딩도적용해보기 아직은 tcp 요청만 처리하지만 나중에 udp등의 요청을 처리하거나 다른 스레드나 프로세스로 연결해주기
     do

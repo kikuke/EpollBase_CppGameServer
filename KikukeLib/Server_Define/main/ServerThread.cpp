@@ -81,7 +81,7 @@ void ReadThread(JobQueue* jobQueue, const int buf_sz)//Todo: 위치 옮기기
     return;
 }
 
-void BroadcastThread(JobQueue* jobQueue, GameRoomManager& gameRoomManager)
+void BroadcastThread(JobQueue* jobQueue, GameRoomManager* gameRoomManager)
 {
     int room_id;
     TcpGameRoom* gameRoom;
@@ -97,7 +97,7 @@ void BroadcastThread(JobQueue* jobQueue, GameRoomManager& gameRoomManager)
 
     while((room_id = jobQueue->broadcastQueue.pop()) >= 0)
     {
-        gameRoom = gameRoomManager.GetGameRoom(room_id);
+        gameRoom = gameRoomManager->GetGameRoom(room_id);
         clnt_num = gameRoom->getClientNum();
         clnt_socks = gameRoom->getClientSocks();
 
@@ -115,22 +115,23 @@ void BroadcastThread(JobQueue* jobQueue, GameRoomManager& gameRoomManager)
     return;
 }
 
-void GameRoomThread(GameRoomManager& gameRoomManager)
+void GameRoomThread(GameRoomManager* gameRoomManager)
 {
     timeval serverTime;
     timeval beforeTime = {0};
-    double frameTime = 1/SERVER_FRAME;
+    double frameTime = 1.0/SERVER_FRAME;
+    double interval;
 
     Logger log("GameRoomThread");
-    log.Log(LOGLEVEL::DEBUG, "GameRoom Thread Start");
-    //Todo: 프레임 단위로 시간 이용해 굴리기
+    log.Log(LOGLEVEL::DEBUG, "GameRoom Thread Start - FrameTime: %lf", frameTime);
+    
     while(true){
         gettimeofday(&serverTime, NULL);
+        interval = getTimeDist(&beforeTime, &serverTime);
+        if(interval > frameTime){
+            log.Log(LOGLEVEL::INFO, "Frame FrameTime: %lf, interval: %lf", frameTime, interval);
 
-        if(getTimeDist(&beforeTime, &serverTime) > frameTime){
-            log.Log(LOGLEVEL::INFO, "Frame Start");
-
-            gameRoomManager.UpdateGameRooms(serverTime);
+            gameRoomManager->UpdateGameRooms(serverTime);
 
             beforeTime = serverTime;
         }

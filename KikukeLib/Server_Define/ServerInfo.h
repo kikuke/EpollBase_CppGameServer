@@ -15,8 +15,9 @@ struct JobQueue
 
 struct TCPSOCKETINFO
 {
+    //Comment: 클라이언트가 인증서버에서 발급받은 후 게임서버로 전달하는 임시 id(토큰 느낌)
     int id;
-    
+
     int socket;
     struct sockaddr_in sockAddr;
 

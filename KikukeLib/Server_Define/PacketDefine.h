@@ -62,6 +62,18 @@ struct GameRoomUpdateObjectData
 #define PLAYER 0x6
 
 //PLAYER SUB_OP 8Bit
+#define PLAYER_SET_ID_REQUEST 0x01
+#define PLAYER_SET_ID_OK 0x02
+
+//Todo: 게임룸 번호도 넣어서 전달. 근데 얘가 게임룸에 들어가는게 맞을수도 있음. 아니면 플레이어 입력 취급이니 플레이어로.
+
+//PLAYER_UPDATE_OBJECT PACKET_DATA
+struct PlayerSetIdRequestData
+{
+    int id;
+};//4Byte
+
+//PLAYER SUB_OP 8Bit
 #define PLAYER_UPDATE_OBJECT 0x03
 
 //Todo: 게임룸 번호도 넣어서 전달. 근데 얘가 게임룸에 들어가는게 맞을수도 있음. 아니면 플레이어 입력 취급이니 플레이어로.
