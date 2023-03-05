@@ -120,12 +120,13 @@ void BroadcastThread(JobQueue* jobQueue, GameRoomManager* gameRoomManager)
 void GameRoomThread(GameRoomManager* gameRoomManager)
 {
     timeval serverTime;
-    timeval beforeTime = {0};
+    timeval beforeTime;
     double frameTime = 1.0/SERVER_FRAME;
     double interval;
 
     Logger log("GameRoomThread");
     log.Log(LOGLEVEL::DEBUG, "GameRoom Thread Start - FrameTime: %lf", frameTime);
+    gettimeofday(&beforeTime, NULL);
 
     while(true){
         gettimeofday(&serverTime, NULL);

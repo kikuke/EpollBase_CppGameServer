@@ -51,7 +51,7 @@ int TcpPacketHandler::execute(int sock)
 
     ret = ExecuteOP(sock, header.mainOp, header.subOp, *(info->recvBuffer));
     if(ret != 1){
-        (*log).Log(LOGLEVEL::ERROR, "ExecuteOP()");
+        (*log).Log(LOGLEVEL::ERROR, "ExecuteOP() - MainOp: %d, SubOp: %d", header.mainOp, header.subOp);
         //해당 소켓의 버퍼는 비게됨.
         //해당 오류에 대한 해당 기능의 에러 처리
         CatchError(sock, header.mainOp, ret);

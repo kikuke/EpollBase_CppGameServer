@@ -12,6 +12,7 @@ private:
     int room_cnt;
     TcpGameRoom** gameRooms;
     bool* isUseRoom;
+    bool* isStartRoom;
 
     size_t DoubleBuffer();
 
@@ -27,6 +28,7 @@ public:
         }
 
         isUseRoom = new bool[room_cnt];
+        isStartRoom = new bool[room_cnt];
     }
 
     ~GameRoomManager()
@@ -35,6 +37,7 @@ public:
             delete gameRooms[i];
         }
         delete isUseRoom;
+        delete isStartRoom;
     }
 
     //return room_id

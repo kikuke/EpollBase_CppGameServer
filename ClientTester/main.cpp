@@ -18,6 +18,7 @@ void SendEchoPacket(int sock, char* buf, TCPTestPacketHeader* header, MessageEch
 ssize_t PrintRecv(int sock, const void* buf, size_t sz);
 void EpollClientsThread(const int maxEpollClients);
 void RequestCreateClientsId(void* buf, GameRoomCreateData* data, int* clntSocks);
+void RequestCreateGameRoom(int authSock, void* buf, GameRoomCreateData* createData);
 void EchoPacketTest();
 void GameRoomTest();
 
@@ -73,6 +74,7 @@ void GameRoomTest()
 	Object_Rule game_rule;
 	int* clnt_id;
 	int* clntSocks;
+	float speed;
 
 	cout << "Input Game rule" << endl;
 	cout << "Object Speed: ";
@@ -88,10 +90,29 @@ void GameRoomTest()
 	}
 	createRoomData.clnt_id = clnt_id;
 
+	createRoomData.rule = game_rule;
+
+	clntSocks = new int[createRoomData.clnt_num];
 	//Comment: 게임서버로 게임 룸 생성 요청은 모든 클라이언트가 서버로부터 id등록 OK응답을 받고 난 후 진행.
+	//Comment: 이를 위해서 인증 서버에서는 클라이언트들에게 id들을 보내고, 클라이언트들로부터 id등록 확인을 모두 받은 후 등록된 id명단들을 다시 게임서버로 전송함.
 	RequestCreateClientsId(buf, &createRoomData, clntSocks);
 
-	//Todo: Send Create Room Packet
+	//Comment: 임시로 아무소켓이나 인증서버로 설정함.
+	RequestCreateGameRoom(clntSocks[0], buf, &createRoomData);
+
+	while(true);
+}
+
+void RequestCreateGameRoom(int authSock, void* buf, GameRoomCreateData* createData)
+{
+	//Comment: 가변형이라 이렇게 세팅해야함.
+	size_t data_sz = 8 + sizeof(Object_Rule) + (sizeof(int) * createData->clnt_num);
+	TCPTestPacketHeader send_header = {TCP_PACKET_START_CODE, (unsigned int)(data_sz + sizeof(unsigned char)),
+        GAMEROOM, GAMEROOM_CREATE, 0x000, 0x000};
+	size_t packetLen;
+	
+	packetLen = MakePacket(buf, &send_header, createData, data_sz, TCP_PACKET_END_CODE);
+	write(authSock, buf, packetLen);
 }
 
 void RequestCreateClientsId(void* buf, GameRoomCreateData* data, int* clntSocks)
@@ -102,8 +123,6 @@ void RequestCreateClientsId(void* buf, GameRoomCreateData* data, int* clntSocks)
 	TCPTestPacketHeader recv_header;
 
 	size_t packetLen;
-
-	clntSocks = new int[data->clnt_num];
 
 	for(int i=0; i<data->clnt_num; i++){
 		clntSocks[i] = socket(PF_INET, SOCK_STREAM, 0);

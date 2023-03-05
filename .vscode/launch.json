@@ -6,6 +6,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/build/Server/EpollServer",
+            //"program": "${workspaceFolder}/build/ClientTester/client_test",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",

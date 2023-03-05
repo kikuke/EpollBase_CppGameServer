@@ -35,7 +35,7 @@ int TcpGameRoomPacket::execute(int sock, unsigned int subOp, RingBuffer& buffer)
         (*log).Log(LOGLEVEL::INFO, "[%s] Open GameRoom id: %d", inet_ntoa(SocketManager::getInstance().getTcpSocketInfo(sock)->sockAddr.sin_addr), room_id);
         delete data.clnt_id;
 
-        return room_id;
+        return 1;
         break;
 
     default:

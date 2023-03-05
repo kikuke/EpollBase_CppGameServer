@@ -116,8 +116,11 @@ void TcpGameRoom::MoveObject(timeval& nowtime, Object_Info* info)
 {
     double moveTime = getTimeDist(&(info->st_time), &nowtime);
 
+    //Todo: 움직였으면 타임 초기화
     info->pos.x += info->force.x * moveTime;
     info->pos.y += info->force.y * moveTime;
+    
+    info->st_time = nowtime;
 }
 
 double TcpGameRoom::GetObjPosDistance(Obj_Position pos1, Obj_Position pos2)
@@ -180,6 +183,8 @@ void TcpGameRoom::AddUpdate(Object_Info* info)
     (*obj_oldInfoMap[info->id]) = (*obj_nowInfoMap[info->id]);
     (*obj_nowInfoMap[info->id]) = *info;
     isUpdateId[info->id] = true;
+
+    LogObjInfo(info);
 }
 
 size_t UpdateObjectPacketFactory(void* buf, GameRoomUpdateObjectData* data)
@@ -266,12 +271,15 @@ void TcpGameRoom::UpdateNpcEndEvents(timeval& nowtime)
     AI_Npc* npc;
     timeval endTime;
 
+    double interval;
+
     while(!npc_end_events.empty())
     {
         event = npc_end_events.top();
         info = event.getObjInfo();
 
-        if(getTimeDist(event.getEndTime(), &nowtime) >= 0){
+        interval = getTimeDist(event.getEndTime(), &nowtime);
+        if(interval >= 0){
             npc_end_events.pop();
 
             npc = FindAI_Npc(info->id);
@@ -282,8 +290,6 @@ void TcpGameRoom::UpdateNpcEndEvents(timeval& nowtime)
 
             event.set(info, endTime);
             npc_end_events.push(event);
-
-            LogObjInfo(info);
             continue;
         }
 
