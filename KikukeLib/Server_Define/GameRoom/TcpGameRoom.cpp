@@ -96,9 +96,9 @@ void TcpGameRoom::StartGame(timeval& nowtime)
 //Comment: AI입력도 여기에 넣기
 //Comment: 즉각 반영 되진 않고 매 프레임마다 실행되는 update때 반영되게끔.
 //Comment: nowObjInfo에 데이터를 갱신함.
-void TcpGameRoom::InterruptEvent(timeval& nowtime, Object_Info info)
+void TcpGameRoom::InterruptEvent(Object_Info info)
 {
-    if(!CheckValidateObjInfo(nowtime, &info)){
+    if(!CheckValidateObjInfo(serverTime, &info)){
         (*log).Log(LOGLEVEL::WARNING, "[%s] Invalidate Info - ID: %d", "GameRoom " + room_id, info.id);
         return;
     }
@@ -109,6 +109,7 @@ void TcpGameRoom::InterruptEvent(timeval& nowtime, Object_Info info)
         (*log).Log(LOGLEVEL::DEBUG, "[%s] Dead Reckoning Ocurred - ID: %d", "GameRoom " + room_id, info.id);
     }
 
+    (*log).Log(LOGLEVEL::INFO, "[%s] InterruptEvent Info - ID: %d", "GameRoom " + room_id, info.id);
     AddUpdate(&info);
 }
 
@@ -184,7 +185,7 @@ void TcpGameRoom::AddUpdate(Object_Info* info)
     (*obj_nowInfoMap[info->id]) = *info;
     isUpdateId[info->id] = true;
 
-    //LogObjInfo(info);
+    LogObjInfo(info);
 }
 
 //Todo: 이거 잘못됨. 포인터를 고정으로 바꾸거나 포인터가리키는곳 복사하기
@@ -227,7 +228,7 @@ void TcpGameRoom::SendUpdateObjectPacket()
             update_obj_num++;
         }
     }
-    
+
     if(update_obj_num <= 0)
         return;
 
@@ -274,10 +275,12 @@ int* TcpGameRoom::getClientSocks()
 //Comment: nowObjInfo에 있는 정보들을 토대로 다시 정보들을 업데이트 시킴
 void TcpGameRoom::update(timeval& nowtime)//Todo: 함수 분리
 {
+    serverTime = nowtime;
     //Todo: 충돌 계산, 보간 등 이벤트 처리.
-    NextFrame(nowtime);
+    //Todo: 중간에 나간 유저 소켓 저장 및 삭제 처리
+    NextFrame(serverTime);
 
-    UpdateNpcEndEvents(nowtime);
+    UpdateNpcEndEvents(serverTime);
 
     SendUpdateObjectPacket();
 }

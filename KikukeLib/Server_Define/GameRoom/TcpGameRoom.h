@@ -21,6 +21,7 @@ private:
     int room_id;
     int obj_idCnt;
     Object_Rule obj_rule;
+    timeval serverTime;
     //Comment: 변경한 정보만 발송하는용도.
     bool* isUpdateId;
 
@@ -90,7 +91,7 @@ public:
     ~TcpGameRoom();
 
     //Comment: 클라이언트의 입력신호
-    void InterruptEvent(timeval& nowtime, Object_Info info);
+    void InterruptEvent(Object_Info info);
     void InitGame(int room_id, Object_Rule obj_rule, int npc_num, int clnt_num, int* clnt_socks);
     void StartGame(timeval& nowtime);
     void update(timeval& nowtime);

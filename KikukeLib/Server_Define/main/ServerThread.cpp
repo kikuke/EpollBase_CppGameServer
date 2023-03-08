@@ -23,7 +23,7 @@ void WorkThread(JobQueue* jobQueue, GameRoomManager* gameRoomManager, const int 
 {
     int sock;
 
-    PacketHandler *tcpHandles[] = { new TcpDisconnectPacket(epfd), new TcpMessagePacket(), new TcpGameRoomPacket(gameRoomManager), new TcpPlayerPacket() };
+    PacketHandler *tcpHandles[] = { new TcpDisconnectPacket(epfd), new TcpMessagePacket(), new TcpGameRoomPacket(gameRoomManager), new TcpPlayerPacket(gameRoomManager) };
     TcpPacketHandler tcpPacketHandler(tcpHandles, sizeof(tcpHandles) / sizeof(*tcpHandles));
 
     Logger log("MainLog");

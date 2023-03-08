@@ -5,6 +5,7 @@
 #include <thread>
 #include <iostream>
 #include <sys/epoll.h>
+#include<termios.h>
 
 #include "PacketDefine.h"
 #include "spepoll.h"
@@ -17,11 +18,13 @@ MessageEchoData* SelfEchoDataFactory();
 void SendEchoPacket(int sock, char* buf, TCPTestPacketHeader* header, MessageEchoData* data, unsigned char end);
 ssize_t PrintRecv(int sock, const void* buf, size_t sz);
 void EpollClientsThread(const int maxEpollClients);
+void InputThread(int sock, int room_id);
 void RequestCreateClientsId(void* buf, GameRoomCreateData* data, int* clntSocks);
 void RequestCreateGameRoom(int authSock, void* buf, GameRoomCreateData* createData);
 void PrintObjInfo(Object_Info* info);
 void EchoPacketTest();
 void GameRoomTest();
+int getch();
 
 struct sockaddr_in serv_addr;
 
@@ -75,6 +78,72 @@ void PrintObjInfo(Object_Info* info)
     info->pos.x, info->pos.y, info->pos.z, info->force.x, info->force.y, info->force.z);
 }
 
+int getch()
+{
+    int ch;
+	struct termios buf, save;
+
+	tcgetattr(0, &save);
+	buf = save;
+
+	buf.c_lflag &= ~(ICANON|ECHO);
+	buf.c_cc[VMIN] = 1;
+	buf.c_cc[VTIME] = 0;
+
+	tcsetattr(0, TCSAFLUSH, &buf);
+
+	ch = getchar();
+	tcsetattr(0, TCSAFLUSH, &save);
+
+    return ch;
+}
+
+void InputThread(int sock, int room_id)
+{
+	unsigned char buf[BUF_SIZE];
+	size_t packetLen;
+	size_t sendLen;
+	char keyInput;
+	size_t data_sz = sizeof(PlayerUpdateObjectData);
+	TCPTestPacketHeader send_header = {TCP_PACKET_START_CODE, (unsigned int)(data_sz + sizeof(unsigned char)),
+        PLAYER, PLAYER_UPDATE_OBJECT, 0x000, 0x000};
+	PlayerUpdateObjectData inputData;
+	inputData.room_id = room_id;
+	inputData.obj_data.info.force = {0};
+
+	puts("Start Input Thread");
+	
+	while(keyInput = getch())
+	{
+		if(!((keyInput == 'w') || (keyInput == 'a') || (keyInput == 's') || (keyInput == 'd')))
+			continue;
+
+		//Todo: 가속도, 시작시간까지 붙여줘야 서버에서 이동처리를 해준다. 여기에서 시작시간과 가속도를 붙여주진 않아서 포지션 이동만 될것.
+		switch (keyInput)
+		{
+		case 'w':
+			inputData.obj_data.info.pos = {0, 10, 0};
+			break;
+		case 'a':
+			inputData.obj_data.info.pos = {-10, 0, 0};
+			break;
+		case 's':
+			inputData.obj_data.info.pos = {0, -10, 0};
+			break;
+		case 'd':
+			inputData.obj_data.info.pos = {10, 0, 0};
+			break;
+		
+		default:
+			break;
+		}
+
+		packetLen = MakePacket(buf, &send_header, &inputData, data_sz, TCP_PACKET_END_CODE);
+		sendLen = write(sock, buf, packetLen);
+		printf("Send Data %ld\n", sendLen);
+	}
+}
+
 void GameRoomTest()
 {
 	unsigned char buf[BUF_SIZE];
@@ -84,6 +153,7 @@ void GameRoomTest()
 	int* clnt_id;
 	int* clntSocks;
 	float speed;
+	int roomid;
 
 	size_t recv_len;
 
@@ -114,6 +184,22 @@ void GameRoomTest()
 	//Comment: 임시로 아무소켓이나 인증서버로 설정함.
 	RequestCreateGameRoom(clntSocks[0], buf, &createRoomData);
 
+	//Comment: 임시 처리. 최초로 받는 update에서 roomid를 받기 위해
+	recv_len = read(clntSocks[0], (unsigned char*)&header, sizeof(header));
+	recv_len = read(clntSocks[0], (unsigned char*)&updateData, sizeof(unsigned int));
+	updateData.objs_data = new OBJECT_DATA[updateData.update_obj_num];
+	recv_len = read(clntSocks[0], updateData.objs_data, sizeof(OBJECT_DATA)*updateData.update_obj_num);
+			
+	printf("\nupdate obj Num: %d\n", updateData.update_obj_num);
+
+	for(int i=0; i<updateData.update_obj_num; i++){
+		PrintObjInfo(&(updateData.objs_data[i].info));
+	}
+	//Comment: 임시처리 끝
+
+	roomid = updateData.room_id;
+	thread inputThread(InputThread, clntSocks[0], roomid);
+
 	//Comment: TCP 특성상 이렇게 받으면 안되고 링버퍼로 해야 하나, 테스트 용도로 간단하게.
 	while(true)
 	{
@@ -124,6 +210,9 @@ void GameRoomTest()
 			updateData.objs_data = new OBJECT_DATA[updateData.update_obj_num];
 			recv_len = read(clntSocks[0], updateData.objs_data, sizeof(OBJECT_DATA)*updateData.update_obj_num);
 			
+			if(recv_len <= 0)
+				continue;
+
 			printf("\nupdate obj Num: %d\n", updateData.update_obj_num);
 
 			for(int i=0; i<updateData.update_obj_num; i++){
