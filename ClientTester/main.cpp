@@ -87,6 +87,7 @@ void GameRoomTest()
 
 	size_t recv_len;
 
+	TCPTestPacketHeader header;
 	GameRoomUpdateObjectData updateData;
 
 	cout << "Input Game rule" << endl;
@@ -116,17 +117,17 @@ void GameRoomTest()
 	//Comment: TCP 특성상 이렇게 받으면 안되고 링버퍼로 해야 하나, 테스트 용도로 간단하게.
 	while(true)
 	{
+		puts("Try Parse");
 		try{
-			recv_len = read(clntSocks[1], (unsigned char*)&updateData, sizeof(int));
-
-			printf("\nRecv: %ld\n", recv_len);
+			recv_len = read(clntSocks[0], (unsigned char*)&header, sizeof(header));
+			recv_len = read(clntSocks[0], (unsigned char*)&updateData, sizeof(unsigned int));
 			updateData.objs_data = new OBJECT_DATA[updateData.update_obj_num];
-			recv_len = read(clntSocks[1], updateData.objs_data, sizeof(OBJECT_DATA)*updateData.update_obj_num);
-			printf("\nRecv: %ld\n", recv_len);
+			recv_len = read(clntSocks[0], updateData.objs_data, sizeof(OBJECT_DATA)*updateData.update_obj_num);
+			
 			printf("\nupdate obj Num: %d\n", updateData.update_obj_num);
 
 			for(int i=0; i<updateData.update_obj_num; i++){
-				//PrintObjInfo(&(updateData.objs_data[i].info));
+				PrintObjInfo(&(updateData.objs_data[i].info));
 			}
 		} catch (exception e){
 			puts("broken packet");

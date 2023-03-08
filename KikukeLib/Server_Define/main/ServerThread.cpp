@@ -85,14 +85,15 @@ void ReadThread(JobQueue* jobQueue, const int buf_sz)//Todo: 위치 옮기기
 
 void BroadcastThread(JobQueue* jobQueue, GameRoomManager* gameRoomManager)
 {
-    int room_id;
-    TcpGameRoom* gameRoom;
-    int clnt_num;
-    int* clnt_socks;
+    int room_id = -1;
+    TcpGameRoom* gameRoom = nullptr;
+    int clnt_num = -1;
+    int* clnt_socks = nullptr;
 
-    unsigned char buf[BROADCAST_BUFFER_SIZE];
+    unsigned char buf[BROADCAST_BUFFER_SIZE] = {0};
 
-    int sendLen;
+    size_t dequeueLen = -1;
+    int sendLen = -1;
 
     Logger log("MainLog");
     log.Log(LOGLEVEL::DEBUG, "Broadcast Thread Start");
@@ -109,11 +110,11 @@ void BroadcastThread(JobQueue* jobQueue, GameRoomManager* gameRoomManager)
             continue;
         }
 
-        gameRoom->getBroadCastBuffer()->dequeue(buf, BROADCAST_BUFFER_SIZE);
+        dequeueLen = gameRoom->getBroadCastBuffer()->dequeue(buf, BROADCAST_BUFFER_SIZE);
         for(int i=0; i<clnt_num; i++){
-            sendLen = write(clnt_socks[i], buf, BROADCAST_BUFFER_SIZE);
+            sendLen = write(clnt_socks[i], buf, dequeueLen);
             
-            log.Log(LOGLEVEL::DEBUG, "Broadcast %d Len to %d Socket", sendLen, clnt_socks[i]);
+            log.Log(LOGLEVEL::INFO, "Broadcast %d Len to %d Socket", sendLen, clnt_socks[i]);
         }
     }
 
@@ -121,6 +122,7 @@ void BroadcastThread(JobQueue* jobQueue, GameRoomManager* gameRoomManager)
     return;
 }
 
+//Todo: chrono 참고해보기
 void GameRoomThread(GameRoomManager* gameRoomManager)
 {
     timeval serverTime;

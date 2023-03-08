@@ -184,17 +184,33 @@ void TcpGameRoom::AddUpdate(Object_Info* info)
     (*obj_nowInfoMap[info->id]) = *info;
     isUpdateId[info->id] = true;
 
-    LogObjInfo(info);
+    //LogObjInfo(info);
 }
 
 //Todo: 이거 잘못됨. 포인터를 고정으로 바꾸거나 포인터가리키는곳 복사하기
 size_t UpdateObjectPacketFactory(void* buf, GameRoomUpdateObjectData* data)
 {
-    size_t data_sz = sizeof(unsigned int) + sizeof(OBJECT_DATA)*(data->update_obj_num);
-    TCPTestPacketHeader header = {TCP_PACKET_START_CODE, (unsigned int)(data_sz + sizeof(unsigned char)),
+    size_t packetLen = 0;
+    const size_t dataInfoLen = sizeof(unsigned int);
+    const size_t allDataSz = sizeof(OBJECT_DATA)*(data->update_obj_num);
+    const unsigned char endCode = TCP_PACKET_END_CODE;
+
+    TCPTestPacketHeader header = {TCP_PACKET_START_CODE, (unsigned int)(dataInfoLen + allDataSz + sizeof(unsigned char)),
         GAMEROOM, GAMEROOM_UPDATE_OBJECT, 0x000, 0x000};
 
-    return MakePacket(buf, &header, data, data_sz, TCP_PACKET_END_CODE);
+    memcpy((unsigned char*)buf + packetLen, &header, sizeof(header));
+    packetLen += sizeof(header);
+
+    memcpy((unsigned char*)buf + packetLen, data, dataInfoLen);
+    packetLen += dataInfoLen;
+
+    memcpy((unsigned char*)buf + packetLen, data->objs_data, allDataSz);
+    packetLen += allDataSz;
+
+    memcpy((unsigned char*)buf + packetLen, &endCode, sizeof(unsigned char));
+    packetLen += sizeof(unsigned char);
+
+    return packetLen;
 }
 
 //Todo: 업데이트된 id들 패킷으로 만들기
@@ -211,6 +227,10 @@ void TcpGameRoom::SendUpdateObjectPacket()
             update_obj_num++;
         }
     }
+    
+    if(update_obj_num <= 0)
+        return;
+
     data.update_obj_num = update_obj_num;
     data.objs_data = new OBJECT_DATA[update_obj_num];
 
@@ -358,7 +378,7 @@ Obj_Position TcpGameRoom::RandomObjPos()
 
 void TcpGameRoom::LogObjInfo(Object_Info* info)
 {
-    //Todo: 함수로 따로 분리해서 시간 다시 잘 표시하기
+    //Todo: State 오버플로 체크
     (*log).Log(LOGLEVEL::INFO, "[%s] Object Update - ID: %d, StartTime: %d, State: %d\n\
     Pos: (%f, %f, %f), Force: (%f, %f, %f)",\
     "GameRoom " + room_id, info->id, info->st_time, info->state,\
